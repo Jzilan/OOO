@@ -31,7 +31,7 @@
     const cyber = { cyan: '#38e0ff', blue: '#2b6bff', deep: '#06121f', deep2: '#0a2438', accent: '#5cd6ff' };
 
     /* huashu-design 全息科幻五主题 */
-    const THEMES = {"hl-light":{"name":"亮蓝全息","icon":"☀","desc":"浅蓝基底·全息科幻","var":{"bg":"#d8e6f6","bg2":"#c8ddf0","topBg":"rgba(195,215,240,.92)","text":"#0c1c30","title":"#051028","muted":"rgba(35,60,105,.88)","accent":"#0e58b8","accent2":"#064098","neon":"rgba(45,135,225,.92)","neon2":"rgba(18,65,150,.82)","success":"#186840","warn":"#9c6020","pur":"#5248b0","err":"#c02838","cardBg":"rgba(218,235,250,.94)","cardBorder":"rgba(38,105,185,.28)","inputBg":"rgba(232,240,252,.96)","inputBorder":"rgba(32,95,170,.28)","btnBg":"rgba(12,60,138,.8)","btnBg2":"rgba(16,85,172,.58)","btnBorder":"rgba(42,125,210,.42)","btnText":"#e6f2ff","btnBgH":"rgba(16,78,165,.88)","btnBg2H":"rgba(22,105,208,.7)","shellBorder":"rgba(42,105,178,.24)","msgUser":"rgba(155,198,235,.84)","msgAi":"rgba(212,234,250,.92)","warnColor":"#9c6020","overlay":"rgba(165,202,236,.84)","vignette":"rgba(145,185,220,.5)","w":"rgba(0,0,0,.04)","ballBg":"rgba(185,208,238,.88)","ballBgH":"rgba(165,190,228,.94)"}},"hl-dark":{"name":"暗色全息","icon":"🌙","desc":"深炭黑底·青蓝霓虹","var":{"bg":"#060e1a","bg2":"#0a1628","topBg":"rgba(14,22,45,.65)","text":"#c8ddf8","title":"#e4eeff","muted":"rgba(130,180,220,.58)","accent":"#60b0f8","accent2":"#2880d0","neon":"rgba(100,190,255,.92)","neon2":"rgba(40,120,210,.82)","success":"#38a068","warn":"#c8a050","pur":"#8878e0","err":"#f05878","cardBg":"rgba(10,20,45,.65)","cardBorder":"rgba(35,95,195,.22)","inputBg":"rgba(6,14,30,.85)","inputBorder":"rgba(35,95,195,.28)","btnBg":"rgba(18,55,125,.72)","btnBg2":"rgba(28,85,175,.52)","btnBorder":"rgba(55,145,240,.38)","btnText":"#c0def8","btnBgH":"rgba(28,75,155,.82)","btnBg2H":"rgba(38,105,215,.62)","shellBorder":"rgba(55,85,128,.2)","msgUser":"rgba(28,75,155,.48)","msgAi":"rgba(10,20,45,.65)","warnColor":"#c8a050","overlay":"rgba(3,6,14,.84)","vignette":"transparent","w":"rgba(255,255,255,.03)","ballBg":"rgba(12,22,45,.72)","ballBgH":"rgba(28,55,125,.82)"}},"hl-blood":{"name":"暗红血族","icon":"🩸","desc":"绯红深渊·血族纹章","var":{"bg":"#0c0606","bg2":"#140a0a","topBg":"rgba(30,10,10,.7)","text":"#e8d0d0","title":"#ffd0d0","muted":"rgba(190,140,140,.6)","accent":"#c83038","accent2":"#981820","neon":"rgba(255,70,70,.9)","neon2":"rgba(200,30,30,.8)","success":"#58a040","warn":"#c89830","pur":"#9050b0","err":"#ff4040","cardBg":"rgba(22,8,8,.72)","cardBorder":"rgba(170,35,40,.28)","inputBg":"rgba(14,6,6,.9)","inputBorder":"rgba(170,35,40,.32)","btnBg":"rgba(140,20,30,.72)","btnBg2":"rgba(180,40,50,.52)","btnBorder":"rgba(220,50,60,.42)","btnText":"#ffe0e0","btnBgH":"rgba(160,28,38,.84)","btnBg2H":"rgba(200,48,58,.64)","shellBorder":"rgba(140,25,35,.24)","msgUser":"rgba(180,40,50,.48)","msgAi":"rgba(22,8,8,.72)","warnColor":"#c89830","overlay":"rgba(6,3,3,.86)","vignette":"transparent","w":"rgba(255,255,255,.03)","ballBg":"rgba(22,8,8,.78)","ballBgH":"rgba(140,20,30,.72)"}},"hl-green":{"name":"清新翠绿","icon":"🌿","desc":"晨露新叶·自然清新","var":{"bg":"#e6f4e6","bg2":"#d6ecd6","topBg":"rgba(200,230,200,.92)","text":"#122812","title":"#081c08","muted":"rgba(40,100,40,.88)","accent":"#289040","accent2":"#187030","neon":"rgba(50,190,70,.92)","neon2":"rgba(25,140,45,.82)","success":"#2a8048","warn":"#b08030","pur":"#7050b8","err":"#d84040","cardBg":"rgba(222,244,224,.94)","cardBorder":"rgba(35,145,55,.28)","inputBg":"rgba(234,248,235,.96)","inputBorder":"rgba(28,125,45,.28)","btnBg":"rgba(18,115,38,.8)","btnBg2":"rgba(25,145,50,.58)","btnBorder":"rgba(45,175,65,.42)","btnText":"#e6ffe8","btnBgH":"rgba(22,135,45,.88)","btnBg2H":"rgba(30,165,58,.7)","shellBorder":"rgba(38,125,55,.24)","msgUser":"rgba(168,222,178,.84)","msgAi":"rgba(218,242,222,.92)","warnColor":"#b08030","overlay":"rgba(172,222,182,.84)","vignette":"rgba(145,205,160,.5)","w":"rgba(0,0,0,.04)","ballBg":"rgba(192,222,198,.88)","ballBgH":"rgba(172,208,182,.94)"}},"hl-gold":{"name":"帝王鎏金","icon":"👑","desc":"御旨金纹·帝王威仪","var":{"bg":"#181208","bg2":"#221808","topBg":"rgba(35,20,8,.72)","text":"#f0e8d0","title":"#ffe8a0","muted":"rgba(195,175,120,.62)","accent":"#d4a030","accent2":"#b08020","neon":"rgba(240,200,60,.92)","neon2":"rgba(200,150,30,.82)","success":"#58a840","warn":"#e0b040","pur":"#9070c8","err":"#e85050","cardBg":"rgba(28,18,6,.72)","cardBorder":"rgba(175,135,30,.28)","inputBg":"rgba(18,12,5,.9)","inputBorder":"rgba(175,135,30,.32)","btnBg":"rgba(150,110,20,.72)","btnBg2":"rgba(190,140,30,.52)","btnBorder":"rgba(220,165,45,.42)","btnText":"#fff8e0","btnBgH":"rgba(170,130,28,.84)","btnBg2H":"rgba(210,158,38,.64)","shellBorder":"rgba(145,105,25,.24)","msgUser":"rgba(180,135,35,.48)","msgAi":"rgba(28,18,6,.72)","warnColor":"#e0b040","overlay":"rgba(8,6,2,.86)","vignette":"transparent","w":"rgba(255,255,255,.04)","ballBg":"rgba(28,18,6,.78)","ballBgH":"rgba(150,110,20,.72)"}}};
+    const THEMES = {"hl-light":{"name":"亮蓝全息","icon":"☀","desc":"浅蓝基底·全息科幻","var":{"bg":"#d8e6f6","bg2":"#c8ddf0","topBg":"rgba(195,215,240,.92)","text":"#0c1c30","title":"#051028","muted":"rgba(35,60,105,.88)","accent":"#0e58b8","accent2":"#064098","neon":"rgba(45,135,225,.92)","neon2":"rgba(18,65,150,.82)","success":"#186840","warn":"#9c6020","pur":"#5248b0","err":"#c02838","cardBg":"rgba(218,235,250,.94)","cardBorder":"rgba(38,105,185,.28)","inputBg":"rgba(232,240,252,.96)","inputBorder":"rgba(32,95,170,.28)","btnBg":"rgba(12,60,138,.8)","btnBg2":"rgba(16,85,172,.58)","btnBorder":"rgba(42,125,210,.42)","btnText":"#e6f2ff","btnBgH":"rgba(16,78,165,.88)","btnBg2H":"rgba(22,105,208,.7)","shellBorder":"rgba(42,105,178,.24)","msgUser":"rgba(155,198,235,.84)","msgAi":"rgba(212,234,250,.92)","warnColor":"#9c6020","overlay":"rgba(165,202,236,.84)","vignette":"rgba(145,185,220,.5)","w":"rgba(0,0,0,.04)","ballBg":"rgba(185,208,238,.88)","ballBgH":"rgba(165,190,228,.94)"}},"hl-dark":{"name":"暗色全息","icon":"🌙","desc":"深炭黑底·青蓝霓虹","var":{"bg":"#060e1a","bg2":"#0a1628","topBg":"rgba(14,22,45,.65)","text":"#c8ddf8","title":"#e4eeff","muted":"rgba(130,180,220,.58)","accent":"#60b0f8","accent2":"#2880d0","neon":"rgba(100,190,255,.92)","neon2":"rgba(40,120,210,.82)","success":"#38a068","warn":"#c8a050","pur":"#8878e0","err":"#f05878","cardBg":"rgba(10,20,45,.65)","cardBorder":"rgba(35,95,195,.22)","inputBg":"rgba(6,14,30,.85)","inputBorder":"rgba(35,95,195,.28)","btnBg":"rgba(18,55,125,.72)","btnBg2":"rgba(28,85,175,.52)","btnBorder":"rgba(55,145,240,.38)","btnText":"#c0def8","btnBgH":"rgba(28,75,155,.82)","btnBg2H":"rgba(38,105,215,.62)","shellBorder":"rgba(55,85,128,.2)","msgUser":"rgba(28,75,155,.48)","msgAi":"rgba(10,20,45,.65)","warnColor":"#c8a050","overlay":"rgba(3,6,14,.84)","vignette":"transparent","w":"rgba(255,255,255,.03)","ballBg":"rgba(12,22,45,.72)","ballBgH":"rgba(28,55,125,.82)"}},"hl-blood":{"name":"暗红血族","icon":"🩸","desc":"绯红深渊·血族纹章","var":{"bg":"#0c0606","bg2":"#140a0a","topBg":"rgba(30,10,10,.7)","text":"#e8d0d0","title":"#ffd0d0","muted":"rgba(190,140,140,.6)","accent":"#c83038","accent2":"#981820","neon":"rgba(255,70,70,.9)","neon2":"rgba(200,30,30,.8)","success":"#58a040","warn":"#c89830","pur":"#9050b0","err":"#ff4040","cardBg":"rgba(22,8,8,.72)","cardBorder":"rgba(170,35,40,.28)","inputBg":"rgba(14,6,6,.9)","inputBorder":"rgba(170,35,40,.32)","btnBg":"rgba(140,20,30,.72)","btnBg2":"rgba(180,40,50,.52)","btnBorder":"rgba(220,50,60,.42)","btnText":"#ffe0e0","btnBgH":"rgba(160,28,38,.84)","btnBg2H":"rgba(200,48,58,.64)","shellBorder":"rgba(140,25,35,.24)","msgUser":"rgba(180,40,50,.48)","msgAi":"rgba(22,8,8,.72)","warnColor":"#c89830","overlay":"rgba(6,3,3,.86)","vignette":"transparent","w":"rgba(255,255,255,.03)","ballBg":"rgba(22,8,8,.78)","ballBgH":"rgba(140,20,30,.72)"}},"hl-green":{"name":"清新翠绿","icon":"🌿","desc":"晨露新叶·自然清新","var":{"bg":"#e6f4e6","bg2":"#d6ecd6","topBg":"rgba(200,230,200,.92)","text":"#122812","title":"#081c08","muted":"rgba(40,100,40,.88)","accent":"#289040","accent2":"#187030","neon":"rgba(50,190,70,.92)","neon2":"rgba(25,140,45,.82)","success":"#2a8048","warn":"#b08030","pur":"#7050b8","err":"#d84040","cardBg":"rgba(222,244,224,.94)","cardBorder":"rgba(35,145,55,.28)","inputBg":"rgba(234,248,235,.96)","inputBorder":"rgba(28,125,45,.28)","btnBg":"rgba(18,115,38,.8)","btnBg2":"rgba(25,145,50,.58)","btnBorder":"rgba(45,175,65,.42)","btnText":"#e6ffe8","btnBgH":"rgba(22,135,45,.88)","btnBg2H":"rgba(30,165,58,.7)","shellBorder":"rgba(38,125,55,.24)","msgUser":"rgba(168,222,178,.84)","msgAi":"rgba(218,242,222,.92)","warnColor":"#b08030","overlay":"rgba(172,222,182,.84)","vignette":"rgba(145,205,160,.5)","w":"rgba(0,0,0,.04)","ballBg":"rgba(192,222,198,.88)","ballBgH":"rgba(172,208,182,.94)"}},"hl-gold":{"name":"帝王鎏金","icon":"👑","desc":"御旨金纹·帝王威仪","var":{"bg":"#181208","bg2":"#221808","topBg":"rgba(35,20,8,.72)","text":"#f0e8d0","title":"#ffe8a0","muted":"rgba(195,175,120,.62)","accent":"#d4a030","accent2":"#b08020","neon":"rgba(240,200,60,.92)","neon2":"rgba(200,150,30,.82)","success":"#58a840","warn":"#e0b040","pur":"#9070c8","err":"#e85050","cardBg":"rgba(28,18,6,.72)","cardBorder":"rgba(175,135,30,.28)","inputBg":"rgba(18,12,5,.9)","inputBorder":"rgba(175,135,30,.32)","btnBg":"rgba(150,110,20,.72)","btnBg2":"rgba(190,140,30,.52)","btnBorder":"rgba(220,165,45,.42)","btnText":"#fff8e0","btnBgH":"rgba(170,130,28,.84)","btnBg2H":"rgba(210,158,38,.64)","shellBorder":"rgba(145,105,25,.24)","msgUser":"rgba(180,135,35,.48)","msgAi":"rgba(28,18,6,.72)","warnColor":"#e0b040","overlay":"rgba(8,6,2,.86)","vignette":"transparent","w":"rgba(255,255,255,.04)","ballBg":"rgba(28,18,6,.78)","ballBgH":"rgba(150,110,20,.72)"}},"hl-purple":{"name":"梦幻紫晶","icon":"🔮","desc":"暗紫深渊·水晶幻境","var":{"bg":"#0e0a1a","bg2":"#140e26","topBg":"rgba(20,14,38,.72)","text":"#d8c8f0","title":"#ece0ff","muted":"rgba(160,130,200,.62)","accent":"#a860e8","accent2":"#8040c8","neon":"rgba(180,120,255,.92)","neon2":"rgba(130,70,210,.82)","success":"#50b070","warn":"#d0a050","pur":"#c070e0","err":"#e85090","cardBg":"rgba(18,10,32,.72)","cardBorder":"rgba(120,60,180,.28)","inputBg":"rgba(10,6,20,.9)","inputBorder":"rgba(120,60,180,.32)","btnBg":"rgba(80,30,140,.72)","btnBg2":"rgba(120,50,180,.52)","btnBorder":"rgba(160,80,220,.42)","btnText":"#f0e0ff","btnBgH":"rgba(100,40,160,.84)","btnBg2H":"rgba(140,60,200,.64)","shellBorder":"rgba(80,40,120,.24)","msgUser":"rgba(120,50,180,.48)","msgAi":"rgba(18,10,32,.72)","warnColor":"#d0a050","overlay":"rgba(6,3,12,.86)","vignette":"transparent","w":"rgba(255,255,255,.03)","ballBg":"rgba(18,10,32,.78)","ballBgH":"rgba(80,30,140,.72)"}},"hl-cyber":{"name":"赛博朋克","icon":"🌃","desc":"霓虹粉青·未来都市","var":{"bg":"#0a0a12","bg2":"#0e0e1c","topBg":"rgba(14,14,28,.75)","text":"#d0e8f0","title":"#00ffe8","muted":"rgba(100,180,200,.6)","accent":"#ff2a8a","accent2":"#cc1066","neon":"rgba(0,255,224,.92)","neon2":"rgba(0,200,180,.82)","success":"#00ff80","warn":"#ffcc00","pur":"#c040ff","err":"#ff3060","cardBg":"rgba(12,12,24,.72)","cardBorder":"rgba(0,200,180,.25)","inputBg":"rgba(8,8,16,.9)","inputBorder":"rgba(255,42,138,.3)","btnBg":"rgba(180,20,80,.72)","btnBg2":"rgba(0,150,140,.52)","btnBorder":"rgba(0,255,224,.4)","btnText":"#e0fff8","btnBgH":"rgba(220,30,100,.84)","btnBg2H":"rgba(0,200,180,.64)","shellBorder":"rgba(0,150,140,.22)","msgUser":"rgba(180,20,80,.45)","msgAi":"rgba(12,12,24,.72)","warnColor":"#ffcc00","overlay":"rgba(4,4,8,.88)","vignette":"transparent","w":"rgba(0,255,224,.02)","ballBg":"rgba(12,12,24,.78)","ballBgH":"rgba(0,150,140,.72)"}},"hl-ocean":{"name":"深海蔚蓝","icon":"🌊","desc":"幽蓝深海·潮汐涌动","var":{"bg":"#04161e","bg2":"#061e28","topBg":"rgba(6,30,40,.72)","text":"#b8e0e8","title":"#e0f8ff","muted":"rgba(100,160,180,.6)","accent":"#20c8d0","accent2":"#1090a0","neon":"rgba(40,200,220,.92)","neon2":"rgba(20,140,170,.82)","success":"#30b888","warn":"#d0a040","pur":"#6080d0","err":"#e85060","cardBg":"rgba(6,22,30,.72)","cardBorder":"rgba(30,160,180,.26)","inputBg":"rgba(4,16,22,.9)","inputBorder":"rgba(30,160,180,.3)","btnBg":"rgba(16,80,100,.72)","btnBg2":"rgba(20,120,140,.52)","btnBorder":"rgba(40,200,220,.4)","btnText":"#e0f8ff","btnBgH":"rgba(20,100,120,.84)","btnBg2H":"rgba(30,160,180,.64)","shellBorder":"rgba(20,100,120,.22)","msgUser":"rgba(20,120,140,.45)","msgAi":"rgba(6,22,30,.72)","warnColor":"#d0a040","overlay":"rgba(2,10,14,.86)","vignette":"transparent","w":"rgba(40,200,220,.025)","ballBg":"rgba(6,22,30,.78)","ballBgH":"rgba(16,80,100,.72)"}},"hl-sakura":{"name":"樱花纷飞","icon":"🌸","desc":"粉樱暖阳·温柔梦境","var":{"bg":"#fce8ee","bg2":"#f8dce6","topBg":"rgba(245,215,228,.92)","text":"#2a0e1a","title":"#1a0612","muted":"rgba(120,60,90,.88)","accent":"#e85090","accent2":"#c83070","neon":"rgba(232,80,144,.92)","neon2":"rgba(200,48,112,.82)","success":"#40a068","warn":"#c08030","pur":"#9060c0","err":"#d83048","cardBg":"rgba(252,232,238,.94)","cardBorder":"rgba(200,80,130,.28)","inputBg":"rgba(255,240,245,.96)","inputBorder":"rgba(200,80,130,.28)","btnBg":"rgba(200,48,112,.8)","btnBg2":"rgba(232,80,144,.58)","btnBorder":"rgba(240,100,160,.42)","btnText":"#fff0f5","btnBgH":"rgba(220,58,122,.88)","btnBg2H":"rgba(245,100,165,.7)","shellBorder":"rgba(200,80,130,.24)","msgUser":"rgba(232,168,195,.84)","msgAi":"rgba(252,232,238,.92)","warnColor":"#c08030","overlay":"rgba(232,188,210,.84)","vignette":"rgba(220,170,195,.5)","w":"rgba(0,0,0,.03)","ballBg":"rgba(245,210,225,.88)","ballBgH":"rgba(232,180,200,.94)"}},"hl-ink":{"name":"水墨丹青","icon":"🖌","desc":"宣纸墨韵·古风雅致","var":{"bg":"#f5f2ee","bg2":"#ede8e0","topBg":"rgba(230,222,210,.92)","text":"#2a2a2a","title":"#0a0a0a","muted":"rgba(80,75,70,.88)","accent":"#8a6a3a","accent2":"#6a5028","neon":"rgba(138,106,58,.82)","neon2":"rgba(106,80,40,.72)","success":"#4a8050","warn":"#a07820","pur":"#604878","err":"#a83838","cardBg":"rgba(245,240,232,.94)","cardBorder":"rgba(120,100,70,.25)","inputBg":"rgba(250,248,242,.96)","inputBorder":"rgba(120,100,70,.25)","btnBg":"rgba(70,55,35,.82)","btnBg2":"rgba(100,80,50,.6)","btnBorder":"rgba(138,106,58,.4)","btnText":"#f5f0e8","btnBgH":"rgba(90,70,45,.9)","btnBg2H":"rgba(120,95,60,.72)","shellBorder":"rgba(100,85,60,.22)","msgUser":"rgba(180,165,140,.7)","msgAi":"rgba(245,240,232,.92)","warnColor":"#a07820","overlay":"rgba(200,190,175,.82)","vignette":"rgba(180,170,155,.4)","w":"rgba(0,0,0,.04)","ballBg":"rgba(225,215,200,.88)","ballBgH":"rgba(205,195,178,.94)"}}};
 
     const DEFAULT_PERSONA = {
         name: '温柔姐姐',
@@ -47,7 +47,7 @@
             connected: false,
             initialized: false,
             points: 0,
-            api: { url: '', key: '', model: '', models: [] },
+            api: { url: '', key: '', model: '', models: [], maxTokens: 30000 },
             system: { name: '', purpose: '', summary: '', greeting: '' },
             worldbook: { name: '', summary: '', entries: [] },
             persona: { ...DEFAULT_PERSONA },
@@ -59,7 +59,14 @@
             theme: 'hl-dark',
             exclusiveFunctions: [],
             exclusivePreferences: [],
-            exclusiveFunctionCount: 1
+            exclusiveFunctionCount: 1,
+            exclComplexity: 'simple',
+            autoRefresh: false,
+            contextFloors: 10,
+            refreshInterval: 1,
+            panelW: 0,
+            panelH: 0,
+            scaleLocked: true
         };
     }
 
@@ -88,6 +95,14 @@
                     if (!Array.isArray(s.exclusiveFunctions)) s.exclusiveFunctions = [];
                     if (!Array.isArray(s.exclusivePreferences)) s.exclusivePreferences = [];
                     if (typeof s.exclusiveFunctionCount !== 'number' || s.exclusiveFunctionCount < 1) s.exclusiveFunctionCount = 1;
+                    if (s.exclComplexity !== 'simple' && s.exclComplexity !== 'complex') s.exclComplexity = 'simple';
+                    if (typeof s.exclCostPoints !== 'boolean') s.exclCostPoints = false;
+                    if (typeof s.autoRefresh !== 'boolean') s.autoRefresh = false;
+                    if (typeof s.contextFloors !== 'number' || s.contextFloors < 1) s.contextFloors = 10;
+                    if (typeof s.refreshInterval !== 'number' || s.refreshInterval < 1) s.refreshInterval = 1;
+                    if (typeof s.panelW !== 'number' || s.panelW < 0) s.panelW = 0;
+                    if (typeof s.panelH !== 'number' || s.panelH < 0) s.panelH = 0;
+                    if (typeof s.scaleLocked !== 'boolean') s.scaleLocked = true;
                     if (!s.theme || !THEMES[s.theme]) s.theme = 'hl-dark';
                     return s;
                 }
@@ -113,6 +128,14 @@
                 if (!Array.isArray(s.exclusiveFunctions)) s.exclusiveFunctions = [];
                 if (!Array.isArray(s.exclusivePreferences)) s.exclusivePreferences = [];
                 if (typeof s.exclusiveFunctionCount !== 'number' || s.exclusiveFunctionCount < 1) s.exclusiveFunctionCount = 1;
+                if (s.exclComplexity !== 'simple' && s.exclComplexity !== 'complex') s.exclComplexity = 'simple';
+                if (typeof s.exclCostPoints !== 'boolean') s.exclCostPoints = false;
+                if (typeof s.autoRefresh !== 'boolean') s.autoRefresh = false;
+                if (typeof s.contextFloors !== 'number' || s.contextFloors < 1) s.contextFloors = 10;
+                if (typeof s.refreshInterval !== 'number' || s.refreshInterval < 1) s.refreshInterval = 1;
+                if (typeof s.panelW !== 'number' || s.panelW < 0) s.panelW = 0;
+                if (typeof s.panelH !== 'number' || s.panelH < 0) s.panelH = 0;
+                if (typeof s.scaleLocked !== 'boolean') s.scaleLocked = true;
                 if (!s.theme || !THEMES[s.theme]) s.theme = 'hl-dark';
             }
         } catch (e) {
@@ -379,9 +402,37 @@ a{text-decoration:none;color:inherit}
         o.innerHTML = `<div class="nlsp-shell">${frameHTML}${inner}</div><div class="nlsp-vignette"></div></div>`;
         const shell = o.querySelector('.nlsp-shell');
         if (shell) {
+            applyPanelResize(shell);
             makeWindowDraggable(shell, o);
         }
         return shell;
+    }
+
+    function applyPanelResize(shell) {
+        if (!shell) shell = getDoc().querySelector('.nlsp-shell');
+        if (!shell) return;
+        if (state.panelW > 200) shell.style.width = state.panelW + 'px';
+        if (state.panelH > 150) shell.style.height = state.panelH + 'px';
+        if (!state.scaleLocked) {
+            shell.style.resize = 'both';
+            shell.style.overflow = 'hidden';
+            shell.style.minWidth = '320px';
+            shell.style.minHeight = '240px';
+        }
+        if (!shell._nlspResizeBound) {
+                shell._nlspResizeBound = true;
+                var saveTimer = null;
+                var ro = new ResizeObserver(function(){
+                    var r = shell.getBoundingClientRect();
+                    state.panelW = Math.round(r.width);
+                    state.panelH = Math.round(r.height);
+                    if (saveTimer) clearTimeout(saveTimer);
+                    saveTimer = setTimeout(function(){ saveState(); }, 500);
+                });
+                ro.observe(shell);
+                shell.addEventListener('mouseup', function(){ saveState(); });
+                shell.addEventListener('touchend', function(){ saveState(); });
+        }
     }
 
     function makeWindowDraggable(shell, win) {
@@ -479,9 +530,14 @@ a{text-decoration:none;color:inherit}
                             ${state.api.models.map((m) => `<option value="${escapeAttr(m)}" ${m === state.api.model ? 'selected' : ''}>${escapeText(m)}</option>`).join('') || '<option value="">请先拉取模型</option>'}
                         </select>
                     </div>
+                    <div class="nlsp-row">
+                        <label class="nlsp-label">最大输出字符数（max_tokens）</label>
+                        <input id="nlsp-api-maxtokens" class="nlsp-input" type="number" min="100" max="128000" value="${state.api.maxTokens||30000}" placeholder="30000" />
+                        <div class="nlsp-page-sub" style="margin-top:4px;">限制AI每次回复的最大字符数，影响所有生成（任务/商城/抽奖/对话）</div>
+                    </div>
                     <div style="display:flex; gap:10px; margin-top:8px;">
                         <button class="nlsp-btn ghost" id="nlsp-pull-btn">拉取模型</button>
-                        <button class="nlsp-btn" id="nlsp-connect-btn">连接并下一步</button>
+                        ${state.api.models.length ? '<button class="nlsp-btn" id="nlsp-next-btn">下一步</button>' : ''}
                     </div>
                     <div id="nlsp-api-status" class="nlsp-page-sub" style="margin-top:10px;"></div>
                 </div>
@@ -520,28 +576,23 @@ a{text-decoration:none;color:inherit}
                 state.api.models = models;
                 if (!state.api.model || !models.includes(state.api.model)) state.api.model = models[0];
                 saveApiToLS(); saveState();
-                setStatus(`已获取 ${models.length} 个模型`, 'ok');
-                renderApi();
+                setStatus(`已获取 ${models.length} 个模型，进入下一步…`, 'ok');
+                state.connected = true;
+                saveApiToLS(); saveState();
+                render();
             } catch (e) {
                 setStatus('拉取失败：' + (e && e.message || e), 'error');
             }
         });
-        on('nlsp-connect-btn', 'click', async () => {
-            const url = val(getDoc().getElementById('nlsp-api-url'));
-            const key = val(getDoc().getElementById('nlsp-api-key'));
-            const model = val(getDoc().getElementById('nlsp-api-model'));
-            if (!url || !key || !model) return setStatus('请填写 URL / Key 并选择模型', 'error');
-            state.api.url = url.trim(); state.api.key = key; state.api.model = model;
-            setStatus('测试连接中…');
-            try {
-                await apiChat(state, { system: '你是一个接线测试助手。', user: '请回复“OK”。', maxTokens: 8 });
-                state.connected = true;
-            } catch (e) {
-                state.connected = false;
-                setStatus('[连接测试] 报错：' + (e && e.message || e) + '（模型已保存，可直接下一步）', 'error');
-            }
+        on('nlsp-next-btn', 'click', () => {
+            state.api.url = val(getDoc().getElementById('nlsp-api-url')).trim();
+            state.api.key = val(getDoc().getElementById('nlsp-api-key'));
+            state.api.model = val(getDoc().getElementById('nlsp-api-model'));
+            const mtEl = getDoc().getElementById('nlsp-api-maxtokens');
+            state.api.maxTokens = Math.max(100, Number(mtEl ? mtEl.value : 30000) || 30000);
+            state.connected = true;
             saveApiToLS(); saveState();
-            if (state.connected) render();
+            render();
         });
     }
 
@@ -598,6 +649,19 @@ a{text-decoration:none;color:inherit}
                         <select id="nlsp-excl-count" class="nlsp-select" style="width:80px">
                             ${[1,2,3,4,5,6].map((n) => `<option value="${n}" ${(state.exclusiveFunctionCount||1)===n?'selected':''}>${n}</option>`).join('')}
                         </select>
+                        <label class="nlsp-label" style="margin:0 0 0 16px;white-space:nowrap">复杂度</label>
+                        <select id="nlsp-excl-complexity" class="nlsp-select" style="width:90px">
+                            <option value="simple" ${state.exclComplexity!=='complex'?'selected':''}>简单</option>
+                            <option value="complex" ${state.exclComplexity==='complex'?'selected':''}>复杂</option>
+                        </select>
+                    </div>
+                    <div class="nlsp-row" style="display:flex;gap:10px;align-items:center;margin-top:6px">
+                        <label class="nlsp-label" style="margin:0;white-space:nowrap">花费积分</label>
+                        <select id="nlsp-excl-cost" class="nlsp-select" style="width:80px">
+                            <option value="false" ${!state.exclCostPoints?'selected':''}>否</option>
+                            <option value="true" ${state.exclCostPoints?'selected':''}>是</option>
+                        </select>
+                        <span class="nlsp-page-sub" style="margin:0">是则使用时扣积分</span>
                     </div>
                     <div id="nlsp-excl-prefs">${renderExclPrefs(state)}</div>
                     <div class="nlsp-section-title">主题</div>
@@ -605,6 +669,27 @@ a{text-decoration:none;color:inherit}
                         <select id="nlsp-theme-select" class="nlsp-select">
                             ${Object.keys(THEMES).map((k) => { const t = THEMES[k]; return `<option value="${escapeAttr(k)}" ${state.theme === k ? 'selected' : ''}>${t.icon} ${escapeText(t.name)} · ${escapeText(t.desc)}</option>`; }).join('')}
                         </select>
+                    </div>
+                    <div class="nlsp-section-title">面板缩放</div>
+                    <div class="nlsp-row" style="display:flex;gap:10px;align-items:center">
+                        <button class="nlsp-btn ${state.scaleLocked?'ghost':''}" id="nlsp-scale-lock" style="${state.scaleLocked?'':'background:rgba(40,160,80,.6);border-color:rgba(60,200,100,.5)'}">${state.scaleLocked?'🔒 锁定':'🔓 解锁'}</button>
+                        <span class="nlsp-page-sub" style="margin:0">解锁后可拖拽面板右下角调整大小</span>
+                    </div>
+                    <div class="nlsp-section-title">自动刷新（根据聊天剧情）</div>
+                    <div class="nlsp-row" style="display:flex;gap:10px;align-items:center">
+                        <label class="nlsp-label" style="margin:0;white-space:nowrap">开启自动刷新</label>
+                        <select id="nlsp-auto-refresh" class="nlsp-select" style="width:80px">
+                            <option value="false" ${!state.autoRefresh?'selected':''}>关闭</option>
+                            <option value="true" ${state.autoRefresh?'selected':''}>开启</option>
+                        </select>
+                    </div>
+                    <div class="nlsp-row" style="display:flex;gap:10px;align-items:center">
+                        <label class="nlsp-label" style="margin:0;white-space:nowrap">读取上下文楼层数</label>
+                        <input id="nlsp-context-floors" class="nlsp-input" type="number" min="1" max="50" value="${state.contextFloors||10}" style="width:80px" />
+                    </div>
+                    <div class="nlsp-row" style="display:flex;gap:10px;align-items:center">
+                        <label class="nlsp-label" style="margin:0;white-space:nowrap">刷新间隔（每N轮AI回复）</label>
+                        <input id="nlsp-refresh-interval" class="nlsp-input" type="number" min="1" max="20" value="${state.refreshInterval||1}" style="width:80px" />
                     </div>
                     ${hasOpenChat() ? '' : '<div class="nlsp-page-sub" style="color:#ff8a8a;margin:8px 0 0;">⚠ 当前未打开角色卡或未进入聊天，无法初始化系统。请先打开一张角色卡并进入聊天。</div>'}
                     <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
@@ -671,12 +756,48 @@ a{text-decoration:none;color:inherit}
             saveState();
             applyTheme(state.theme);
         });
+        on('nlsp-scale-lock', 'click', () => {
+            state.scaleLocked = !state.scaleLocked;
+            saveState();
+            renderInit();
+            applyPanelResize();
+        });
+        on('nlsp-auto-refresh', 'change', () => {
+            const sel = getDoc().getElementById('nlsp-auto-refresh');
+            state.autoRefresh = sel ? sel.value === 'true' : false;
+            saveState();
+            setupAutoRefresh();
+            toast(state.autoRefresh ? '已开启自动刷新，每次AI回复后自动检查并刷新任务/商城' : '已关闭自动刷新', 'success');
+        });
+        on('nlsp-context-floors', 'change', () => {
+            const inp = getDoc().getElementById('nlsp-context-floors');
+            state.contextFloors = Math.max(1, Math.min(50, Number(inp ? inp.value : 10) || 10));
+            if (inp) inp.value = state.contextFloors;
+            saveState();
+        });
+        on('nlsp-refresh-interval', 'change', () => {
+            const inp = getDoc().getElementById('nlsp-refresh-interval');
+            state.refreshInterval = Math.max(1, Math.min(20, Number(inp ? inp.value : 1) || 1));
+            if (inp) inp.value = state.refreshInterval;
+            refreshCounter = 0;
+            saveState();
+        });
         on('nlsp-excl-count', 'change', () => {
             const sel = getDoc().getElementById('nlsp-excl-count');
             state.exclusiveFunctionCount = sel ? Math.max(1,Math.min(6,Number(sel.value)||1)) : 1;
             saveState();
             var box = getDoc().getElementById('nlsp-excl-prefs');
             if (box) box.innerHTML = renderExclPrefs(state);
+        });
+        on('nlsp-excl-complexity', 'change', () => {
+            const sel = getDoc().getElementById('nlsp-excl-complexity');
+            state.exclComplexity = sel && sel.value === 'complex' ? 'complex' : 'simple';
+            saveState();
+        });
+        on('nlsp-excl-cost', 'change', () => {
+            const sel = getDoc().getElementById('nlsp-excl-cost');
+            state.exclCostPoints = sel ? sel.value === 'true' : false;
+            saveState();
         });
         on('nlsp-init-btn', 'click', () => doInit());
     }
@@ -793,7 +914,7 @@ a{text-decoration:none;color:inherit}
         taskData = await safeCall('任务', apiGenerateTask(state, { first: true }));
         shopItems = await safeCall('商城', apiGenerateShop(state));
         for(var ei=0;ei<(state.exclusiveFunctionCount||1);ei++){
-            var ep=await safeCall('专属功能'+(ei+1), apiGenerateExclusive(state, prefs[ei]||''));
+            var ep=await safeCall('专属功能'+(ei+1), apiGenerateExclusive(state, prefs[ei]||'', state.exclComplexity||'simple'));
             if(ep)exclList.push(ep);
         }
         if (!sysData || !taskData) {
@@ -1279,11 +1400,28 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
             <div class="nlsp-page-head">
                 <span class="nlsp-page-sub">${escapeText(ef.desc || '')}</span>
                 <button class="nlsp-btn ghost" id="nlsp-excl-refresh">刷新</button>
+                ${state.exclCostPoints ? '<button class="nlsp-btn ghost" id="nlsp-excl-refresh-cost">💰刷新花费</button>' : ''}
             </div>
             <div id="nlsp-excl-content">${html || '<div class="nlsp-muted">专属功能已生成，点击刷新按钮重新生成。</div>'}</div>
             <div id="nlsp-excl-status" class="nlsp-page-sub" style="margin-top:10px;"></div>
         `;
         bindExclActions();
+        on('nlsp-excl-refresh-cost', 'click', async () => {
+            var btn = getDoc().getElementById('nlsp-excl-refresh-cost');
+            if (btn) btn.disabled = true;
+            try {
+                var excls = state.exclusiveFunctions || [];
+                var cur = excls[idx] || {};
+                cur.cost = await apiRefreshExclCost(state, cur);
+                excls[idx] = cur;
+                saveState();
+                renderExclBody(body, idx);
+                toast('花费已更新为 ' + cur.cost + ' 积分', 'success');
+            } catch(e) {
+                toast('刷新失败：' + (e && e.message || e), 'error');
+            }
+            if (btn) btn.disabled = false;
+        });
         on('nlsp-excl-refresh', 'click', () => {
             const area = getDoc().getElementById('nlsp-excl-content');
             if (!area) return;
@@ -1329,6 +1467,7 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
         var excls=state.exclusiveFunctions||[];
         var ef=excls[0]||{};
         if(activeView.indexOf('excl')===0){var i=parseInt(activeView.slice(4))||0;ef=excls[i]||{};}
+        if(state.exclCostPoints&&ef.cost>0){if(state.points<ef.cost){toast('积分不足，需要 '+ef.cost+' 积分，当前仅有 '+state.points,'error');return}state.points-=ef.cost;saveState();var ptspan=getDoc().getElementById('nlsp-pt-span');if(ptspan)ptspan.textContent=state.points;toast('已扣除 '+ef.cost+' 积分','info')}
         const stEl = getDoc().getElementById('nlsp-excl-status');
         if (stEl) { stEl.textContent = '处理中…'; stEl.style.color = ''; }
         try {
@@ -1566,7 +1705,7 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
         const body = {
             model: st.api.model, messages,
             temperature: typeof opts.temperature === 'number' ? opts.temperature : 0.85,
-            max_tokens: opts.maxTokens || 1400
+            max_tokens: Math.min(opts.maxTokens || 1400, (st.api && st.api.maxTokens) ? st.api.maxTokens : 128000)
         };
         if (opts.json) body.response_format = { type: 'json_object' };
         const res = await fetch(base + '/chat/completions', {
@@ -1687,7 +1826,7 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
             worldbookContext(st),
             scriptsContext(st),
             (function(){var cc=charContext();return cc?'【当前角色卡信息】\n'+cc:'';})(),
-            (function(){var ch=chatHistoryContext(10);return ch?'【'+ch:'';})()
+            (function(){var ch=chatHistoryContext(state.contextFloors || 10);return ch?'【'+ch:'';})()
         ].filter(Boolean).join('\n');
     }
 
@@ -1702,11 +1841,10 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
 }
 系统名称：${st.system.name}
 核心作用：${st.system.purpose}
-${st.worldbook.name ? worldbookContext(st) : '（未读取世界书）'}
-${(function(){var ci=getCharInfo();var p=[];if(ci.name)p.push('当前角色：'+ci.name);if(ci.description)p.push('角色描述：'+ci.description.slice(0,400));if(ci.scenario)p.push('当前场景：'+ci.scenario.slice(0,300));return p.length?'\n【角色卡信息】\n'+p.join('\n'):'';})()}
-${(function(){var ch=getChatHistory(8);if(!ch.length)return'';var l=[];for(var i=0;i<ch.length;i++)l.push(ch[i].role+'：'+ch[i].content.slice(0,200));return'\n【最近聊天记录】\n'+l.join('\n');})()}
-注意：initialPoints 为整数，默认 0，范围 0~3000。简介与问候要尽量贴合当前角色设定与剧情氛围。`;
-        const text = await apiChat(st, { system: sys, user, json: false, temperature: 0.8, maxTokens: 700 });
+${st.worldbook.name ? worldbookContext(st) : ''}
+${(function(){try{var ci=getCharInfo();var p=[];if(ci.name)p.push('当前角色：'+ci.name);if(ci.description)p.push('角色描述：'+ci.description.slice(0,300));return p.length?'角色信息：'+p.join('，'):'';}catch(e){return '';}})()}
+注意：initialPoints 为整数，默认 0，范围 0~3000。简介与问候要贴合当前角色设定与剧情氛围。只返回JSON。`;
+        const text = await apiChat(st, { system: sys, user, json: false, temperature: 0.8, maxTokens: 1500 });
         const obj = extractJson(text);
         return {
             summary: String(obj.summary || '').trim(),
@@ -1776,19 +1914,43 @@ ${opts && opts.first ? '请生成 2~4 个适合系统开局的初始任务。' :
     }
 
     /* ---------- 业务：专属功能（纯AI·重试·零硬编码）---------- */
-async function apiGenerateExclusive(st, pref){
+    async function apiRefreshExclCost(st, ef) {
+        var ch = getChatHistory(st.contextFloors || 10);
+        var chatCtx = '';
+        if (ch.length) {
+            var lines = [];
+            for (var i = 0; i < Math.min(ch.length, 10); i++) {
+                lines.push(ch[i].role + '：' + ch[i].content.slice(0, 180));
+            }
+            chatCtx = '\n近期剧情：\n' + lines.join('\n');
+        }
+        var pts = st.points || 0;
+        var text = await apiChat(st, {
+            system: '你是系统设计师，根据角色剧情与积分余额判断专属功能的合理花费积分。只返回一个整数，不要任何额外文字。角色越强、积分越多，花费越高；角色越弱、积分越少，花费越低。',
+            user: '当前积分：' + pts + '。系统名称：' + (st.system.name || '') + '。功能名：' + (ef.name || '') + chatCtx + '\n请输出一个合理的花费积分整数：',
+            temperature: 0.5, maxTokens: 10
+        });
+        var num = parseInt(String(text).match(/\d+/));
+        return isNaN(num) ? Math.floor(pts * 0.15) || 80 : Math.max(1, num);
+    }
+
+async function apiGenerateExclusive(st, pref, complexity){
+    complexity = complexity || 'simple';
+    var isComplex = complexity === 'complex';
     var sn=st.system.name||'系统';var sp=st.system.purpose||'';
     var prefText=(typeof pref==='string'?pref:'').trim();
-    var bias=prefText?'\n用户偏向：'+prefText.slice(0,200)+'\n功能设计必须紧扣上述偏向，但细节和UI风格仍随机创新。':'';
+    var wb=st.worldbook||{};
+    var wbCtx=wb.name&&wb.summary?('世界书《'+wb.name+'》设定：'+(wb.summary||'').slice(0,400)+'。'):'';
+    var bias=prefText?('\n请严格按照以下提示词设计此功能：'+prefText.slice(0,300)):(wbCtx?('\n请参考以下世界观设定设计功能：'+wbCtx):'');
     var name='',icon='',desc='',html='',actions=[];
     for(var attempt=0;attempt<3;attempt++){
         try{
-            var r=await apiChat(st,{system:'你是系统UI设计师。只输出一行JSON，不要markdown。html字段为合法HTML片段（不含script），actions为2~4个操作按钮名。功能紧扣"'+sn+'"的核心玩法（'+sp.slice(0,60)+'），每次必须生成不同概念，禁止签到/抽卡/召唤/商店等模板。',
-            user:'为系统"'+sn+'"（'+sp.slice(0,90)+'）生成专属交互功能JSON：{"name":"≤6字功能名","icon":"1个emoji","desc":"≤12字描述","actions":["操作A","操作B","操作C"],"html":"<div>信息展示+操作按钮HTML</div>"}\nhtml要求：150~400字，class从nlsp-card nlsp-page-sub nlsp-pt nlsp-section-title nlsp-btn nlsp-grid3 nlsp-tags nlsp-result nlsp-banner nlsp-row nlsp-center中自由选用，颜色用var(--t-accent) var(--t-text) var(--t-title) var(--t-cardBg) var(--t-warn) var(--t-success) var(--t-err) var(--t-pur)，{% points %}占位积分。每个操作按钮必须带data-excl-act属性。'+bias,
-            temperature:1.0,maxTokens:1100});
+            var r=await apiChat(st,{system:'你是系统UI设计师。只输出一行JSON，不要markdown。html字段为合法HTML片段（不含script），actions为2~4个操作按钮名。你必须严格遵循用户提示词或世界书世界观生成功能，禁止擅自改变功能方向，严禁生成情色/成人/擦边内容，除非用户提示词明确要求，否则不得出现任何性暗示或色情相关功能。禁止签到/抽卡/召唤/商店等模板。',
+            user:'为系统"'+sn+'"（'+sp.slice(0,90)+'）生成专属交互功能JSON：{"name":"≤6字功能名","icon":"1个emoji","desc":"≤12字描述","cost":0,"actions":["操作A","操作B","操作C"],"html":"<div>信息展示+操作按钮HTML</div>"}\ncost要求：'+(state.exclCostPoints?'cost字段为每次使用花费的积分（整数），各按钮需在html中用data-excl-cost=\"N\"标注扣费':'cost字段固定为0')+'\nhtml要求：'+(isComplex?'800~3000字，必须包含<style>标签实现复杂CSS样式（动画/渐变/卡片布局/悬浮效果/响应式等），可自定义class名，使用纯CSS实现视觉冲击力的交互界面':'150~400字，class从')+'nlsp-card nlsp-page-sub nlsp-pt nlsp-section-title nlsp-btn nlsp-grid3 nlsp-tags nlsp-result nlsp-banner nlsp-row nlsp-center中自由选用，颜色用var(--t-accent) var(--t-text) var(--t-title) var(--t-cardBg) var(--t-warn) var(--t-success) var(--t-err) var(--t-pur)，{% points %}占位积分。每个操作按钮必须带data-excl-act属性。'+bias,
+            temperature:1.0,maxTokens:isComplex?30000:2000});
             var d=extractJson(r);
             if(d.name&&d.icon&&Array.isArray(d.actions)&&d.actions.length&&d.actions[0]&&d.html&&d.html.length>30){
-                name=d.name;icon=d.icon;desc=d.desc;actions=d.actions;html=d.html;break;
+                name=d.name;icon=d.icon;desc=d.desc;actions=d.actions;html=d.html;var cost=Number(d.cost)||0;break;
             }
         }catch(e){}
     }
@@ -1856,6 +2018,62 @@ async function apiGenerateExclusive(st, pref){
         close() { closePanel(); }
     };
 
+    /* ---------- 自动刷新引擎 ---------- */
+    var autoRefreshTimer = null;
+    var refreshCounter = 0;
+    var lastGenCount = -1;
+    function setupAutoRefresh() {
+        if (state.autoRefresh) {
+            try {
+                var te = window.parent && window.parent.SillyTavern && window.parent.SillyTavern.eventSource;
+                if (!te) { console.warn('[自定义系统] 未找到 eventSource，自动刷新无法启用'); return; }
+                if (autoRefreshTimer) return;
+                autoRefreshTimer = setInterval(function() {
+                    try {
+                        var ctx = window.parent.SillyTavern.getContext();
+                        var chat = ctx.chat || [];
+                        var count = chat.length;
+                        if (count === lastGenCount) return;
+                        var lastMsg = chat[chat.length - 1];
+                        if (!lastMsg || lastMsg.is_user) { lastGenCount = count; return; }
+                        if (window.parent.is_generating) return;
+                        lastGenCount = count;
+                        refreshCounter++;
+                        var interval = state.refreshInterval || 1;
+                        if (refreshCounter < interval) {
+                            console.log('[自定义系统] 自动刷新倒计时: ' + refreshCounter + '/' + interval);
+                            return;
+                        }
+                        refreshCounter = 0;
+                        doAutoRefresh();
+                    } catch (e) {}
+                }, 3000);
+                console.log('[自定义系统] 自动刷新已开启（每3秒检查一次）');
+            } catch (e) { console.warn('[自定义系统] 自动刷新启动失败:', e); }
+        } else {
+            if (autoRefreshTimer) { clearInterval(autoRefreshTimer); autoRefreshTimer = null; console.log('[自定义系统] 自动刷新已关闭'); }
+        }
+    }
+    var autoRefreshRunning = false;
+    async function doAutoRefresh() {
+        if (!state.initialized || !state.connected) return;
+        if (autoRefreshRunning) return;
+        autoRefreshRunning = true;
+        try {
+            console.log('[自定义系统] 开始自动刷新任务/商城…');
+            var tasks = await apiGenerateTask(state, { first: false });
+            if (tasks && tasks.length) { state.tasks = tasks; }
+            var shop = await apiGenerateShop(state);
+            if (shop && shop.length) { state.shop = shop; }
+            saveState();
+            console.log('[自定义系统] 自动刷新完成: ' + (state.tasks?state.tasks.length:0) + '个任务, ' + (state.shop?state.shop.length:0) + '件商品');
+        } catch (e) {
+            console.warn('[自定义系统] 自动刷新失败:', e);
+        } finally {
+            autoRefreshRunning = false;
+        }
+    }
+
     /* 监听 JS-Slash-Runner 脚本按钮 */
     try {
         var btnEvt = getButtonEvent('系统面板');
@@ -1886,5 +2104,6 @@ async function apiGenerateExclusive(st, pref){
     try {
         ensureStyle();
         injectFont();
+        setupAutoRefresh();
     } catch (e) { console.error('[自定义系统] 启动失败：', e); }
 })();
