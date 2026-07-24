@@ -110,37 +110,7 @@
         } catch (e) {
             console.warn('[自定义系统] localStorage 全量读取失败：', e);
         }
-        try {
-            const vars = TH.getVariables({ type: 'script', script_id: (typeof getScriptId === 'function' ? getScriptId() : '') || (window.frameElement && window.frameElement.id) || window.name || '' });
-            const data = vars && vars[NS];
-            if (data && typeof data === 'object') {
-                const def = getDefaultState();
-                s = Object.assign(def, data);
-                s.api = Object.assign(def.api, (data && data.api) || {});
-                s.system = Object.assign(def.system, (data && data.system) || {});
-                s.worldbook = Object.assign(def.worldbook, (data && data.worldbook) || {});
-                s.persona = Object.assign(def.persona, (data && data.persona) || {});
-                if (!Array.isArray(s.tasks)) s.tasks = [];
-                if (!Array.isArray(s.shop)) s.shop = [];
-                if (!Array.isArray(s.inventory)) s.inventory = [];
-                if (!Array.isArray(s.draws)) s.draws = [];
-                if (!Array.isArray(s.chat)) s.chat = [];
-                if (!Array.isArray(s.exclusiveFunctions)) s.exclusiveFunctions = [];
-                if (!Array.isArray(s.exclusivePreferences)) s.exclusivePreferences = [];
-                if (typeof s.exclusiveFunctionCount !== 'number' || s.exclusiveFunctionCount < 1) s.exclusiveFunctionCount = 1;
-                if (s.exclComplexity !== 'simple' && s.exclComplexity !== 'complex') s.exclComplexity = 'simple';
-                if (typeof s.exclCostPoints !== 'boolean') s.exclCostPoints = false;
-                if (typeof s.autoRefresh !== 'boolean') s.autoRefresh = false;
-                if (typeof s.contextFloors !== 'number' || s.contextFloors < 1) s.contextFloors = 10;
-                if (typeof s.refreshInterval !== 'number' || s.refreshInterval < 1) s.refreshInterval = 1;
-                if (typeof s.panelW !== 'number' || s.panelW < 0) s.panelW = 0;
-                if (typeof s.panelH !== 'number' || s.panelH < 0) s.panelH = 0;
-                if (typeof s.scaleLocked !== 'boolean') s.scaleLocked = true;
-                if (!s.theme || !THEMES[s.theme]) s.theme = 'hl-dark';
-            }
-        } catch (e) {
-            console.warn('[自定义系统] 读取状态失败：', e);
-        }
+
         /* 从 localStorage 还原 API 配置（跨会话持久） */
         try {
             const ls = window.parent && window.parent.localStorage ? window.parent.localStorage : window.localStorage;
@@ -162,11 +132,6 @@
     }
 
     function saveState() {
-        try {
-            TH.insertOrAssignVariables({ [NS]: state }, { type: 'script', script_id: (typeof getScriptId === 'function' ? getScriptId() : '') || (window.frameElement && window.frameElement.id) || window.name || '' });
-        } catch (e) {
-            console.warn('[自定义系统] 保存状态失败：', e);
-        }
         try {
             const ls = window.parent && window.parent.localStorage ? window.parent.localStorage : window.localStorage;
             ls.setItem(LS_FULL_KEY, JSON.stringify(state));
