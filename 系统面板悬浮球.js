@@ -111,7 +111,7 @@
             console.warn('[自定义系统] localStorage 全量读取失败：', e);
         }
         try {
-            const vars = TH.getVariables({ type: 'script' });
+            const vars = TH.getVariables({ type: 'script', script_id: (typeof getScriptId === 'function' ? getScriptId() : '') || (window.frameElement && window.frameElement.id) || window.name || '' });
             const data = vars && vars[NS];
             if (data && typeof data === 'object') {
                 const def = getDefaultState();
@@ -163,7 +163,7 @@
 
     function saveState() {
         try {
-            TH.insertOrAssignVariables({ [NS]: state }, { type: 'script' });
+            TH.insertOrAssignVariables({ [NS]: state }, { type: 'script', script_id: (typeof getScriptId === 'function' ? getScriptId() : '') || (window.frameElement && window.frameElement.id) || window.name || '' });
         } catch (e) {
             console.warn('[自定义系统] 保存状态失败：', e);
         }
@@ -237,14 +237,14 @@ function injectFont() {
         applyTheme(state.theme || 'hl-dark');
         const css = `*{box-sizing:border-box;margin:0;padding:0}
 a{text-decoration:none;color:inherit}
-#${OVERLAY_ID}{position:fixed;inset:0;z-index:999999;font-family:"Tourney","Microsoft YaHei",sans-serif;pointer-events:none;display:flex;align-items:center;justify-content:center}
+#${OVERLAY_ID}{position:absolute;top:0;left:0;width:100%;height:100%;z-index:999999;font-family:"Tourney","Microsoft YaHei",sans-serif;pointer-events:none;display:flex;align-items:center;justify-content:center}
 #${OVERLAY_ID} .nlsp-shell{pointer-events:auto}
-#OVL .nlsp-topbar{cursor:move}
-#OVL .nlsp-topbar .tr,#OVL .nlsp-topbar .tr *{cursor:default}
-#OVL .nlsp-pane,#OVL .nlsp-pane *{cursor:default}
-#OVL .nlsp-body,#OVL .nlsp-body *{cursor:default}
-#OVL .nlsp-btn,#OVL .nlsp-app,#OVL .nlsp-close,#OVL .nlsp-icon,#OVL .nlsp-back,#OVL button{cursor:pointer}
-#OVL input,#OVL textarea,#OVL select{cursor:text}
+#${OVERLAY_ID} .nlsp-topbar{cursor:move;touch-action:none}
+#${OVERLAY_ID} .nlsp-topbar .tr,#${OVERLAY_ID} .nlsp-topbar .tr *{cursor:default}
+#${OVERLAY_ID} .nlsp-pane,#${OVERLAY_ID} .nlsp-pane *{cursor:default}
+#${OVERLAY_ID} .nlsp-body,#${OVERLAY_ID} .nlsp-body *{cursor:default}
+#${OVERLAY_ID} .nlsp-btn,#${OVERLAY_ID} .nlsp-app,#${OVERLAY_ID} .nlsp-close,#${OVERLAY_ID} .nlsp-icon,#${OVERLAY_ID} .nlsp-back,#${OVERLAY_ID} button{cursor:pointer}
+#${OVERLAY_ID} input,#${OVERLAY_ID} textarea,#${OVERLAY_ID} select{cursor:text}
 /** preview 原封不动照搬开始 **/
 .scene,.nlsp-shell{position:relative;width:min(820px,94vw);height:min(580px,88vh);animation:hl-shift 6s ease-in-out infinite}@media(max-width:768px){.scene,.nlsp-shell{width:96vw;height:min(520px,80vh);border-radius:0}.nlsp-topbar{padding:12px 14px 10px}.nlsp-topbar .tname{font-size:11px;letter-spacing:1px}.nlsp-topbar .tsub{font-size:10px}.nlsp-body{padding:12px 14px}.nlsp-app-grid{grid-template-columns:repeat(3,1fr);gap:10px}.nlsp-app .nlsp-app-ic{width:46px;height:46px;font-size:20px}.nlsp-app .nlsp-app-name{font-size:10px}.nlsp-btn{font-size:10px;padding:6px 12px}.nlsp-card{padding:10px 12px}.nlsp-input,.nlsp-select,.nlsp-textarea{padding:8px 10px;font-size:12px}.nlsp-page-title{font-size:11px}.nlsp-pt-pill{font-size:10px;padding:3px 10px}.nlsp-chat{font-size:11px}.nlsp-msg{font-size:11px;padding:8px 10px}}
 @keyframes hl-shift{0%,100%{transform:translate(0,0)}25%{transform:translate(.3px,-.2px)}50%{transform:translate(-.2px,.3px)}75%{transform:translate(.1px,-.1px)}}
@@ -385,7 +385,8 @@ a{text-decoration:none;color:inherit}
         
         overlay.id = OVERLAY_ID;
         overlay.addEventListener('click', (ev) => { if (ev.target === overlay) overlay.remove(); });
-        doc.body.appendChild(overlay);
+        var container = doc.getElementById('movingDivs') || doc.getElementById('sheld') || doc.body;
+        container.appendChild(overlay);
         render();
     }
 
@@ -404,6 +405,16 @@ a{text-decoration:none;color:inherit}
         if (shell) {
             applyPanelResize(shell);
             makeWindowDraggable(shell, o);
+            try {
+                var tb = shell.querySelector('.nlsp-topbar');
+                if (tb) {
+                    var pe = getDoc().defaultView.getComputedStyle(tb).pointerEvents;
+                    var ta = getDoc().defaultView.getComputedStyle(tb).touchAction;
+                    console.log('[debug] topbar pointerEvents='+pe+' touchAction='+ta+' rect='+JSON.stringify(tb.getBoundingClientRect()));
+                } else {
+                    console.log('[debug] topbar NOT FOUND');
+                }
+            } catch(e) { console.log('[debug] css check error:', e.message); }
         }
         return shell;
     }
@@ -411,8 +422,11 @@ a{text-decoration:none;color:inherit}
     function applyPanelResize(shell) {
         if (!shell) shell = getDoc().querySelector('.nlsp-shell');
         if (!shell) return;
-        if (state.panelW > 200) shell.style.width = state.panelW + 'px';
-        if (state.panelH > 150) shell.style.height = state.panelH + 'px';
+        var doc = getDoc();
+        var vw = doc.documentElement.clientWidth || window.innerWidth;
+        var vh = doc.documentElement.clientHeight || window.innerHeight;
+        if (state.panelW > 200 && state.panelW < vw - 20) shell.style.width = state.panelW + 'px';
+        if (state.panelH > 150 && state.panelH < vh - 20) shell.style.height = state.panelH + 'px';
         if (!state.scaleLocked) {
             shell.style.resize = 'both';
             shell.style.overflow = 'hidden';
@@ -438,35 +452,66 @@ a{text-decoration:none;color:inherit}
     function makeWindowDraggable(shell, win) {
         const doc = getDoc();
         const topbar = shell.querySelector('.nlsp-topbar');
+        console.log('[自定义系统] makeWindowDraggable: doc='+(doc===document?'self':'parent')+' topbar='+(topbar?'OK':'NULL')+' win='+win.tagName);
         if (!topbar) return;
+        topbar.style.touchAction = 'none';
         let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
-        topbar.addEventListener('pointerdown', (e) => {
-            if (e.target.closest('.tr') || e.target.closest('.nlsp-close') || e.target.closest('.nlsp-icon') || e.target.tagName === 'BUTTON') return;
+        function isIgnored(t) {
+            return !!(t && (t.closest('.tr') || t.closest('.nlsp-close') || t.closest('.nlsp-icon') || t.tagName === 'BUTTON'));
+        }
+        function startDrag(cx, cy) {
             dragging = true;
-            sx = e.clientX; sy = e.clientY;
+            sx = cx; sy = cy;
             const r = win.getBoundingClientRect();
             ox = r.left; oy = r.top;
             win.style.left = ox + 'px'; win.style.top = oy + 'px';
             win.style.right = 'auto'; win.style.bottom = 'auto';
-            topbar.setPointerCapture(e.pointerId);
-            e.preventDefault();
-        });
-        topbar.addEventListener('pointermove', (e) => {
+            topbar.style.background = 'var(--t-accent)';
+            console.log('[自定义系统] drag start cx='+cx+' cy='+cy+' rect='+r.width+'x'+r.height);
+        }
+        function moveDrag(cx, cy) {
             if (!dragging) return;
-            const dx = e.clientX - sx, dy = e.clientY - sy;
-            const W = doc.documentElement.clientWidth, H = doc.documentElement.clientHeight;
+            const dx = cx - sx, dy = cy - sy;
+            const W = doc.documentElement.clientWidth, H = window.parent ? window.parent.innerHeight : doc.documentElement.clientHeight;
             let x = ox + dx, y = oy + dy;
             x = Math.max(4, Math.min(x, W - shell.offsetWidth - 4));
             y = Math.max(4, Math.min(y, H - shell.offsetHeight - 4));
             win.style.left = x + 'px'; win.style.top = y + 'px';
-        });
-        function end(e) {
-            if (!dragging) return;
-            dragging = false;
-            try { topbar.releasePointerCapture(e.pointerId); } catch (err) {}
         }
-        topbar.addEventListener('pointerup', end);
-        topbar.addEventListener('pointercancel', end);
+        function endDrag() {
+            if (dragging) console.log('[自定义系统] drag end');
+            dragging = false;
+            topbar.style.background = '';
+        }
+        topbar.addEventListener('pointerdown', function(e) {
+            console.log('[自定义系统] pointerdown target='+e.target.tagName+' ignored='+isIgnored(e.target));
+            if (isIgnored(e.target)) return;
+            startDrag(e.clientX, e.clientY);
+            e.preventDefault();
+        }, { passive: false });
+        doc.addEventListener('pointermove', function(e) {
+            if (!dragging) return;
+            moveDrag(e.clientX, e.clientY);
+            e.preventDefault();
+        }, { passive: false });
+        doc.addEventListener('pointerup', endDrag);
+        doc.addEventListener('pointercancel', endDrag);
+        topbar.addEventListener('touchstart', function(e) {
+            console.log('[自定义系统] touchstart target='+e.target.tagName+' touches='+e.touches.length);
+            if (dragging) return;
+            if (isIgnored(e.target)) return;
+            var t = e.touches[0];
+            startDrag(t.clientX, t.clientY);
+            e.preventDefault();
+        }, { passive: false });
+        doc.addEventListener('touchmove', function(e) {
+            if (!dragging) return;
+            var t = e.touches[0];
+            moveDrag(t.clientX, t.clientY);
+            e.preventDefault();
+        }, { passive: false });
+        doc.addEventListener('touchend', endDrag);
+        doc.addEventListener('touchcancel', endDrag);
     }
 
     function shellTopBar(title, sub, right) {
@@ -1398,7 +1443,7 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
             .replace(/\{%\s*reward\s*%\}/g, String(reward));
         body.innerHTML = `
             <div class="nlsp-page-head">
-                <span class="nlsp-page-sub">${escapeText(ef.desc || '')}</span>
+                <span class="nlsp-page-sub">${escapeText(ef.desc || '')}${state.exclCostPoints&&ef.cost?(' · 每次花费 '+ef.cost+' 积分'):''}</span>
                 <button class="nlsp-btn ghost" id="nlsp-excl-refresh">刷新</button>
                 ${state.exclCostPoints ? '<button class="nlsp-btn ghost" id="nlsp-excl-refresh-cost">💰刷新花费</button>' : ''}
             </div>
@@ -1452,22 +1497,46 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
         var bodyId='nlsp-'+activeView+'-body';
         const body = getDoc().getElementById(bodyId);
         if (!body) return;
-        body.querySelectorAll('[data-excl-act]').forEach((b) => {
-            b.addEventListener('click', async () => {
-                const act = b.getAttribute('data-excl-act');
-                const msg = b.getAttribute('data-excl-msg') || ('执行了「' + act + '」');
+        var clickables = body.querySelectorAll('[data-excl-act], button:not([disabled]), a[class], [role=button], .nlsp-btn');
+        clickables.forEach((b) => {
+            if (b._nlspBound) return;
+            b._nlspBound = true;
+            b.addEventListener('click', async (ev) => {
+                ev.preventDefault();
+                ev.stopPropagation();
+                var act = b.getAttribute('data-excl-act') || b.textContent.trim().slice(0,20) || '操作';
+                var btnCost = parseInt(b.getAttribute('data-excl-cost')) || 0;
+                if (!btnCost) {
+                    var m = b.textContent.match(/(\d{2,6})/);
+                    if (m) btnCost = parseInt(m[1]);
+                }
                 b.disabled = true;
-                try { await handleExclAction(act); } catch (e) { toast('操作失败：' + (e && e.message || e), 'error'); }
+                b.style.opacity = '0.5';
+                try { await handleExclAction(act, btnCost); } catch (e) { toast('操作失败：' + (e && e.message || e), 'error'); }
                 b.disabled = false;
+                b.style.opacity = '';
             });
         });
     }
 
-    async function handleExclAction(act) {
+    async function handleExclAction(act, btnCost) {
         var excls=state.exclusiveFunctions||[];
         var ef=excls[0]||{};
         if(activeView.indexOf('excl')===0){var i=parseInt(activeView.slice(4))||0;ef=excls[i]||{};}
-        if(state.exclCostPoints&&ef.cost>0){if(state.points<ef.cost){toast('积分不足，需要 '+ef.cost+' 积分，当前仅有 '+state.points,'error');return}state.points-=ef.cost;saveState();var ptspan=getDoc().getElementById('nlsp-pt-span');if(ptspan)ptspan.textContent=state.points;toast('已扣除 '+ef.cost+' 积分','info')}
+        try {
+            if (typeof triggerSlash === 'function') {
+                triggerSlash('/send {{user}}使用了「' + (ef.name||'专属功能') + '」的「' + act + '」功能。', { show: false });
+            }
+        } catch(e) {}
+        var realCost = (state.exclCostPoints ? (btnCost || ef.cost || 0) : 0);
+        if (realCost > 0) {
+            if (state.points < realCost) { toast('积分不足，需要 ' + realCost + ' 积分，当前仅有 ' + state.points, 'error'); return; }
+            state.points -= realCost;
+            saveState();
+            if (typeof renderMainTop === 'function') renderMainTop();
+            var pillEl = getDoc().querySelector('.nlsp-pt-pill');
+            if (pillEl) pillEl.textContent = '积分 ' + state.points;
+            toast('已扣除 '+realCost+' 积分，剩余 '+state.points, 'success')}
         const stEl = getDoc().getElementById('nlsp-excl-status');
         if (stEl) { stEl.textContent = '处理中…'; stEl.style.color = ''; }
         try {
@@ -1945,8 +2014,8 @@ async function apiGenerateExclusive(st, pref, complexity){
     var name='',icon='',desc='',html='',actions=[];
     for(var attempt=0;attempt<3;attempt++){
         try{
-            var r=await apiChat(st,{system:'你是系统UI设计师。只输出一行JSON，不要markdown。html字段为合法HTML片段（不含script），actions为2~4个操作按钮名。你必须严格遵循用户提示词或世界书世界观生成功能，禁止擅自改变功能方向，严禁生成情色/成人/擦边内容，除非用户提示词明确要求，否则不得出现任何性暗示或色情相关功能。禁止签到/抽卡/召唤/商店等模板。',
-            user:'为系统"'+sn+'"（'+sp.slice(0,90)+'）生成专属交互功能JSON：{"name":"≤6字功能名","icon":"1个emoji","desc":"≤12字描述","cost":0,"actions":["操作A","操作B","操作C"],"html":"<div>信息展示+操作按钮HTML</div>"}\ncost要求：'+(state.exclCostPoints?'cost字段为每次使用花费的积分（整数），各按钮需在html中用data-excl-cost=\"N\"标注扣费':'cost字段固定为0')+'\nhtml要求：'+(isComplex?'800~3000字，必须包含<style>标签实现复杂CSS样式（动画/渐变/卡片布局/悬浮效果/响应式等），可自定义class名，使用纯CSS实现视觉冲击力的交互界面':'150~400字，class从')+'nlsp-card nlsp-page-sub nlsp-pt nlsp-section-title nlsp-btn nlsp-grid3 nlsp-tags nlsp-result nlsp-banner nlsp-row nlsp-center中自由选用，颜色用var(--t-accent) var(--t-text) var(--t-title) var(--t-cardBg) var(--t-warn) var(--t-success) var(--t-err) var(--t-pur)，{% points %}占位积分。每个操作按钮必须带data-excl-act属性。'+bias,
+            var r=await apiChat(st,{system:'你是系统UI设计师。只输出一行JSON，不要markdown。html字段为合法HTML片段（不含script）。你必须严格遵循用户提示词或世界书世界观生成功能，禁止擅自改变功能方向，严禁生成情色/成人/擦边内容，除非用户提示词明确要求，否则不得出现任何性暗示或色情相关功能。禁止签到/抽卡/召唤/商店等模板。【最重要】所有可交互元素（按钮、链接、卡片、图标等）必须带data-excl-act属性，属性值为该操作的中文动作名，点击后会自动触发对应逻辑并静默执行，绝对不能有无法点击的假按钮或装饰按钮。',
+            user:'为系统"'+sn+'"（'+sp.slice(0,90)+'）生成专属交互功能JSON：{"name":"≤6字功能名","icon":"1个emoji","desc":"≤12字描述","cost":0,"actions":["操作A","操作B","操作C"],"html":"<div>信息展示+操作按钮HTML</div>"}\ncost要求：'+(state.exclCostPoints?'cost字段为功能总花费参考值（整数）。每个操作按钮必须在按钮文字旁写明该按钮的具体花费积分（如：升级(500积分)），并在HTML中用data-excl-cost=\"N\"标注实际扣费值。不同按钮可以有不同花费，由你根据功能强度自行定价。':'cost字段固定为0')+'\nhtml要求：'+(isComplex?'800~3000字，必须包含<style>标签实现复杂CSS样式（动画/渐变/卡片布局/悬浮效果/响应式等），可自定义class名，使用纯CSS实现视觉冲击力的交互界面':'150~400字，class从')+'nlsp-card nlsp-page-sub nlsp-pt nlsp-section-title nlsp-btn nlsp-grid3 nlsp-tags nlsp-result nlsp-banner nlsp-row nlsp-center中自由选用，颜色用var(--t-accent) var(--t-text) var(--t-title) var(--t-cardBg) var(--t-warn) var(--t-success) var(--t-err) var(--t-pur)，{% points %}占位积分。【点击逻辑要求】所有按钮、链接、可交互卡片、图标必须带data-excl-act=\"中文动作名\"属性，data-excl-msg=\"点击后显示的提示\"可选。禁止生成任何无法点击的装饰按钮。每个data-excl-act元素点击后会自动静默触发对应逻辑。'+bias,
             temperature:1.0,maxTokens:isComplex?30000:2000});
             var d=extractJson(r);
             if(d.name&&d.icon&&Array.isArray(d.actions)&&d.actions.length&&d.actions[0]&&d.html&&d.html.length>30){
@@ -1963,7 +2032,11 @@ async function apiGenerateExclusive(st, pref, complexity){
         html='<div class="nlsp-result"><div class="nlsp-section-title">'+name+'</div><div class="nlsp-page-sub">'+desc+'</div><div style="font-size:22px;color:var(--t-accent);font-weight:700;margin:8px 0">{% points %}</div>'+btnHtml+'</div>';
     }
     html=String(html).replace(/<script[^>]*>[\s\S]*?<\/script>/gi,'').replace(/\son\w+\s*=/gi,' data-blocked=');
-    return{name:name,icon:icon,desc:desc,html:html+'<div id="nlsp-excl-status" class="nlsp-page-sub" style="margin-top:10px;min-height:16px"></div>'};
+    if (state.exclCostPoints && (!cost || cost < 1)) {
+        var costMatch = String(html || '').match(/(?:花费|消耗|扣|cost|积分)[^0-9]*(\d{2,6})/i);
+        cost = costMatch ? parseInt(costMatch[1]) : 0;
+    }
+    return{name:name,icon:icon,desc:desc,cost:cost||0,actions:actions,html:html+'<div id="nlsp-excl-status" class="nlsp-page-sub" style="margin-top:10px;min-height:16px"></div>'};
 }
 
         /* ---------- 业务：聊天（使用人格预设） ---------- */
