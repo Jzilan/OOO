@@ -15,6 +15,15 @@
 
     const DRAW_COST_ONE = 100;
     const DRAW_COST_TEN = 900;
+    const PANEL_PRESETS = {
+        'tall-3-4': { name: '竖向 3:4（高面板）', width: 660, height: 880 },
+        'classic-4-3': { name: '经典 4:3', width: 920, height: 690 },
+        'square-1-1': { name: '方形 1:1', width: 760, height: 760 },
+        'photo-5-4': { name: '舒展 5:4', width: 900, height: 720 },
+        'wide-16-10': { name: '宽屏 16:10', width: 1040, height: 650 },
+        'wide-16-9': { name: '宽屏 16:9', width: 1120, height: 630 },
+        'ultrawide-21-9': { name: '超宽 21:9', width: 1260, height: 540 }
+    };
 
     /* 官方预设接口（均以 OpenAI 兼容路径结尾） */
     const API_PRESETS = [
@@ -33,16 +42,80 @@
     /* huashu-design 全息科幻五主题 */
     const THEMES = {"hl-light":{"name":"亮蓝全息","icon":"☀","desc":"浅蓝基底·全息科幻","var":{"bg":"#d8e6f6","bg2":"#c8ddf0","topBg":"rgba(195,215,240,.92)","text":"#0c1c30","title":"#051028","muted":"rgba(35,60,105,.88)","accent":"#0e58b8","accent2":"#064098","neon":"rgba(45,135,225,.92)","neon2":"rgba(18,65,150,.82)","success":"#186840","warn":"#9c6020","pur":"#5248b0","err":"#c02838","cardBg":"rgba(218,235,250,.94)","cardBorder":"rgba(38,105,185,.28)","inputBg":"rgba(232,240,252,.96)","inputBorder":"rgba(32,95,170,.28)","btnBg":"rgba(12,60,138,.8)","btnBg2":"rgba(16,85,172,.58)","btnBorder":"rgba(42,125,210,.42)","btnText":"#e6f2ff","btnBgH":"rgba(16,78,165,.88)","btnBg2H":"rgba(22,105,208,.7)","shellBorder":"rgba(42,105,178,.24)","msgUser":"rgba(155,198,235,.84)","msgAi":"rgba(212,234,250,.92)","warnColor":"#9c6020","overlay":"rgba(165,202,236,.84)","vignette":"rgba(145,185,220,.5)","w":"rgba(0,0,0,.04)","ballBg":"rgba(185,208,238,.88)","ballBgH":"rgba(165,190,228,.94)"}},"hl-dark":{"name":"暗色全息","icon":"🌙","desc":"深炭黑底·青蓝霓虹","var":{"bg":"#060e1a","bg2":"#0a1628","topBg":"rgba(14,22,45,.65)","text":"#c8ddf8","title":"#e4eeff","muted":"rgba(130,180,220,.58)","accent":"#60b0f8","accent2":"#2880d0","neon":"rgba(100,190,255,.92)","neon2":"rgba(40,120,210,.82)","success":"#38a068","warn":"#c8a050","pur":"#8878e0","err":"#f05878","cardBg":"rgba(10,20,45,.65)","cardBorder":"rgba(35,95,195,.22)","inputBg":"rgba(6,14,30,.85)","inputBorder":"rgba(35,95,195,.28)","btnBg":"rgba(18,55,125,.72)","btnBg2":"rgba(28,85,175,.52)","btnBorder":"rgba(55,145,240,.38)","btnText":"#c0def8","btnBgH":"rgba(28,75,155,.82)","btnBg2H":"rgba(38,105,215,.62)","shellBorder":"rgba(55,85,128,.2)","msgUser":"rgba(28,75,155,.48)","msgAi":"rgba(10,20,45,.65)","warnColor":"#c8a050","overlay":"rgba(3,6,14,.84)","vignette":"transparent","w":"rgba(255,255,255,.03)","ballBg":"rgba(12,22,45,.72)","ballBgH":"rgba(28,55,125,.82)"}},"hl-blood":{"name":"暗红血族","icon":"🩸","desc":"绯红深渊·血族纹章","var":{"bg":"#0c0606","bg2":"#140a0a","topBg":"rgba(30,10,10,.7)","text":"#e8d0d0","title":"#ffd0d0","muted":"rgba(190,140,140,.6)","accent":"#c83038","accent2":"#981820","neon":"rgba(255,70,70,.9)","neon2":"rgba(200,30,30,.8)","success":"#58a040","warn":"#c89830","pur":"#9050b0","err":"#ff4040","cardBg":"rgba(22,8,8,.72)","cardBorder":"rgba(170,35,40,.28)","inputBg":"rgba(14,6,6,.9)","inputBorder":"rgba(170,35,40,.32)","btnBg":"rgba(140,20,30,.72)","btnBg2":"rgba(180,40,50,.52)","btnBorder":"rgba(220,50,60,.42)","btnText":"#ffe0e0","btnBgH":"rgba(160,28,38,.84)","btnBg2H":"rgba(200,48,58,.64)","shellBorder":"rgba(140,25,35,.24)","msgUser":"rgba(180,40,50,.48)","msgAi":"rgba(22,8,8,.72)","warnColor":"#c89830","overlay":"rgba(6,3,3,.86)","vignette":"transparent","w":"rgba(255,255,255,.03)","ballBg":"rgba(22,8,8,.78)","ballBgH":"rgba(140,20,30,.72)"}},"hl-green":{"name":"清新翠绿","icon":"🌿","desc":"晨露新叶·自然清新","var":{"bg":"#e6f4e6","bg2":"#d6ecd6","topBg":"rgba(200,230,200,.92)","text":"#122812","title":"#081c08","muted":"rgba(40,100,40,.88)","accent":"#289040","accent2":"#187030","neon":"rgba(50,190,70,.92)","neon2":"rgba(25,140,45,.82)","success":"#2a8048","warn":"#b08030","pur":"#7050b8","err":"#d84040","cardBg":"rgba(222,244,224,.94)","cardBorder":"rgba(35,145,55,.28)","inputBg":"rgba(234,248,235,.96)","inputBorder":"rgba(28,125,45,.28)","btnBg":"rgba(18,115,38,.8)","btnBg2":"rgba(25,145,50,.58)","btnBorder":"rgba(45,175,65,.42)","btnText":"#e6ffe8","btnBgH":"rgba(22,135,45,.88)","btnBg2H":"rgba(30,165,58,.7)","shellBorder":"rgba(38,125,55,.24)","msgUser":"rgba(168,222,178,.84)","msgAi":"rgba(218,242,222,.92)","warnColor":"#b08030","overlay":"rgba(172,222,182,.84)","vignette":"rgba(145,205,160,.5)","w":"rgba(0,0,0,.04)","ballBg":"rgba(192,222,198,.88)","ballBgH":"rgba(172,208,182,.94)"}},"hl-gold":{"name":"帝王鎏金","icon":"👑","desc":"御旨金纹·帝王威仪","var":{"bg":"#181208","bg2":"#221808","topBg":"rgba(35,20,8,.72)","text":"#f0e8d0","title":"#ffe8a0","muted":"rgba(195,175,120,.62)","accent":"#d4a030","accent2":"#b08020","neon":"rgba(240,200,60,.92)","neon2":"rgba(200,150,30,.82)","success":"#58a840","warn":"#e0b040","pur":"#9070c8","err":"#e85050","cardBg":"rgba(28,18,6,.72)","cardBorder":"rgba(175,135,30,.28)","inputBg":"rgba(18,12,5,.9)","inputBorder":"rgba(175,135,30,.32)","btnBg":"rgba(150,110,20,.72)","btnBg2":"rgba(190,140,30,.52)","btnBorder":"rgba(220,165,45,.42)","btnText":"#fff8e0","btnBgH":"rgba(170,130,28,.84)","btnBg2H":"rgba(210,158,38,.64)","shellBorder":"rgba(145,105,25,.24)","msgUser":"rgba(180,135,35,.48)","msgAi":"rgba(28,18,6,.72)","warnColor":"#e0b040","overlay":"rgba(8,6,2,.86)","vignette":"transparent","w":"rgba(255,255,255,.04)","ballBg":"rgba(28,18,6,.78)","ballBgH":"rgba(150,110,20,.72)"}},"hl-purple":{"name":"梦幻紫晶","icon":"🔮","desc":"暗紫深渊·水晶幻境","var":{"bg":"#0e0a1a","bg2":"#140e26","topBg":"rgba(20,14,38,.72)","text":"#d8c8f0","title":"#ece0ff","muted":"rgba(160,130,200,.62)","accent":"#a860e8","accent2":"#8040c8","neon":"rgba(180,120,255,.92)","neon2":"rgba(130,70,210,.82)","success":"#50b070","warn":"#d0a050","pur":"#c070e0","err":"#e85090","cardBg":"rgba(18,10,32,.72)","cardBorder":"rgba(120,60,180,.28)","inputBg":"rgba(10,6,20,.9)","inputBorder":"rgba(120,60,180,.32)","btnBg":"rgba(80,30,140,.72)","btnBg2":"rgba(120,50,180,.52)","btnBorder":"rgba(160,80,220,.42)","btnText":"#f0e0ff","btnBgH":"rgba(100,40,160,.84)","btnBg2H":"rgba(140,60,200,.64)","shellBorder":"rgba(80,40,120,.24)","msgUser":"rgba(120,50,180,.48)","msgAi":"rgba(18,10,32,.72)","warnColor":"#d0a050","overlay":"rgba(6,3,12,.86)","vignette":"transparent","w":"rgba(255,255,255,.03)","ballBg":"rgba(18,10,32,.78)","ballBgH":"rgba(80,30,140,.72)"}},"hl-cyber":{"name":"赛博朋克","icon":"🌃","desc":"霓虹粉青·未来都市","var":{"bg":"#0a0a12","bg2":"#0e0e1c","topBg":"rgba(14,14,28,.75)","text":"#d0e8f0","title":"#00ffe8","muted":"rgba(100,180,200,.6)","accent":"#ff2a8a","accent2":"#cc1066","neon":"rgba(0,255,224,.92)","neon2":"rgba(0,200,180,.82)","success":"#00ff80","warn":"#ffcc00","pur":"#c040ff","err":"#ff3060","cardBg":"rgba(12,12,24,.72)","cardBorder":"rgba(0,200,180,.25)","inputBg":"rgba(8,8,16,.9)","inputBorder":"rgba(255,42,138,.3)","btnBg":"rgba(180,20,80,.72)","btnBg2":"rgba(0,150,140,.52)","btnBorder":"rgba(0,255,224,.4)","btnText":"#e0fff8","btnBgH":"rgba(220,30,100,.84)","btnBg2H":"rgba(0,200,180,.64)","shellBorder":"rgba(0,150,140,.22)","msgUser":"rgba(180,20,80,.45)","msgAi":"rgba(12,12,24,.72)","warnColor":"#ffcc00","overlay":"rgba(4,4,8,.88)","vignette":"transparent","w":"rgba(0,255,224,.02)","ballBg":"rgba(12,12,24,.78)","ballBgH":"rgba(0,150,140,.72)"}},"hl-ocean":{"name":"深海蔚蓝","icon":"🌊","desc":"幽蓝深海·潮汐涌动","var":{"bg":"#04161e","bg2":"#061e28","topBg":"rgba(6,30,40,.72)","text":"#b8e0e8","title":"#e0f8ff","muted":"rgba(100,160,180,.6)","accent":"#20c8d0","accent2":"#1090a0","neon":"rgba(40,200,220,.92)","neon2":"rgba(20,140,170,.82)","success":"#30b888","warn":"#d0a040","pur":"#6080d0","err":"#e85060","cardBg":"rgba(6,22,30,.72)","cardBorder":"rgba(30,160,180,.26)","inputBg":"rgba(4,16,22,.9)","inputBorder":"rgba(30,160,180,.3)","btnBg":"rgba(16,80,100,.72)","btnBg2":"rgba(20,120,140,.52)","btnBorder":"rgba(40,200,220,.4)","btnText":"#e0f8ff","btnBgH":"rgba(20,100,120,.84)","btnBg2H":"rgba(30,160,180,.64)","shellBorder":"rgba(20,100,120,.22)","msgUser":"rgba(20,120,140,.45)","msgAi":"rgba(6,22,30,.72)","warnColor":"#d0a040","overlay":"rgba(2,10,14,.86)","vignette":"transparent","w":"rgba(40,200,220,.025)","ballBg":"rgba(6,22,30,.78)","ballBgH":"rgba(16,80,100,.72)"}},"hl-sakura":{"name":"樱花纷飞","icon":"🌸","desc":"粉樱暖阳·温柔梦境","var":{"bg":"#fce8ee","bg2":"#f8dce6","topBg":"rgba(245,215,228,.92)","text":"#2a0e1a","title":"#1a0612","muted":"rgba(120,60,90,.88)","accent":"#e85090","accent2":"#c83070","neon":"rgba(232,80,144,.92)","neon2":"rgba(200,48,112,.82)","success":"#40a068","warn":"#c08030","pur":"#9060c0","err":"#d83048","cardBg":"rgba(252,232,238,.94)","cardBorder":"rgba(200,80,130,.28)","inputBg":"rgba(255,240,245,.96)","inputBorder":"rgba(200,80,130,.28)","btnBg":"rgba(200,48,112,.8)","btnBg2":"rgba(232,80,144,.58)","btnBorder":"rgba(240,100,160,.42)","btnText":"#fff0f5","btnBgH":"rgba(220,58,122,.88)","btnBg2H":"rgba(245,100,165,.7)","shellBorder":"rgba(200,80,130,.24)","msgUser":"rgba(232,168,195,.84)","msgAi":"rgba(252,232,238,.92)","warnColor":"#c08030","overlay":"rgba(232,188,210,.84)","vignette":"rgba(220,170,195,.5)","w":"rgba(0,0,0,.03)","ballBg":"rgba(245,210,225,.88)","ballBgH":"rgba(232,180,200,.94)"}},"hl-ink":{"name":"水墨丹青","icon":"🖌","desc":"宣纸墨韵·古风雅致","var":{"bg":"#f5f2ee","bg2":"#ede8e0","topBg":"rgba(230,222,210,.92)","text":"#2a2a2a","title":"#0a0a0a","muted":"rgba(80,75,70,.88)","accent":"#8a6a3a","accent2":"#6a5028","neon":"rgba(138,106,58,.82)","neon2":"rgba(106,80,40,.72)","success":"#4a8050","warn":"#a07820","pur":"#604878","err":"#a83838","cardBg":"rgba(245,240,232,.94)","cardBorder":"rgba(120,100,70,.25)","inputBg":"rgba(250,248,242,.96)","inputBorder":"rgba(120,100,70,.25)","btnBg":"rgba(70,55,35,.82)","btnBg2":"rgba(100,80,50,.6)","btnBorder":"rgba(138,106,58,.4)","btnText":"#f5f0e8","btnBgH":"rgba(90,70,45,.9)","btnBg2H":"rgba(120,95,60,.72)","shellBorder":"rgba(100,85,60,.22)","msgUser":"rgba(180,165,140,.7)","msgAi":"rgba(245,240,232,.92)","warnColor":"#a07820","overlay":"rgba(200,190,175,.82)","vignette":"rgba(180,170,155,.4)","w":"rgba(0,0,0,.04)","ballBg":"rgba(225,215,200,.88)","ballBgH":"rgba(205,195,178,.94)"}},"hl-scifi":{"name":"全息科幻","icon":"🔷","desc":"磨砂玻璃·全息色散·粒子扫描","var":{"bg":"#0a1428","bg2":"#0e1a34","topBg":"rgba(14,26,52,.85)","text":"#c0dcf8","title":"#a0e0ff","muted":"rgba(140,180,220,.58)","accent":"#40b8f0","accent2":"#2890d0","neon":"rgba(100,200,255,.92)","neon2":"rgba(40,140,220,.82)","success":"#30c080","warn":"#d0a040","pur":"#8060e0","err":"#f05070","cardBg":"rgba(12,24,48,.7)","cardBorder":"rgba(60,160,240,.25)","inputBg":"rgba(8,16,32,.85)","inputBorder":"rgba(60,160,240,.28)","btnBg":"rgba(20,80,160,.7)","btnBg2":"rgba(30,110,200,.5)","btnBorder":"rgba(80,180,255,.4)","btnText":"#c0e0ff","btnBgH":"rgba(28,100,190,.8)","btnBg2H":"rgba(40,130,230,.6)","shellBorder":"rgba(60,120,200,.2)","msgUser":"rgba(30,90,160,.5)","msgAi":"rgba(12,24,48,.7)","warnColor":"#d0a040","overlay":"rgba(4,8,18,.88)","vignette":"rgba(30,60,120,.15)","w":"rgba(255,255,255,.03)","ballBg":"rgba(14,26,52,.75)","ballBgH":"rgba(28,60,120,.85)"}},"hl-xianxia":{"name":"国风水墨","icon":"🏮","desc":"云纹金边·灵气光雾·宣纸肌理","var":{"bg":"#120e0a","bg2":"#1a1410","topBg":"rgba(26,20,16,.85)","text":"#e0d0b0","title":"#d0b870","muted":"rgba(160,130,80,.6)","accent":"#c0a050","accent2":"#a08030","neon":"rgba(100,200,180,.82)","neon2":"rgba(60,160,140,.62)","success":"#50a060","warn":"#c09040","pur":"#8060a0","err":"#c04848","cardBg":"rgba(25,18,12,.7)","cardBorder":"rgba(190,160,90,.22)","inputBg":"rgba(18,14,10,.85)","inputBorder":"rgba(190,160,90,.25)","btnBg":"rgba(100,70,30,.7)","btnBg2":"rgba(140,100,40,.5)","btnBorder":"rgba(190,160,90,.38)","btnText":"#e8d8b0","btnBgH":"rgba(120,85,38,.8)","btnBg2H":"rgba(160,115,50,.6)","shellBorder":"rgba(120,90,50,.2)","msgUser":"rgba(100,75,35,.45)","msgAi":"rgba(25,18,12,.7)","warnColor":"#c09040","overlay":"rgba(8,5,3,.88)","vignette":"rgba(40,25,15,.3)","w":"rgba(255,255,255,.02)","ballBg":"rgba(26,20,16,.78)","ballBgH":"rgba(100,70,30,.75)"}},"hl-solo":{"name":"暗黑硬核","icon":"⚔","desc":"银灰棱角·金属冷峻·几何切割","var":{"bg":"#0e0e12","bg2":"#121216","topBg":"rgba(18,18,22,.9)","text":"#c0c4cc","title":"#a0a8b8","muted":"rgba(130,138,150,.6)","accent":"#a0a8b8","accent2":"#788090","neon":"rgba(170,180,195,.72)","neon2":"rgba(120,130,145,.52)","success":"#48a058","warn":"#b09838","pur":"#6858a0","err":"#c04848","cardBg":"rgba(18,18,24,.8)","cardBorder":"rgba(170,180,195,.15)","inputBg":"rgba(12,12,16,.9)","inputBorder":"rgba(170,180,195,.15)","btnBg":"rgba(40,42,50,.8)","btnBg2":"rgba(55,58,68,.6)","btnBorder":"rgba(170,180,195,.28)","btnText":"#c0c8d8","btnBgH":"rgba(50,52,62,.9)","btnBg2H":"rgba(65,68,78,.7)","shellBorder":"rgba(100,105,115,.2)","msgUser":"rgba(50,52,60,.5)","msgAi":"rgba(18,18,24,.8)","warnColor":"#b09838","overlay":"rgba(5,5,8,.9)","vignette":"transparent","w":"rgba(255,255,255,.02)","ballBg":"rgba(18,18,22,.85)","ballBgH":"rgba(40,42,50,.8)"}},"hl-neon":{"name":"赛博霓虹","icon":"🌆","desc":"洋红青蓝·故障全息·电路暗纹","var":{"bg":"#08080e","bg2":"#0c0c14","topBg":"rgba(12,12,20,.85)","text":"#b8e0e8","title":"#ff2a8a","muted":"rgba(100,160,180,.6)","accent":"#ff2a8a","accent2":"#00ffe8","neon":"rgba(0,255,230,.85)","neon2":"rgba(255,42,138,.65)","success":"#00e080","warn":"#e0c040","pur":"#a040ff","err":"#ff3060","cardBg":"rgba(12,12,20,.7)","cardBorder":"rgba(0,255,230,.18)","inputBg":"rgba(8,8,14,.9)","inputBorder":"rgba(255,42,138,.25)","btnBg":"rgba(160,20,80,.6)","btnBg2":"rgba(0,160,140,.4)","btnBorder":"rgba(0,255,230,.35)","btnText":"#e0fff8","btnBgH":"rgba(200,28,100,.7)","btnBg2H":"rgba(0,200,180,.5)","shellBorder":"rgba(100,0,50,.2)","msgUser":"rgba(160,20,80,.4)","msgAi":"rgba(12,12,20,.7)","warnColor":"#e0c040","overlay":"rgba(4,2,8,.9)","vignette":"rgba(20,0,20,.3)","w":"rgba(0,255,230,.02)","ballBg":"rgba(12,12,20,.8)","ballBgH":"rgba(0,120,110,.7)"}}};
 
-    const DEFAULT_PERSONA = {
-        name: '温柔姐姐',
-        role: '系统助手',
-        tone: '温柔、体贴、鼓励，像关心你的大姐姐',
-        rules: '回复时使用第二人称称呼对方，多用鼓励性语言，温度偏低，避免说教；回答简洁不啰嗦，但保留亲和力。'
-    };
+    function getTavernContextSafe() {
+        try {
+            if (window.parent && window.parent.SillyTavern && typeof window.parent.SillyTavern.getContext === 'function') {
+                return window.parent.SillyTavern.getContext() || {};
+            }
+        } catch (e) {}
+        return {};
+    }
+
+    function getUserBinding() {
+        const ctx = getTavernContextSafe();
+        let name = String(ctx.name1 || '').trim();
+        let avatar = '';
+        let description = '';
+        try {
+            avatar = String(ctx.userAvatar || ctx.user_avatar || (window.parent && window.parent.user_avatar) || '').trim();
+        } catch (e) {}
+        try {
+            description = String(
+                ctx.personaDescription || ctx.persona_description ||
+                (ctx.powerUserSettings && ctx.powerUserSettings.persona_description) ||
+                (window.parent && window.parent.power_user && window.parent.power_user.persona_description) || ''
+            ).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+        } catch (e) {}
+        if (!name) name = 'USER';
+        const rawId = (avatar || name || 'USER').toLowerCase();
+        return { id: encodeURIComponent(rawId).slice(0, 120), name: name, avatar: avatar, description: description };
+    }
+
+    function getStateStorageKey() {
+        return LS_FULL_KEY + ':user:' + getUserBinding().id;
+    }
+
+    function getApiStorageKey() {
+        return LS_KEY + ':user:' + getUserBinding().id;
+    }
+
+    function makeId(prefix) {
+        return String(prefix || 'id') + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 9);
+    }
+
+    function redactSensitive(value) {
+        return String(value == null ? '' : value)
+            .replace(/Bearer\s+[A-Za-z0-9._~+\/-]+/gi, 'Bearer [REDACTED]')
+            .replace(/\bsk-[A-Za-z0-9_-]{8,}\b/gi, '[REDACTED_API_KEY]')
+            .replace(/([?&](?:api[_-]?key|token|secret)=)[^&\s]+/gi, '$1[REDACTED]')
+            .slice(0, 2400);
+    }
+
+    function recordDebugError(feature, error, phase, details) {
+        try {
+            if (!state || !Array.isArray(state.debugErrors)) return;
+            const message = redactSensitive(error && error.message ? error.message : error);
+            const stack = redactSensitive(error && error.stack ? error.stack : '');
+            state.debugErrors.push({
+                id: makeId('error'),
+                time: Date.now(),
+                feature: String(feature || '未知功能').slice(0, 60),
+                phase: String(phase || '运行').slice(0, 80),
+                message: message || '未知错误',
+                details: redactSensitive(details || stack || '')
+            });
+            state.debugErrors = state.debugErrors.slice(-120);
+        } catch (ignored) {}
+    }
+
+    function setDebugHealth(key, ok, detail) {
+        if (!state || !state.debugHealth) return;
+        state.debugHealth[key] = { ok: ok === true, detail: String(detail || ''), checkedAt: Date.now() };
+    }
 
     function getDefaultState() {
         return {
-            schema: 3,
+            schema: 4,
             enabled: false,
             connected: false,
             initialized: false,
@@ -50,7 +123,6 @@
             api: { url: '', key: '', model: '', models: [], maxTokens: 30000 },
             system: { name: '', purpose: '', summary: '', greeting: '' },
             worldbook: { name: '', summary: '', entries: [] },
-            persona: { ...DEFAULT_PERSONA },
             tasks: [],
             shop: [],
             inventory: [],
@@ -66,7 +138,17 @@
             refreshInterval: 1,
             panelW: 0,
             panelH: 0,
-            scaleLocked: true
+            scaleLocked: true,
+            fontScale: 1,
+            layoutPreset: 'wide-16-9',
+            shopMemory: [],
+            autoTaskSettlement: true,
+            taskSettlementMinConfidence: 0.78,
+            taskSettlementHistory: [],
+            lastTaskContextFingerprint: '',
+            debugErrors: [],
+            debugHealth: {},
+            userBinding: getUserBinding()
         };
     }
 
@@ -77,21 +159,27 @@
         /* 优先从 localStorage 还原完整设置 */
         try {
             const ls = window.parent && window.parent.localStorage ? window.parent.localStorage : window.localStorage;
-            const fullRaw = ls.getItem(LS_FULL_KEY);
+            const scopedKey = getStateStorageKey();
+            const fullRaw = ls.getItem(scopedKey) || ls.getItem(LS_FULL_KEY);
             if (fullRaw) {
                 const fullState = JSON.parse(fullRaw);
-                if (fullState && typeof fullState === 'object' && fullState.schema === getDefaultState().schema) {
+                if (fullState && typeof fullState === 'object') {
                     const def = getDefaultState();
                     s = Object.assign(def, fullState);
+                    s.schema = def.schema;
                     s.api = Object.assign(def.api, (fullState && fullState.api) || {});
                     s.system = Object.assign(def.system, (fullState && fullState.system) || {});
                     s.worldbook = Object.assign(def.worldbook, (fullState && fullState.worldbook) || {});
-                    s.persona = Object.assign(def.persona, (fullState && fullState.persona) || {});
+                    delete s.persona;
                     if (!Array.isArray(s.tasks)) s.tasks = [];
                     if (!Array.isArray(s.shop)) s.shop = [];
                     if (!Array.isArray(s.inventory)) s.inventory = [];
                     if (!Array.isArray(s.draws)) s.draws = [];
                     if (!Array.isArray(s.chat)) s.chat = [];
+                    if (!Array.isArray(s.shopMemory)) s.shopMemory = [];
+                    if (!Array.isArray(s.taskSettlementHistory)) s.taskSettlementHistory = [];
+                    if (!Array.isArray(s.debugErrors)) s.debugErrors = [];
+                    if (!s.debugHealth || typeof s.debugHealth !== 'object') s.debugHealth = {};
                     if (!Array.isArray(s.exclusiveFunctions)) s.exclusiveFunctions = [];
                     if (!Array.isArray(s.exclusivePreferences)) s.exclusivePreferences = [];
                     if (typeof s.exclusiveFunctionCount !== 'number' || s.exclusiveFunctionCount < 1) s.exclusiveFunctionCount = 1;
@@ -103,7 +191,17 @@
                     if (typeof s.panelW !== 'number' || s.panelW < 0) s.panelW = 0;
                     if (typeof s.panelH !== 'number' || s.panelH < 0) s.panelH = 0;
                     if (typeof s.scaleLocked !== 'boolean') s.scaleLocked = true;
+                    if (typeof s.fontScale !== 'number' || s.fontScale < .75 || s.fontScale > 1.5) s.fontScale = 1;
+                    if (!PANEL_PRESETS[s.layoutPreset]) s.layoutPreset = 'wide-16-9';
+                    if (typeof s.autoTaskSettlement !== 'boolean') s.autoTaskSettlement = true;
+                    if (typeof s.taskSettlementMinConfidence !== 'number') s.taskSettlementMinConfidence = .78;
                     if (!s.theme || !THEMES[s.theme]) s.theme = 'hl-dark';
+                    s.userBinding = getUserBinding();
+                    s.tasks = (s.tasks || []).map(function(t, i){
+                        if (!t.id) t.id = makeId('task') + '-' + i;
+                        if (t.status === 'done' && typeof t.rewardClaimed !== 'boolean') t.rewardClaimed = true;
+                        return t;
+                    });
                     return s;
                 }
             }
@@ -114,7 +212,7 @@
         /* 从 localStorage 还原 API 配置（跨会话持久） */
         try {
             const ls = window.parent && window.parent.localStorage ? window.parent.localStorage : window.localStorage;
-            const raw = ls.getItem(LS_KEY);
+            const raw = ls.getItem(getApiStorageKey()) || ls.getItem(LS_KEY);
             if (raw) {
                 const cfg = JSON.parse(raw);
                 if (cfg) {
@@ -134,16 +232,18 @@
     function saveState() {
         try {
             const ls = window.parent && window.parent.localStorage ? window.parent.localStorage : window.localStorage;
-            ls.setItem(LS_FULL_KEY, JSON.stringify(state));
+            state.userBinding = getUserBinding();
+            ls.setItem(getStateStorageKey(), JSON.stringify(state));
         } catch (e) {
             console.warn('[自定义系统] localStorage 全量保存失败：', e);
+            recordDebugError('用户存档', e);
         }
     }
 
     function saveApiToLS() {
         try {
             const ls = window.parent && window.parent.localStorage ? window.parent.localStorage : window.localStorage;
-            ls.setItem(LS_KEY, JSON.stringify({
+            ls.setItem(getApiStorageKey(), JSON.stringify({
                 url: state.api.url,
                 key: state.api.key,
                 model: state.api.model,
@@ -167,7 +267,7 @@
         state.initialized = false;
         try {
             const ls = window.parent && window.parent.localStorage ? window.parent.localStorage : window.localStorage;
-            ls.removeItem(LS_FULL_KEY);
+            ls.removeItem(getStateStorageKey());
         } catch (e) {}
         saveApiToLS();
         saveState();
@@ -190,7 +290,7 @@
     function applyTheme(key){var th=THEMES[key]||THEMES["hl-dark"];var v=th.var;var r=getDoc().documentElement.style;
     var themeCls='theme-'+key.replace('hl-','');
     try{var sh=getDoc().querySelector('.nlsp-shell');if(sh){sh.className=sh.className.replace(/\s*theme-\S+/g,'')+' '+themeCls;}}catch(e){}
-    try{var ov=getDoc().getElementById(OVERLAY_ID);if(ov){ov.className=ov.className.replace(/\s*theme-\S+/g,'')+' '+themeCls;}}catch(e){}var ks=["bg","text","title","muted","accent","accent2","neon","neon2","success","warn","pur","err","cardBg","cardBorder","inputBg","inputBorder","btnBg","btnBg2","btnBorder","btnText","btnBgH","btnBg2H","shellBorder","msgUser","msgAi","warnColor","overlay","vignette","w","topBg","bg2","ballBg","ballBgH"];for(var i=0;i<ks.length;i++){var k=ks[i];if(v[k]!==undefined)r.setProperty("--t-"+k,v[k]);}}
+    try{var ov=getDoc().getElementById(OVERLAY_ID);if(ov){ov.className=ov.className.replace(/\s*theme-\S+/g,'')+' '+themeCls;}}catch(e){}var ks=["bg","text","title","muted","accent","accent2","neon","neon2","success","warn","pur","err","cardBg","cardBorder","inputBg","inputBorder","btnBg","btnBg2","btnBorder","btnText","btnBgH","btnBg2H","shellBorder","msgUser","msgAi","warnColor","overlay","vignette","w","topBg","bg2","ballBg","ballBgH"];for(var i=0;i<ks.length;i++){var k=ks[i];if(v[k]!==undefined)r.setProperty("--t-"+k,v[k]);}r.setProperty('--nlsp-font-scale',String(state.fontScale||1));}
 function injectFont() {
         const doc = getDoc();
         const style = doc.createElement('style');
@@ -212,7 +312,10 @@ a{text-decoration:none;color:inherit}
 #${OVERLAY_ID} .nlsp-pane,#${OVERLAY_ID} .nlsp-pane *{cursor:default}
 #${OVERLAY_ID} .nlsp-body,#${OVERLAY_ID} .nlsp-body *{cursor:default}
 #${OVERLAY_ID} .nlsp-btn,#${OVERLAY_ID} .nlsp-app,#${OVERLAY_ID} .nlsp-close,#${OVERLAY_ID} .nlsp-icon,#${OVERLAY_ID} .nlsp-back,#${OVERLAY_ID} button{cursor:pointer}
-#${OVERLAY_ID} input,#${OVERLAY_ID} textarea,#${OVERLAY_ID} select{cursor:text}
+#${OVERLAY_ID} input,#${OVERLAY_ID} textarea,#${OVERLAY_ID} select{cursor:text;pointer-events:auto!important;user-select:text!important;-webkit-user-select:text!important;-webkit-touch-callout:default!important;touch-action:manipulation!important}
+#${OVERLAY_ID} input::selection,#${OVERLAY_ID} textarea::selection{background:var(--t-accent);color:var(--t-bg)}
+#${OVERLAY_ID} .nlsp-api-key-wrap{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center}
+#${OVERLAY_ID} .nlsp-mini-btn{min-width:54px;padding:9px 10px;margin:0;white-space:nowrap}
 /** preview 原封不动照搬开始 **/
 .scene,.nlsp-shell{position:relative;width:min(820px,94vw);height:min(580px,88vh);animation:hl-shift 6s ease-in-out infinite}@media(max-width:768px){.scene,.nlsp-shell{width:96vw;height:min(520px,80vh);border-radius:0}.nlsp-topbar{padding:12px 14px 10px}.nlsp-topbar .tname{font-size:11px;letter-spacing:1px}.nlsp-topbar .tsub{font-size:10px}.nlsp-body{padding:12px 14px}.nlsp-app-grid{grid-template-columns:repeat(3,1fr);gap:10px}.nlsp-app .nlsp-app-ic{width:46px;height:46px;font-size:20px}.nlsp-app .nlsp-app-name{font-size:10px}.nlsp-btn{font-size:10px;padding:6px 12px}.nlsp-card{padding:10px 12px}.nlsp-input,.nlsp-select,.nlsp-textarea{padding:8px 10px;font-size:12px}.nlsp-page-title{font-size:11px}.nlsp-pt-pill{font-size:10px;padding:3px 10px}.nlsp-chat{font-size:11px}.nlsp-msg{font-size:11px;padding:8px 10px}}
 @keyframes hl-shift{0%,100%{transform:translate(0,0)}25%{transform:translate(.3px,-.2px)}50%{transform:translate(-.2px,.3px)}75%{transform:translate(.1px,-.1px)}}
@@ -388,10 +491,15 @@ a{text-decoration:none;color:inherit}
 @keyframes neon-circuit{0%{opacity:.5}50%{opacity:1}100%{opacity:.5}}
 @keyframes neon-text{0%,85%{transform:translate(0)}88%{transform:translate(-1px,1px)}90%{transform:translate(1px,-1px)}92%{transform:translate(0)}}
 @keyframes neon-sweep{0%{transform:translate(-30%,-30%) rotate(15deg)}50%{transform:translate(30%,30%) rotate(15deg)}100%{transform:translate(-30%,-30%) rotate(15deg)}}
+
+/* 用户设置：字体缩放与移动端输入适配 */
+#${OVERLAY_ID}{font-size:calc(14px * var(--nlsp-font-scale))}#${OVERLAY_ID} .nlsp-page-sub{font-size:calc(13px * var(--nlsp-font-scale))}#${OVERLAY_ID} .nlsp-label,#${OVERLAY_ID} .nlsp-section-title{font-size:calc(11px * var(--nlsp-font-scale))}#${OVERLAY_ID} .nlsp-input,#${OVERLAY_ID} .nlsp-select,#${OVERLAY_ID} .nlsp-textarea{font-size:calc(13px * var(--nlsp-font-scale))}#${OVERLAY_ID} .nlsp-btn{font-size:calc(12px * var(--nlsp-font-scale))}
+@media(max-width:720px){#${OVERLAY_ID} .nlsp-shell{width:96vw!important;height:88vh!important;max-height:88vh}.nlsp-api-key-wrap{grid-template-columns:minmax(0,1fr) auto!important}.nlsp-api-key-wrap .nlsp-key-toggle{display:none}}
 `;
         const style = doc.createElement('style');
         style.id = STYLE_ID;
-        style.textContent = css;        style.textContent = css;        doc.head.appendChild(style);
+        style.textContent = css;
+        doc.head.appendChild(style);
     }
 
     function getDoc() {
@@ -408,6 +516,11 @@ a{text-decoration:none;color:inherit}
         const doc = getDoc();
         let overlay = doc.getElementById(OVERLAY_ID);
         if (overlay) { overlay.remove(); return; }
+        const liveUser = getUserBinding();
+        if (!state.userBinding || state.userBinding.id !== liveUser.id) {
+            state = loadState();
+            applyTheme(state.theme || 'hl-dark');
+        }
         ensureStyle();
         overlay = doc.createElement('div');
         
@@ -431,18 +544,9 @@ a{text-decoration:none;color:inherit}
         o.innerHTML = `<div class="nlsp-shell theme-${(state.theme||'hl-dark').replace('hl-','')}">${frameHTML}${inner}</div><div class="nlsp-vignette"></div></div>`;
         const shell = o.querySelector('.nlsp-shell');
         if (shell) {
+            shell.style.setProperty('--nlsp-font-scale', String(state.fontScale || 1));
             applyPanelResize(shell);
             makeWindowDraggable(shell, o);
-            try {
-                var tb = shell.querySelector('.nlsp-topbar');
-                if (tb) {
-                    var pe = getDoc().defaultView.getComputedStyle(tb).pointerEvents;
-                    var ta = getDoc().defaultView.getComputedStyle(tb).touchAction;
-                    console.log('[debug] topbar pointerEvents='+pe+' touchAction='+ta+' rect='+JSON.stringify(tb.getBoundingClientRect()));
-                } else {
-                    console.log('[debug] topbar NOT FOUND');
-                }
-            } catch(e) { console.log('[debug] css check error:', e.message); }
         }
         return shell;
     }
@@ -453,8 +557,14 @@ a{text-decoration:none;color:inherit}
         var doc = getDoc();
         var vw = doc.documentElement.clientWidth || window.innerWidth;
         var vh = doc.documentElement.clientHeight || window.innerHeight;
-        if (state.panelW > 200 && state.panelW < vw - 20) shell.style.width = state.panelW + 'px';
-        if (state.panelH > 150 && state.panelH < vh - 20) shell.style.height = state.panelH + 'px';
+        var preset = PANEL_PRESETS[state.layoutPreset] || PANEL_PRESETS['wide-16-9'];
+        var wantedW = state.panelW > 200 ? state.panelW : preset.width;
+        var wantedH = state.panelH > 150 ? state.panelH : preset.height;
+        shell.style.width = Math.max(320, Math.min(wantedW, vw - 20)) + 'px';
+        shell.style.height = Math.max(240, Math.min(wantedH, vh - 20)) + 'px';
+        shell.style.maxWidth = 'calc(100vw - 20px)';
+        shell.style.maxHeight = 'calc(100vh - 20px)';
+        shell.style.setProperty('--nlsp-font-scale', String(state.fontScale || 1));
         if (!state.scaleLocked) {
             shell.style.resize = 'both';
             shell.style.overflow = 'hidden';
@@ -462,9 +572,11 @@ a{text-decoration:none;color:inherit}
             shell.style.minHeight = '240px';
         }
         if (!shell._nlspResizeBound) {
-                shell._nlspResizeBound = true;
-                var saveTimer = null;
-                var ro = new ResizeObserver(function(){
+            shell._nlspResizeBound = true;
+            var saveTimer = null;
+            var ResizeObserverCtor = (doc.defaultView && doc.defaultView.ResizeObserver) || window.ResizeObserver;
+            if (typeof ResizeObserverCtor === 'function') {
+                var ro = new ResizeObserverCtor(function(){
                     var r = shell.getBoundingClientRect();
                     state.panelW = Math.round(r.width);
                     state.panelH = Math.round(r.height);
@@ -472,8 +584,9 @@ a{text-decoration:none;color:inherit}
                     saveTimer = setTimeout(function(){ saveState(); }, 500);
                 });
                 ro.observe(shell);
-                shell.addEventListener('mouseup', function(){ saveState(); });
-                shell.addEventListener('touchend', function(){ saveState(); });
+            }
+            shell.addEventListener('mouseup', function(){ saveState(); });
+            shell.addEventListener('touchend', function(){ saveState(); });
         }
     }
 
@@ -595,7 +708,12 @@ a{text-decoration:none;color:inherit}
                     </div>
                     <div class="nlsp-row">
                         <label class="nlsp-label">API Key</label>
-                        <input id="nlsp-api-key" class="nlsp-input" type="password" placeholder="sk-..." value="${escapeAttr(state.api.key)}" />
+                        <div class="nlsp-api-key-wrap">
+                            <input id="nlsp-api-key" class="nlsp-input" type="password" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="sk-..." value="${escapeAttr(state.api.key)}" />
+                            <button type="button" class="nlsp-btn ghost nlsp-mini-btn" id="nlsp-api-paste">粘贴</button>
+                            <button type="button" class="nlsp-btn ghost nlsp-mini-btn nlsp-key-toggle" id="nlsp-api-key-toggle">显示</button>
+                        </div>
+                        <div class="nlsp-page-sub" style="margin-top:5px;">移动端可长按输入框粘贴，也可点击右侧“粘贴”。</div>
                     </div>
                     <div class="nlsp-row">
                         <label class="nlsp-label">模型</label>
@@ -634,6 +752,50 @@ a{text-decoration:none;color:inherit}
                 if (hint) hint.textContent = p ? '已选官方预设：' + p.hint : '';
             } else {
                 if (hint) hint.textContent = '自定义：可在下方手动填入 Base URL';
+            }
+        });
+        on('nlsp-api-key-toggle', 'click', () => {
+            const input = getDoc().getElementById('nlsp-api-key');
+            const btn = getDoc().getElementById('nlsp-api-key-toggle');
+            if (!input) return;
+            const showing = input.type === 'text';
+            input.type = showing ? 'password' : 'text';
+            if (btn) btn.textContent = showing ? '显示' : '隐藏';
+            input.focus();
+        });
+        const apiKeyInput = getDoc().getElementById('nlsp-api-key');
+        if (apiKeyInput) {
+            apiKeyInput.addEventListener('pointerdown', (event) => event.stopPropagation());
+            apiKeyInput.addEventListener('touchstart', (event) => event.stopPropagation(), { passive: true });
+            apiKeyInput.addEventListener('paste', (event) => {
+                const pasted = event.clipboardData && event.clipboardData.getData('text');
+                if (!pasted) return;
+                event.preventDefault();
+                const start = typeof apiKeyInput.selectionStart === 'number' ? apiKeyInput.selectionStart : apiKeyInput.value.length;
+                const end = typeof apiKeyInput.selectionEnd === 'number' ? apiKeyInput.selectionEnd : start;
+                apiKeyInput.value = apiKeyInput.value.slice(0, start) + pasted + apiKeyInput.value.slice(end);
+                apiKeyInput.selectionStart = apiKeyInput.selectionEnd = start + pasted.length;
+                apiKeyInput.dispatchEvent(new Event('input', { bubbles: true }));
+            });
+        }
+        on('nlsp-api-paste', 'click', async () => {
+            const input = getDoc().getElementById('nlsp-api-key');
+            if (!input) return;
+            try {
+                const nav = (getDoc().defaultView && getDoc().defaultView.navigator) || navigator;
+                if (!nav.clipboard || typeof nav.clipboard.readText !== 'function') throw new Error('浏览器未开放剪贴板读取');
+                const text = await nav.clipboard.readText();
+                if (!text) throw new Error('剪贴板为空');
+                input.value = String(text).trim();
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+                input.focus();
+                setStatus('API Key 已从剪贴板粘贴。', 'ok');
+            } catch (e) {
+                recordDebugError('移动端粘贴', e);
+                input.type = 'text';
+                input.focus();
+                input.select();
+                setStatus('无法自动读取剪贴板：请长按已选中的输入框并选择“粘贴”。', 'error');
             }
         });
         on('nlsp-pull-btn', 'click', async () => {
@@ -675,14 +837,13 @@ a{text-decoration:none;color:inherit}
 
     function renderInit() {
         refreshWbList();
-        refreshScriptList();
         const wb = state.worldbook || {};
-        const sc = state.scripts || [];
+        const userBinding = getUserBinding();
         const editing = !!state._editingSetup;
         const rightHTML = (editing ? '<span class="nlsp-back" data-act="back-home">‹ 返回系统界面</span>' : '')
             + '<span class="nlsp-close" data-act="close">×</span>';
         setShell(`
-            ${shellTopBar(editing ? '系统设置' : '初始化系统', editing ? '修改名称/读世界书/读角色卡脚本轮换并重新初始化' : '第三步 · 命名、读取世界书并初始化', rightHTML)}
+            ${shellTopBar(editing ? '系统设置' : '初始化系统', editing ? '玩家绑定 · 世界书 · 生成与界面设置' : '第三步 · 绑定当前玩家并初始化', rightHTML)}
             <div class="nlsp-body">
                 <div class="nlsp-pane">
                     <div class="nlsp-row">
@@ -702,20 +863,11 @@ a{text-decoration:none;color:inherit}
                         <button class="nlsp-btn ghost" id="nlsp-wb-load">读取</button>
                     </div>
                     <div id="nlsp-wb-info" style="margin-top:6px;">${renderWbInfoHTML(wb)}</div>
-                    <div class="nlsp-section-title">可选 · 读取角色卡脚本（含 zod 注册）</div>
-                    <div class="nlsp-page-sub" style="margin-bottom:6px;">读取当前角色卡绑定的酒馆助手脚本（含 zod 注册），把脚本内容摘要作为系统生成上下文。</div>
-                    <div class="nlsp-row">
-                        <select id="nlsp-sc-select" class="nlsp-select">
-                            <option value="">-- 选择脚本 --</option>
-                            ${sc.map((s, i) => `<option value="${i}" ${state._selectedScript === i ? 'selected' : ''}>${escapeText(s.name || '未命名')}（${s.size} 字）</option>`).join('')}
-                        </select>
+                    <div class="nlsp-section-title">酒馆玩家绑定</div>
+                    <div class="nlsp-wb-box">
+                        <div class="wb-name">已绑定 USER：${escapeText(userBinding.name)}</div>
+                        <div class="wb-sum">存档键：${escapeText(userBinding.id)}\n系统只读取玩家身份、玩家 Persona、世界书和聊天正文；不会读取或绑定任何 CHAR 角色卡数据。</div>
                     </div>
-                    <div class="nlsp-row" style="display:flex; gap:8px;">
-                        <button class="nlsp-btn ghost" id="nlsp-sc-load">读取所选</button>
-                        <button class="nlsp-btn ghost" id="nlsp-sc-loadall">读取全部</button>
-                        <button class="nlsp-btn ghost" id="nlsp-sc-clear">清除已读取</button>
-                    </div>
-                    <div id="nlsp-sc-info" style="margin-top:6px;">${renderScriptInfoHTML(state)}</div>
                     <div class="nlsp-section-title">专属功能 · 数量与偏向</div>
                     <div class="nlsp-row" style="display:flex;gap:10px;align-items:center">
                         <label class="nlsp-label" style="margin:0;white-space:nowrap">生成数量</label>
@@ -743,6 +895,19 @@ a{text-decoration:none;color:inherit}
                             ${Object.keys(THEMES).map((k) => { const t = THEMES[k]; return `<option value="${escapeAttr(k)}" ${state.theme === k ? 'selected' : ''}>${t.icon} ${escapeText(t.name)} · ${escapeText(t.desc)}</option>`; }).join('')}
                         </select>
                     </div>
+                    <div class="nlsp-section-title">字体大小</div>
+                    <div class="nlsp-row">
+                        <select id="nlsp-font-scale" class="nlsp-select">
+                            ${[[.85,'紧凑 85%'],[.95,'偏小 95%'],[1,'标准 100%'],[1.1,'舒适 110%'],[1.2,'大字 120%'],[1.35,'超大 135%']].map((x) => `<option value="${x[0]}" ${Math.abs((state.fontScale||1)-x[0])<.001?'selected':''}>${x[1]}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div class="nlsp-section-title">界面布局预设</div>
+                    <div class="nlsp-row">
+                        <select id="nlsp-layout-preset" class="nlsp-select">
+                            ${Object.keys(PANEL_PRESETS).map((k) => `<option value="${escapeAttr(k)}" ${state.layoutPreset===k?'selected':''}>${escapeText(PANEL_PRESETS[k].name)} · ${PANEL_PRESETS[k].width}×${PANEL_PRESETS[k].height}</option>`).join('')}
+                        </select>
+                        <div class="nlsp-page-sub" style="margin-top:5px;">包含高面板 3:4、4:3、1:1、5:4、16:10、16:9 与 21:9。窗口超出屏幕时会自动收缩。</div>
+                    </div>
                     <div class="nlsp-section-title">面板缩放</div>
                     <div class="nlsp-row" style="display:flex;gap:10px;align-items:center">
                         <button class="nlsp-btn ${state.scaleLocked?'ghost':''}" id="nlsp-scale-lock" style="${state.scaleLocked?'':'background:rgba(40,160,80,.6);border-color:rgba(60,200,100,.5)'}">${state.scaleLocked?'🔒 锁定':'🔓 解锁'}</button>
@@ -764,7 +929,7 @@ a{text-decoration:none;color:inherit}
                         <label class="nlsp-label" style="margin:0;white-space:nowrap">刷新间隔（每N轮AI回复）</label>
                         <input id="nlsp-refresh-interval" class="nlsp-input" type="number" min="1" max="20" value="${state.refreshInterval||1}" style="width:80px" />
                     </div>
-                    ${hasOpenChat() ? '' : '<div class="nlsp-page-sub" style="color:#ff8a8a;margin:8px 0 0;">⚠ 当前未打开角色卡或未进入聊天，无法初始化系统。请先打开一张角色卡并进入聊天。</div>'}
+                    ${hasOpenChat() ? '' : '<div class="nlsp-page-sub" style="color:#ff8a8a;margin:8px 0 0;">⚠ 当前没有可读取的聊天正文，无法初始化系统。请先进入任意酒馆聊天。</div>'}
                     <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
                         ${editing ? '' : '<button class="nlsp-btn ghost" id="nlsp-back-api">返回</button>'}
                         ${editing ? '<button class="nlsp-btn ghost" id="nlsp-back-to-api">返回API设置</button>' : ''}
@@ -796,38 +961,30 @@ a{text-decoration:none;color:inherit}
                 if (box) box.innerHTML = '<div class="nlsp-page-sub" style="color:#ff8a8a;padding:4px 2px;">读取失败：' + escapeText(e && e.message || e) + '</div>';
             }
         });
-        on('nlsp-sc-load', 'click', () => {
-            const sel = getDoc().getElementById('nlsp-sc-select');
-            const i = Number(sel ? sel.value : -1);
-            if (isNaN(i) || i < 0 || !state.scripts || !state.scripts[i]) return toast('请先选择一个脚本', 'error');
-            state._selectedScript = i;
-            state.scripts[i].loaded = !state.scripts[i].loaded;
-            saveState();
-            const info = getDoc().getElementById('nlsp-sc-info');
-            if (info) info.innerHTML = renderScriptInfoHTML(state);
-        });
-        on('nlsp-sc-loadall', 'click', () => {
-            if (!state.scripts.length) return toast('当前角色卡没有 JS-Slash-Runner 脚本', 'error');
-            const allLoaded = state.scripts.every((s) => s.loaded);
-            state.scripts.forEach((s) => { s.loaded = !allLoaded; });
-            state._selectedScript = -1;
-            saveState();
-            const info = getDoc().getElementById('nlsp-sc-info');
-            if (info) info.innerHTML = renderScriptInfoHTML(state);
-            toast(allLoaded ? '已清除脚本勾选' : '已勾选全部脚本', 'success');
-        });
-        on('nlsp-sc-clear', 'click', () => {
-            state.scripts.forEach((s) => { s.loaded = false; });
-            state._selectedScript = -1;
-            saveState();
-            const info = getDoc().getElementById('nlsp-sc-info');
-            if (info) info.innerHTML = renderScriptInfoHTML(state);
-        });
         on('nlsp-theme-select', 'change', () => {
             const sel = getDoc().getElementById('nlsp-theme-select');
-            state.theme = sel ? sel.value : 'hl-dark';
+            state.theme = sel && THEMES[sel.value] ? sel.value : 'hl-dark';
             saveState();
             applyTheme(state.theme);
+        });
+        on('nlsp-font-scale', 'change', () => {
+            const sel = getDoc().getElementById('nlsp-font-scale');
+            state.fontScale = Math.max(.85, Math.min(1.35, Number(sel && sel.value) || 1));
+            saveState();
+            const shell = getDoc().querySelector('.nlsp-shell');
+            if (shell) shell.style.setProperty('--nlsp-font-scale', String(state.fontScale));
+            setDebugHealth('layout', true, '字体 ' + Math.round(state.fontScale * 100) + '%');
+        });
+        on('nlsp-layout-preset', 'change', () => {
+            const sel = getDoc().getElementById('nlsp-layout-preset');
+            const key = sel && PANEL_PRESETS[sel.value] ? sel.value : 'wide-16-9';
+            const preset = PANEL_PRESETS[key];
+            state.layoutPreset = key;
+            state.panelW = preset.width;
+            state.panelH = preset.height;
+            saveState();
+            applyPanelResize();
+            setDebugHealth('layout', true, preset.name);
         });
         on('nlsp-scale-lock', 'click', () => {
             state.scaleLocked = !state.scaleLocked;
@@ -875,49 +1032,9 @@ a{text-decoration:none;color:inherit}
         on('nlsp-init-btn', 'click', () => doInit());
     }
 
-    let scriptList = [];
-    function refreshScriptList() {
-        scriptList = [];
-        if (typeof TH.getScriptTrees !== 'function') { state.scripts = []; return; }
-        try {
-            const trees = TH.getScriptTrees({ type: 'character' }) || [];
-            const flat = [];
-            for (const node of trees) flattenScripts(node, flat);
-            scriptList = flat;
-            const loaded = (state.scripts || []).filter((s) => s.loaded).map((s) => s.name);
-            state.scripts = flat.map((s) => ({
-                name: s.name, id: s.id, size: s.size, content: s.content,
-                loaded: loaded.includes(s.name)
-            }));
-        } catch (e) {
-            console.warn('[自定义系统] 读取角色卡脚本失败：', e);
-            state.scripts = [];
-        }
-    }
-    function flattenScripts(node, out) {
-        if (!node) return;
-        if (node.type === 'folder' && Array.isArray(node.scripts)) {
-            for (const s of node.scripts) flattenScripts(s, out);
-            return;
-        }
-        if (node.type === 'script' && node.enabled !== false) {
-            const content = String(node.content || '');
-            out.push({ name: String(node.name || '未命名'), id: node.id, size: content.length, content });
-        }
-    }
-
     function renderWbInfoHTML(wb) {
         if (!wb || !wb.name) return '<div class="nlsp-page-sub" style="padding:4px 2px;">读取后会基于世界书条目摘要生成系统。</div>';
         return renderWbBox(wb);
-    }
-
-    function renderScriptInfoHTML(st) {
-        const sc = st.scripts || [];
-        if (!sc.length) return '<div class="nlsp-page-sub" style="padding:4px 2px;">当前角色卡未发现 JS-Slash-Runner 脚本。</div>';
-        const loaded = sc.filter((s) => s.loaded);
-        return '<div class="nlsp-wb-box"><div class="wb-name">已勾选脚本：' + loaded.length + ' / ' + sc.length + '</div><div class="wb-sum">'
-            + (loaded.length ? loaded.map((s, i) => '· ' + escapeText(s.name) + '（' + s.size + ' 字）').join('\n') : '（未勾选任何脚本，将不写入上下文）')
-            + '</div></div>';
     }
 
     function refreshWbInfo(box) {
@@ -979,6 +1096,7 @@ a{text-decoration:none;color:inherit}
         async function safeCall(label, fn) {
             try { return await fn; } catch (e) {
                 console.warn('[自定义系统] ' + label + ' 失败：', e);
+                recordDebugError(label, e, '初始化');
                 setStatus(label + ' 失败：' + (e && e.message || e) + '（继续其他任务…）', 'error');
                 return null;
             }
@@ -1049,9 +1167,13 @@ a{text-decoration:none;color:inherit}
         if (activeView.indexOf('excl')===0){var idx=parseInt(activeView.slice(4))||0;var excls=state.exclusiveFunctions||[];var ef=excls[idx]||{};return renderAppView(pane,'excl'+idx,ef.name||'专属功能',ef.desc||'',function(b){renderExclBody(b,idx)});}
     }
 
-    function renderHome(pane){var ef=state.exclusiveFunctions||[];var exclIcons='';for(var ei=0;ei<ef.length;ei++){exclIcons+='<a class="nlsp-app" data-app="excl'+ei+'"><span class="nlsp-app-ic">'+escapeText(ef[ei].icon||'⭐')+'</span><span class="nlsp-app-name">'+escapeText(ef[ei].name||'功能')+'</span></a>';}
-pane.innerHTML=`
-${state.system.greeting?'<div class="nlsp-banner"><div>SYSTEM.GREETING</div><div class="greet">'+escapeText(state.system.greeting)+'</div></div>':''}
+    function renderHome(pane) {
+        const exclusive = state.exclusiveFunctions || [];
+        const exclusiveIcons = exclusive.map(function(item, index) {
+            return '<a class="nlsp-app" data-app="excl' + index + '"><span class="nlsp-app-ic">' + escapeText(item.icon || '⭐') + '</span><span class="nlsp-app-name">' + escapeText(item.name || '功能') + '</span></a>';
+        }).join('');
+        pane.innerHTML = `
+${state.system.greeting ? '<div class="nlsp-banner"><div>SYSTEM.GREETING</div><div class="greet">' + escapeText(state.system.greeting) + '</div></div>' : ''}
 <div class="nlsp-section-title">// FUNCTIONS</div>
 <div class="nlsp-app-grid">
 <a class="nlsp-app" data-app="task"><span class="nlsp-app-ic">📋</span><span class="nlsp-app-name">任务</span></a>
@@ -1059,17 +1181,65 @@ ${state.system.greeting?'<div class="nlsp-banner"><div>SYSTEM.GREETING</div><div
 <a class="nlsp-app" data-app="draw"><span class="nlsp-app-ic">🎁</span><span class="nlsp-app-name">抽奖</span></a>
 <a class="nlsp-app" data-app="decompose"><span class="nlsp-app-ic">♻</span><span class="nlsp-app-name">分解</span></a>
 <a class="nlsp-app" data-app="chat"><span class="nlsp-app-ic">💬</span><span class="nlsp-app-name">对话</span></a>
-${exclIcons}
+${exclusiveIcons}
 </div>
 <div class="nlsp-section-title" style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">// TASKS<span class="nlsp-btn ghost" id="nlsp-task-refresh-home">REFRESH</span></div>
 <div id="nlsp-task-list-home"></div>
 `;
-pane.querySelectorAll('.nlsp-app').forEach(function(a){a.addEventListener('click',function(){openView(a.getAttribute('data-app'))})});
-paintHomeTasks();
-var rf=document.getElementById('nlsp-task-refresh-home');if(rf)rf.addEventListener('click',async function(){rf.disabled=true;var list=document.getElementById('nlsp-task-list-home');if(list)list.innerHTML='<div class="nlsp-loading">generating...</div>';try{var tasks=await apiGenerateTask(state,{first:false});state.tasks=tasks||[];saveState();paintHomeTasks();toast('tasks refreshed','success')}catch(e){if(list)list.innerHTML='<div class="nlsp-muted">refresh failed</div>'}finally{rf.disabled=false}});
-}
+        pane.querySelectorAll('.nlsp-app').forEach(function(app) {
+            app.addEventListener('click', function() { openView(app.getAttribute('data-app')); });
+        });
+        paintHomeTasks();
+        const refresh = getDoc().getElementById('nlsp-task-refresh-home');
+        if (refresh) refresh.addEventListener('click', async function() {
+            refresh.disabled = true;
+            const list = getDoc().getElementById('nlsp-task-list-home');
+            if (list) list.innerHTML = '<div class="nlsp-loading">generating...</div>';
+            try {
+                state.tasks = mergeTaskRefresh(await apiGenerateTask(state, { first: false }));
+                saveState();
+                paintHomeTasks();
+                toast('tasks refreshed', 'success');
+            } catch (e) {
+                recordDebugError('任务刷新', e, '主页');
+                if (list) list.innerHTML = '<div class="nlsp-muted">refresh failed</div>';
+            } finally {
+                refresh.disabled = false;
+            }
+        });
+    }
 
-function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home');if(!list)return;if(!state.tasks.length){list.innerHTML='<div class="nlsp-muted">NO ACTIVE TASKS</div>';return}list.innerHTML=state.tasks.map(function(t,i){return'<div class="nlsp-card nlsp-task-card"><div class="tmeta"><span class="seq">#'+(i+1)+'</span><span class="iname">'+escapeText(t.name||'')+'</span>'+(t.status==='done'?'<span class="status-done">DONE</span>':(t.status==='doing'?'<span class="status-doing">ACTIVE</span>':'<span class="nlsp-page-sub">PENDING</span>'))+'</div><div class="tdesc">'+escapeText(t.desc||'')+'</div><div class="tgoal">OBJECTIVE: '+escapeText(t.goal||'')+'</div><div class="treward">REWARD: <span class="nlsp-pt">'+(t.reward||0)+' PTS</span>'+(t.itemReward?' · '+escapeText(t.itemReward):'')+'</div><div class="tactions">'+(t.status==='done'?'<span class="status-done">CLAIMED</span>':'<button class="nlsp-btn ghost" data-home-start="'+i+'" '+(t.status==='doing'?'disabled':'')+'>START</button><button class="nlsp-btn" data-home-done="'+i+'" '+(t.status!=='doing'?'disabled':'')+'>COMPLETE</button>')+'</div></div>'}).join('');list.querySelectorAll('[data-home-start]').forEach(function(b){b.addEventListener('click',function(){var i=Number(b.getAttribute('data-home-start'));var t=state.tasks[i];if(!t||t.status==='doing')return;t.status='doing';saveState();paintHomeTasks();toast('started: '+t.name,'success');insertIntoChat('📋 '+t.name,'OBJECTIVE: '+t.goal+'\n'+(t.desc||''),'task')})});list.querySelectorAll('[data-home-done]').forEach(function(b){b.addEventListener('click',function(){completeTask(Number(b.getAttribute('data-home-done')));paintHomeTasks()})})}
+    function paintHomeTasks() {
+        const list = getDoc().getElementById('nlsp-task-list-home');
+        if (!list) return;
+        if (!state.tasks.length) { list.innerHTML = '<div class="nlsp-muted">NO ACTIVE TASKS</div>'; return; }
+        list.innerHTML = state.tasks.map(function(task, index) {
+            return '<div class="nlsp-card nlsp-task-card"><div class="tmeta"><span class="seq">#' + (index + 1) + '</span><span class="iname">' + escapeText(task.name || '') + '</span>' +
+                (task.status === 'done' ? '<span class="status-done">DONE</span>' : (task.status === 'doing' ? '<span class="status-doing">ACTIVE</span>' : '<span class="nlsp-page-sub">PENDING</span>')) +
+                '</div><div class="tdesc">' + escapeText(task.desc || '') + '</div><div class="tgoal">OBJECTIVE: ' + escapeText(task.goal || '') + '</div><div class="treward">REWARD: <span class="nlsp-pt">' + (task.reward || 0) + ' PTS</span>' +
+                (task.itemReward ? ' · ' + escapeText(task.itemReward) : '') + '</div><div class="tactions">' +
+                (task.status === 'done' ? '<span class="status-done">CLAIMED</span>' : '<button class="nlsp-btn ghost" data-home-start="' + index + '" ' + (task.status === 'doing' ? 'disabled' : '') + '>START</button><button class="nlsp-btn" data-home-done="' + index + '" ' + (task.status !== 'doing' ? 'disabled' : '') + '>COMPLETE</button>') + '</div></div>';
+        }).join('');
+        list.querySelectorAll('[data-home-start]').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const index = Number(button.getAttribute('data-home-start'));
+                const task = state.tasks[index];
+                if (!task || task.status === 'doing') return;
+                task.status = 'doing';
+                saveState();
+                paintHomeTasks();
+                toast('started: ' + task.name, 'success');
+                insertIntoChat('📋 ' + task.name, 'OBJECTIVE: ' + task.goal + '\n' + (task.desc || ''), 'task');
+            });
+        });
+        list.querySelectorAll('[data-home-done]').forEach(function(button) {
+            button.addEventListener('click', function() {
+                completeTask(Number(button.getAttribute('data-home-done')));
+                paintHomeTasks();
+            });
+        });
+    }
+
 
     function renderAppView(pane, key, title, sub, bodyFn) {
         pane.innerHTML = `
@@ -1166,17 +1336,30 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
             if (list) list.innerHTML = '<div class="nlsp-loading">正在生成新任务…</div>';
             try {
                 const tasks = await apiGenerateTask(state, { first: false });
-                state.tasks = tasks || [];
+                state.tasks = mergeTaskRefresh(tasks || []);
                 saveState();
                 paintTasks();
                 toast('任务已刷新', 'success');
             } catch (e) {
+                recordDebugError('任务刷新', e, '任务页');
                 if (list) list.innerHTML = `<div class="nlsp-muted">刷新失败：${escapeText(e && e.message || e)}</div>`;
                 toast('刷新失败', 'error');
             } finally {
                 if (btn) btn.disabled = false;
             }
         });
+    }
+
+    function mergeTaskRefresh(generated) {
+        const kept = (state.tasks || []).filter((t) => t && (t.status === 'doing' || t.status === 'done')).slice(-20);
+        const seen = new Set(kept.map((t) => normalizeFingerprintText(t.name + '|' + t.goal)));
+        const fresh = (Array.isArray(generated) ? generated : []).filter((t) => {
+            const key = normalizeFingerprintText((t && t.name) + '|' + (t && t.goal));
+            if (!key || seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
+        return kept.concat(fresh).slice(-30);
     }
 
     function paintTasks() {
@@ -1225,14 +1408,25 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
     function completeTask(i) {
         const t = state.tasks[i];
         if (!t || t.status !== 'doing') return;
+        return settleTask(t, { source: 'manual', evidence: '用户手动点击完成' });
+    }
+
+    function settleTask(t, meta) {
+        if (!t || t.status !== 'doing' || t.rewardClaimed) return false;
         const reward = Number(t.reward || 0);
+        t.status = 'done';
+        t.rewardClaimed = true;
+        t.settledAt = Date.now();
+        t.settlementSource = String(meta && meta.source || 'unknown');
+        t.settlementEvidence = String(meta && meta.evidence || '').slice(0, 240);
         state.points += reward;
         if (t.itemReward) pushInventory([{ name: t.itemReward, category: '任务奖励', desc: '完成任务「' + (t.name || '') + '」所得', rarity: '稀有', from: '任务' }]);
-        state.tasks.splice(i, 1);
         saveState();
         toast(`任务完成，获得 ${reward} 积分${t.itemReward ? ' · ' + t.itemReward : ''}`, 'success');
         paintTasks();
+        paintHomeTasks();
         renderMainTop();
+        return true;
     }
 
     function renderMainTop() {
@@ -1429,8 +1623,7 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
             <div class="nlsp-page-head" style="margin:0 6px 6px;">
                 <span class="nlsp-back" data-back="1">‹ 返回</span>
                 <div style="display:flex;align-items:center;gap:10px;">
-                    <span class="nlsp-page-sub">与「${escapeText(state.persona.name)}」对话</span>
-                    <span class="nlsp-icon" id="nlsp-persona-open" title="人格预设" style="font-size:18px;">👤</span>
+                    <span class="nlsp-page-sub">与「${escapeText(state.system.name || '系统')}」对话</span>
                 </div>
             </div>
             <div class="nlsp-chat" id="nlsp-chat-area">${renderChatMessages()}</div>
@@ -1453,7 +1646,6 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
         };
         if (sendBtn) sendBtn.addEventListener('click', send);
         if (inputEl) inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') send(); });
-        on('nlsp-persona-open', 'click', () => renderPersonaPane());
     }
 
     /* ---------- 专属功能 ---------- */
@@ -1592,7 +1784,7 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
         if (!state.chat.length) return '<div class="nlsp-p-empty">还没有对话，发条消息开始吧。</div>';
         return state.chat.map((m) => `
             <div class="nlsp-msg ${m.role === 'user' ? 'user' : 'ai'}">
-                <div class="meta">${m.role === 'user' ? '我' : escapeText(state.persona.name)}</div>
+                <div class="meta">${m.role === 'user' ? '我' : escapeText(state.system.name || '系统')}</div>
                 ${escapeText(m.content)}
             </div>`).join('');
     }
@@ -1626,59 +1818,6 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
         }
     }
 
-    /* ---------- 人格预设 ---------- */
-    function renderPersonaPane() {
-        setShell(`
-            ${shellTopBar('人格预设', '设置当前系统人格', '<span class="nlsp-back" id="nlsp-persona-back">‹ 返回</span><span class="nlsp-close" id="nlsp-close-main">×</span>')}
-            <div class="nlsp-body">
-                <div class="nlsp-pane">
-                    <div class="nlsp-row">
-                        <label class="nlsp-label">人格名称</label>
-                        <input id="nlsp-p-name" class="nlsp-input" value="${escapeAttr(state.persona.name)}" />
-                    </div>
-                    <div class="nlsp-row">
-                        <label class="nlsp-label">身份/角色</label>
-                        <input id="nlsp-p-role" class="nlsp-input" value="${escapeAttr(state.persona.role)}" />
-                    </div>
-                    <div class="nlsp-row">
-                        <label class="nlsp-label">语气风格</label>
-                        <input id="nlsp-p-tone" class="nlsp-input" value="${escapeAttr(state.persona.tone)}" />
-                    </div>
-                    <div class="nlsp-row">
-                        <label class="nlsp-label">行为规则</label>
-                        <textarea id="nlsp-p-rules" class="nlsp-textarea">${escapeText(state.persona.rules)}</textarea>
-                    </div>
-                    <div style="display:flex; gap:10px; margin-top:10px;">
-                        <button class="nlsp-btn ghost" id="nlsp-p-reset">恢复默认（温柔大姐姐）</button>
-                        <button class="nlsp-btn" id="nlsp-p-save">保存并返回</button>
-                    </div>
-                    <div id="nlsp-p-tip" class="nlsp-page-sub" style="margin-top:10px;"></div>
-                </div>
-            </div>
-        `);
-        on('nlsp-close-main', 'click', closePanel);
-        on('nlsp-persona-back', 'click', () => { activeView = 'chat'; render(); });
-        on('nlsp-p-reset', 'click', () => {
-            const setVal = (id, v) => { const el = getDoc().getElementById(id); if (el) el.value = v; };
-            setVal('nlsp-p-name', DEFAULT_PERSONA.name); setVal('nlsp-p-role', DEFAULT_PERSONA.role);
-            setVal('nlsp-p-tone', DEFAULT_PERSONA.tone); setVal('nlsp-p-rules', DEFAULT_PERSONA.rules);
-            const tip = getDoc().getElementById('nlsp-p-tip');
-            if (tip) tip.textContent = '已重置为默认温柔大姐姐人格，点击「保存并返回」生效。';
-        });
-        on('nlsp-p-save', 'click', () => {
-            state.persona = {
-                name: val(getDoc().getElementById('nlsp-p-name')).trim() || DEFAULT_PERSONA.name,
-                role: val(getDoc().getElementById('nlsp-p-role')),
-                tone: val(getDoc().getElementById('nlsp-p-tone')),
-                rules: val(getDoc().getElementById('nlsp-p-rules'))
-            };
-            saveState();
-            toast('人格已保存', 'success');
-            activeView = 'chat';
-            render();
-        });
-    }
-
     /* ---------- 工具：DOM ---------- */
     function bind(act, fn) {
         const el = overlay() && overlay().querySelector(`[data-act="${act}"]`);
@@ -1693,7 +1832,7 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
         return String(s == null ? '' : s).replace(/["'<>]/g, (c) => ({ '"': '&quot;', "'": '&#39;', '<': '&lt;', '>': '&gt;' })[c]);
     }
 
-    /* ---------- 工具：聊天正文插入与角色卡判定 ---------- */
+    /* ---------- 工具：聊天正文插入与聊天状态判定 ---------- */
     function hasOpenChat() {
         try {
             if (typeof TH.getLastMessageId !== 'function') return false;
@@ -1705,14 +1844,14 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
 
     function requireOpenChat(reason) {
         if (!hasOpenChat()) {
-            toast('尚未打开角色卡/聊天' + (reason ? '：' + reason : '，无法' + reason) + '。请先打开一张角色卡并进入聊天。', 'error');
+            toast('尚未进入可读取的酒馆聊天' + (reason ? '：' + reason : '') + '。请先进入任意聊天。', 'error');
             return false;
         }
         return true;
     }
 
     async function insertIntoChat(title, detail, kind) {
-        if (!hasOpenChat()) { toast('未打开角色卡，本次操作未写入正文中。', 'error'); return false; }
+        if (!hasOpenChat()) { toast('当前没有可写入的聊天正文，本次操作未写入。', 'error'); return false; }
         try {
             const lastId = TH.getLastMessageId();
             if (typeof lastId !== 'number' || lastId < 0) {
@@ -1840,20 +1979,6 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
     }
 
     /* ---------- 业务：模型上下文 ---------- */
-    function getCharInfo() {
-        try {
-            var ctx = window.parent.SillyTavern.getContext();
-            var charId = ctx.characterId;
-            var chars = ctx.characters || {};
-            var ch = chars[charId] || {};
-            return {
-                name: ch.name || ctx.name2 || '',
-                description: String(ch.description || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
-                personality: String(ch.personality || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
-                scenario: String(ch.scenario || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
-            };
-        } catch (e) { return {}; }
-    }
     function getChatHistory(maxCount) {
         maxCount = maxCount || 20;
         try {
@@ -1868,7 +1993,7 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
                     var content = String(msg.mes || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
                     if (content) {
                         result.push({
-                            role: msg.is_user ? (ctx.name1 || '用户') : (msg.name || ctx.name2 || 'AI'),
+                            role: msg.is_user ? (ctx.name1 || '用户') : '正文叙事',
                             content: content
                         });
                     }
@@ -1876,15 +2001,6 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
             }
             return result;
         } catch (e) { return []; }
-    }
-    function charContext() {
-        var info = getCharInfo();
-        var parts = [];
-        if (info.name) parts.push('角色名称：' + info.name);
-        if (info.description) parts.push('角色描述：' + info.description.slice(0, 500));
-        if (info.personality) parts.push('角色性格：' + info.personality.slice(0, 300));
-        if (info.scenario) parts.push('当前场景：' + info.scenario.slice(0, 300));
-        return parts.length ? parts.join('\n') : '';
     }
     function chatHistoryContext(maxCount) {
         maxCount = maxCount || 15;
@@ -1901,31 +2017,27 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
         if (!wb.name) return '';
         return '已读取的世界书：' + wb.name + '\n世界书摘要：\n' + (wb.summary || '');
     }
-    function scriptsContext(st) {
-        const sc = (st.scripts || []).filter((s) => s.loaded);
-        if (!sc.length) return '';
-        const parts = sc.map((s) => {
-            const header = '【脚本 ' + s.name + '】' + s.size + ' 字';
-            const body = String(s.content || '').replace(/```/g, "'''").replace(/\s+/g, ' ').trim().slice(0, 1500);
-            return header + '\n' + (body || '（空）');
-        });
-        return '已读取的角色卡脚本（含 zod 注册）共 ' + sc.length + ' 个：\n' + parts.join('\n----\n');
+    function userContext() {
+        const user = getUserBinding();
+        const parts = ['绑定的酒馆 USER：' + user.name];
+        if (user.description) parts.push('USER Persona：' + user.description.slice(0, 800));
+        parts.push('绑定规则：系统只绑定当前酒馆 USER，禁止绑定或继承任何 CHAR 角色卡身份。');
+        return parts.join('\n');
     }
     function systemContext(st) {
         return [
             '系统名称：' + st.system.name,
             '系统核心：' + st.system.purpose,
             '系统简介：' + (st.system.summary || ''),
+            userContext(),
             worldbookContext(st),
-            scriptsContext(st),
-            (function(){var cc=charContext();return cc?'【当前角色卡信息】\n'+cc:'';})(),
-            (function(){var ch=chatHistoryContext(state.contextFloors || 10);return ch?'【'+ch:'';})()
+            (function(){var ch=chatHistoryContext(state.contextFloors || 10);return ch?'【当前正文上下文】\n'+ch:'';})()
         ].filter(Boolean).join('\n');
     }
 
     /* ---------- 业务：初始化系统 ---------- */
     async function apiInitSystem(st) {
-        const sys = '你是一个系统初始化助手，根据角色设定与聊天剧情，为可交互的“系统面板”生成贴合当前故事背景的初始化数据。必须严格输出 JSON。';
+        const sys = '你是系统初始化助手。系统身份必须绑定当前酒馆 USER，严禁绑定或继承任何 CHAR 角色卡身份。根据 USER Persona、世界书与聊天正文生成初始化数据。必须严格输出 JSON。';
         const user = `请为以下系统生成初始化信息，只返回 JSON：
 {
   "summary": "1-3 句系统简介，体现氛围与玩法，应贴合世界书背景",
@@ -1935,8 +2047,8 @@ function paintHomeTasks(){var list=document.getElementById('nlsp-task-list-home'
 系统名称：${st.system.name}
 核心作用：${st.system.purpose}
 ${st.worldbook.name ? worldbookContext(st) : ''}
-${(function(){try{var ci=getCharInfo();var p=[];if(ci.name)p.push('当前角色：'+ci.name);if(ci.description)p.push('角色描述：'+ci.description.slice(0,300));return p.length?'角色信息：'+p.join('，'):'';}catch(e){return '';}})()}
-注意：initialPoints 为整数，默认 0，范围 0~3000。简介与问候要贴合当前角色设定与剧情氛围。只返回JSON。`;
+${userContext()}
+注意：initialPoints 为整数，默认 0，范围 0~3000。简介与问候要贴合 USER Persona、世界书与正文剧情氛围，但不得把 CHAR 当作系统绑定对象。只返回JSON。`;
         const text = await apiChat(st, { system: sys, user, json: false, temperature: 0.8, maxTokens: 1500 });
         const obj = extractJson(text);
         return {
@@ -1952,39 +2064,122 @@ ${(function(){try{var ci=getCharInfo();var p=[];if(ci.name)p.push('当前角色�
         const user = `${systemContext(st)}
 ${opts && opts.first ? '请生成 2~4 个适合系统开局的初始任务。' : '请生成 2~4 个系统任务，难度递增。'}
 每个任务字段：name（任务名称）、desc（任务介绍）、goal（任务目标）、reward（完成奖励积分，整数 50~600）、itemReward（可选，完成奖励道具名，可空字符串）。
-其中第一个任务建议为引导类简单任务。任务难度与奖励应参考上文聊天记录中角色的当前实力阶段：若角色尚弱则生成简单低奖励任务，若角色已强则生成困难高奖励任务。只返回 JSON：{"tasks":[{"name":"","desc":"","goal":"","reward":0,"itemReward":""}]}`;
+其中第一个任务建议为引导类简单任务。任务难度与奖励只参考当前 USER 在正文剧情中的进度与能力表现；CHAR 仅是正文叙事参与者，不是系统绑定对象。只返回 JSON：{"tasks":[{"name":"","desc":"","goal":"","reward":0,"itemReward":""}]}`;
         const text = await apiChat(st, { system: sys, user, json: false, temperature: 0.85, maxTokens: 1100 });
         const obj = extractJson(text);
         const arr = obj.tasks || (Array.isArray(obj) ? obj : []);
         return arr.filter(Boolean).map((t) => ({
+            id: makeId('task'),
             name: String(t.name || '未命名任务').slice(0, 40),
             desc: String(t.desc || '').slice(0, 200),
             goal: String(t.goal || '').slice(0, 120),
             reward: Math.max(1, Math.min(9999, Math.floor(Number(t.reward || 100)))),
             itemReward: String(t.itemReward || '').slice(0, 40),
-            status: 'todo'
+            status: 'todo',
+            rewardClaimed: false
         }));
     }
 
     /* ---------- 业务：商城 ---------- */
-    async function apiGenerateShop(st) {
-        const sys = '你是一个系统商城生成器，负责生成符合世界观的商品列表。必须严格输出 JSON 对象，键为 products，值为数组。';
-        var pts = st.points || 0;
-        var afford = Math.max(50, Math.floor(pts * 1.2));
-        var user = `${systemContext(st)}
-当前积分：${pts}
-请生成 6 件商品，每件包含字段：name（名称）、category（类别，如"消耗品/装备/材料/技能书/奇物"）、desc（一句话作用描述）、cost（购买积分，整数）、rarity（稀有度，取值：普通/稀有/史诗/传说）。
-定价原则：根据上文聊天记录判断角色当前实力阶段——若角色尚弱/初期，大部分商品应贴合其当前实力（价格在几十到几百积分，多为普通/稀有）；若角色已强/拥有神器，则可生成高价高稀有度的强力物品（上千到上万积分）。切勿脱离剧情给弱角色神装。商品必须贴合当前剧情与角色实力。只返回 JSON：{"products":[{"name":"","category":"","desc":"","cost":0,"rarity":""}]}`;
-        const text = await apiChat(st, { system: sys, user, json: false, temperature: 0.95, maxTokens: 1100 });
-        const obj = extractJson(text);
-        const items = obj.products || obj.shop || obj.items || (Array.isArray(obj) ? obj : []);
-        return items.filter(Boolean).map((it) => ({
+    function normalizeFingerprintText(value) {
+        return String(value == null ? '' : value).normalize('NFKC').toLowerCase().replace(/[\s\p{P}\p{S}_]+/gu, '');
+    }
+
+    function shopFingerprint(item) {
+        return normalizeFingerprintText([item && item.name, item && item.category, item && (item.desc || item.function)].join('|'));
+    }
+
+    function normalizeShopItems(items) {
+        const validRarity = ['普通', '稀有', '史诗', '传说'];
+        return (Array.isArray(items) ? items : []).filter(Boolean).map((it) => ({
             name: String(it.name || '未命名商品').slice(0, 40),
             category: String(it.category || '未分类').slice(0, 20),
             desc: String(it.desc || it.function || '').slice(0, 120),
             cost: Math.max(1, Math.floor(Number(it.cost || it.price || 100))),
-            rarity: ['普通', '稀有', '史诗', '传说'].includes(it.rarity) ? it.rarity : '普通'
-        }));
+            rarity: validRarity.includes(it.rarity) ? it.rarity : '普通'
+        })).filter((it) => shopFingerprint(it)).slice(0, 6);
+    }
+
+    function rememberShopBatch(st, items) {
+        const memory = Array.isArray(st.shopMemory) ? st.shopMemory.map((x) => typeof x === 'string' ? x : x && x.fingerprint).filter(Boolean) : [];
+        for (const item of items) memory.push(shopFingerprint(item));
+        st.shopMemory = Array.from(new Set(memory)).slice(-180);
+    }
+
+    function fallbackShopItems(st, forbidden) {
+        const catalog = [
+            ['星屑止血贴','消耗品','快速处理轻度创伤并抑制感染'],['雾航定位针','奇物','在低能见度环境标注安全返程方向'],
+            ['折叠净水囊','生存工具','过滤一日份饮水并保留必要矿物质'],['静电破锁片','工具','一次性干扰低阶电子门锁'],
+            ['月白储能扣','材料','为小型设备补充稳定能源'],['回声记录珠','奇物','保存并回放一段关键环境声音'],
+            ['微光侦察蝶','装备','短时巡查拐角并回传模糊影像'],['应急体温毯','消耗品','抵御严寒并降低体力消耗'],
+            ['磁轨攀援索','装备','吸附金属表面完成快速攀援'],['旧城通行章','奇物','提高与中立商队交涉的可信度'],
+            ['晨露清醒剂','消耗品','缓解疲劳并保持短时专注'],['符文隔音棉','材料','削弱小范围内的声音外泄'],
+            ['便携修复胶','材料','临时修补护具与机械裂口'],['风向测绘镜','工具','读取气流变化并提示隐蔽通道'],
+            ['脉冲照明棒','消耗品','释放无明火的高亮冷光'],['余烬保温盒','生存工具','长时间保存食物温度与气味'],
+            ['谐振解码叉','工具','辅助识别简单声纹和机械频率'],['薄雾伪装披肩','装备','在静止时弱化轮廓与反光'],
+            ['青铜契约笔','奇物','让双方签下的短期约定留下可见印记'],['速记战术卡','技能书','记录并复盘一次小队行动失误'],
+            ['重力平衡环','装备','减轻负重造成的行动迟滞'],['夜巡无声靴垫','装备','降低硬质地面的脚步声'],
+            ['灵感索引册','技能书','整理零散线索并标出潜在关联'],['晶格防潮盒','工具','保护药剂与精密零件免受湿气影响'],
+            ['逆风火种匣','生存工具','在强风中点燃稳定火种'],['简易护心铭牌','装备','抵消一次轻度精神冲击'],
+            ['蓝纹地图膜','材料','把手绘地图临时防水并增强标记'],['蜂鸣诱饵器','工具','在远处制造可控声源吸引注意'],
+            ['便携药草研钵','工具','提升基础草药的现场处理效率'],['残光信标','奇物','在撤离路线留下仅持有者可见的微光标记']
+        ];
+        const out = [];
+        const start = Math.abs(Date.now() + Number(st.points || 0)) % catalog.length;
+        for (let i = 0; i < catalog.length && out.length < 6; i++) {
+            const row = catalog[(start + i) % catalog.length];
+            const item = { name: row[0], category: row[1], desc: row[2], cost: 60 + ((start + i) % 9) * 45, rarity: (i % 7 === 0 ? '稀有' : '普通') };
+            const fp = shopFingerprint(item);
+            if (!forbidden.has(fp)) { forbidden.add(fp); out.push(item); }
+        }
+        while (out.length < 6) {
+            const serial = Date.now().toString(36) + '-' + out.length;
+            const item = { name: '异域补给·' + serial, category: '奇物', desc: '来自临时交易节点的密封未知补给', cost: 120 + out.length * 35, rarity: '稀有' };
+            if (!forbidden.has(shopFingerprint(item))) out.push(item);
+        }
+        return out;
+    }
+
+    async function apiGenerateShop(st) {
+        const sys = '你是一个系统商城生成器，负责生成符合世界观的商品列表。必须严格输出 JSON 对象，键为 products，值为数组。';
+        var pts = st.points || 0;
+        const previous = new Set((st.shop || []).map(shopFingerprint).filter(Boolean));
+        const history = new Set((st.shopMemory || []).map((x) => typeof x === 'string' ? x : x && x.fingerprint).filter(Boolean));
+        previous.forEach((fingerprint) => history.add(fingerprint));
+        st.shopMemory = Array.from(history).slice(-180);
+        const forbidden = new Set([...previous, ...history]);
+        const bannedNames = (st.shop || []).concat([]).map((x) => x && x.name).filter(Boolean).concat(
+            (st.shopMemory || []).filter((x) => x && typeof x === 'object' && x.name).map((x) => x.name)
+        ).slice(-80);
+        let lastError = null;
+        for (let attempt = 1; attempt <= 4; attempt++) {
+            try {
+                var user = `${systemContext(st)}
+当前积分：${pts}
+请生成 6 件商品，每件包含字段：name（名称）、category（类别，如"消耗品/装备/材料/技能书/奇物"）、desc（一句话作用描述）、cost（购买积分，整数）、rarity（稀有度，取值：普通/稀有/史诗/传说）。
+定价原则：根据上文聊天正文判断当前 USER 的剧情阶段——初期以低价普通/稀有商品为主，后期才允许高价高稀有度商品。CHAR 只作为正文参与者，不得成为商城绑定身份。商品必须贴合 USER 的剧情进度。只返回 JSON：{"products":[{"name":"","category":"","desc":"","cost":0,"rarity":""}]}
+严禁出现以下上一批或近期商品（名称、类别、作用近似也视为重复）：${bannedNames.length ? bannedNames.join('、') : '无'}
+这是第 ${attempt} 次唯一性生成，随机因子 ${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}。六件商品彼此也不得重复。`;
+                const text = await apiChat(st, { system: sys, user, json: false, temperature: Math.min(1.2, .92 + attempt * .06), maxTokens: 1300 });
+                const obj = extractJson(text);
+                const raw = obj.products || obj.shop || obj.items || (Array.isArray(obj) ? obj : []);
+                const items = normalizeShopItems(raw);
+                if (items.length !== 6) throw new Error('商城返回商品数量不是 6 件');
+                const fingerprints = items.map(shopFingerprint);
+                if (new Set(fingerprints).size !== 6) throw new Error('商城返回批次内部存在重复商品');
+                if (fingerprints.some((fp) => forbidden.has(fp))) throw new Error('商城返回与上一批或近期历史重复的商品');
+                rememberShopBatch(st, items);
+                setDebugHealth('shop', true, '严格去重通过 · 第 ' + attempt + ' 次');
+                return items;
+            } catch (e) {
+                lastError = e;
+            }
+        }
+        const fallback = fallbackShopItems(st, forbidden);
+        rememberShopBatch(st, fallback);
+        recordDebugError('商城去重', lastError || new Error('模型重复生成'), '四次重试后启用本地唯一候选');
+        setDebugHealth('shop', true, '模型重复时已启用本地唯一兜底');
+        return fallback;
     }
 
     /* ---------- 业务：抽奖 ---------- */
@@ -2019,7 +2214,7 @@ ${opts && opts.first ? '请生成 2~4 个适合系统开局的初始任务。' :
         }
         var pts = st.points || 0;
         var text = await apiChat(st, {
-            system: '你是系统设计师，根据角色剧情与积分余额判断专属功能的合理花费积分。只返回一个整数，不要任何额外文字。角色越强、积分越多，花费越高；角色越弱、积分越少，花费越低。',
+            system: '你是系统设计师，根据当前 USER 的正文剧情进度与积分余额判断专属功能的合理花费积分。只返回一个整数，不要任何额外文字；严禁把 CHAR 作为系统绑定身份。',
             user: '当前积分：' + pts + '。系统名称：' + (st.system.name || '') + '。功能名：' + (ef.name || '') + chatCtx + '\n请输出一个合理的花费积分整数：',
             temperature: 0.5, maxTokens: 10
         });
@@ -2063,18 +2258,14 @@ async function apiGenerateExclusive(st, pref, complexity){
     return{name:name,icon:icon,desc:desc,cost:cost||0,actions:actions,html:html+'<div id="nlsp-excl-status" class="nlsp-page-sub" style="margin-top:10px;min-height:16px"></div>'};
 }
 
-        /* ---------- 业务：聊天（使用人格预设） ---------- */
+    /* ---------- 业务：系统对话 ---------- */
     async function apiChatReply(st, userText) {
-        const p = st.persona || DEFAULT_PERSONA;
         const sys = [
-            '你是系统的对话人格，请保持设定的人格与立场进行回复。',
-            '人格名称：' + p.name,
-            '身份/角色：' + p.role,
-            '语气风格：' + p.tone,
-            '行为规则：' + p.rules,
-            '所在系统：' + st.system.name + '（核心：' + st.system.purpose + '）',
+            '你是当前系统的功能助手，直接、自然地回应绑定 USER 的问题。',
+            '系统名称：' + st.system.name + '（核心：' + st.system.purpose + '）',
+            userContext(),
             st.worldbook.name ? worldbookContext(st) : '',
-            '规则：以第一人称回复，简洁自然，单次回复 60~200 字，遵守上述人格设定。'
+            '规则：只绑定酒馆 USER，严禁把任何 CHAR 当作系统身份；单次回复 60~200 字。'
         ].filter(Boolean).join('\n');
         const msgs = [];
         const history = (st.chat || []).filter((m) => m.role !== 'system' || m.content === '正在思考…').slice(-10);
@@ -2108,6 +2299,23 @@ async function apiGenerateExclusive(st, pref, complexity){
         return text;
     }
 
+    function installInternalErrorCapture() {
+        if (window.__nlspErrorCaptureInstalled) return;
+        window.__nlspErrorCaptureInstalled = true;
+        const internal = /自定义系统|nlsp|NailongSystemPanel|settleTasksFromContext|apiGenerateShop|apiGenerateTask|renderDebugBody|doAutoRefresh/i;
+        window.addEventListener('error', (event) => {
+            const stack = String(event && event.error && event.error.stack || '');
+            const source = String(event && event.filename || '');
+            const message = String(event && event.message || '');
+            if (internal.test(stack + ' ' + source + ' ' + message)) recordDebugError('脚本异常', event.error || message, source || 'window.error');
+        });
+        window.addEventListener('unhandledrejection', (event) => {
+            const reason = event && event.reason;
+            const text = String(reason && reason.stack || reason || '');
+            if (internal.test(text)) recordDebugError('未处理 Promise', reason || text, 'unhandledrejection');
+        });
+    }
+
     /* ---------- 全局暴露 ---------- */
     window.NailongSystemPanel = {
         toggle() { const doc = getDoc(); if (doc.getElementById(OVERLAY_ID)) { closePanel(); } else { openPanel(); } },
@@ -2115,41 +2323,191 @@ async function apiGenerateExclusive(st, pref, complexity){
         close() { closePanel(); }
     };
 
-    /* ---------- 自动刷新引擎 ---------- */
-    var autoRefreshTimer = null;
+    /* ---------- 正文事件与自动结算 / 自动刷新 ---------- */
+    var runtimeEventDisposers = [];
+    var runtimePollTimer = null;
+    var taskSettlementRunning = false;
     var refreshCounter = 0;
-    var lastGenCount = -1;
-    function setupAutoRefresh() {
-        if (state.autoRefresh) {
-            try {
-                var te = window.parent && window.parent.SillyTavern && window.parent.SillyTavern.eventSource;
-                if (!te) { console.warn('[自定义系统] 未找到 eventSource，自动刷新无法启用'); return; }
-                if (autoRefreshTimer) return;
-                autoRefreshTimer = setInterval(function() {
-                    try {
-                        var ctx = window.parent.SillyTavern.getContext();
-                        var chat = ctx.chat || [];
-                        var count = chat.length;
-                        if (count === lastGenCount) return;
-                        var lastMsg = chat[chat.length - 1];
-                        if (!lastMsg || lastMsg.is_user) { lastGenCount = count; return; }
-                        if (window.parent.is_generating) return;
-                        lastGenCount = count;
-                        refreshCounter++;
-                        var interval = state.refreshInterval || 1;
-                        if (refreshCounter < interval) {
-                            console.log('[自定义系统] 自动刷新倒计时: ' + refreshCounter + '/' + interval);
-                            return;
-                        }
-                        refreshCounter = 0;
-                        doAutoRefresh();
-                    } catch (e) {}
-                }, 3000);
-                console.log('[自定义系统] 自动刷新已开启（每3秒检查一次）');
-            } catch (e) { console.warn('[自定义系统] 自动刷新启动失败:', e); }
-        } else {
-            if (autoRefreshTimer) { clearInterval(autoRefreshTimer); autoRefreshTimer = null; console.log('[自定义系统] 自动刷新已关闭'); }
+    var lastRefreshFingerprint = '';
+
+    function fingerprintText(value) {
+        let hash = 2166136261;
+        const input = String(value || '');
+        for (let i = 0; i < input.length; i++) { hash ^= input.charCodeAt(i); hash = Math.imul(hash, 16777619) >>> 0; }
+        return hash.toString(16).padStart(8, '0');
+    }
+
+    function cleanNarrativeText(value) {
+        return String(value || '')
+            .replace(/\[SYS_PANEL\][\s\S]*?\[\/SYS_PANEL\]/gi, ' ')
+            .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, ' ')
+            .replace(/<[^>]+>/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .slice(-12000);
+    }
+
+    async function readLatestNarrativeContext(limit) {
+        const count = Math.max(2, Math.min(20, Number(limit) || 8));
+        try {
+            if (typeof TH.getChatMessages === 'function') {
+                const result = await Promise.resolve(TH.getChatMessages('0-{{lastMessageId}}', { role: 'all', hide_state: 'all' }));
+                if (Array.isArray(result) && result.length) {
+                    return result.slice(-count).map((msg) => cleanNarrativeText(
+                        typeof msg === 'string' ? msg : (msg.message || msg.mes || msg.text || '')
+                    )).filter(Boolean).join('\n');
+                }
+            }
+        } catch (e) {
+            recordDebugError('正文读取', e, 'TavernHelper.getChatMessages');
         }
+        const fallback = getChatHistory(count);
+        return fallback.map((msg) => cleanNarrativeText(msg.content)).filter(Boolean).join('\n');
+    }
+
+    function taskKeywords(task) {
+        const stop = new Set(['任务','完成','进行','目标','获得','一次','当前','系统','玩家','需要','成功','以及','然后','相关']);
+        const source = String((task && task.name) || '') + ' ' + String((task && task.goal) || '');
+        const words = source.match(/[\p{Script=Han}]{2,8}|[A-Za-z0-9]{3,}/gu) || [];
+        return Array.from(new Set(words.map(normalizeFingerprintText).filter((word) => word && !stop.has(word)))).slice(0, 12);
+    }
+
+    function quickTaskMatches(text, tasks) {
+        const normalized = normalizeFingerprintText(text);
+        const completionCue = /(?:任务(?:已经|已|顺利)?完成|已完成|完成了|达成(?:了)?(?:目标|条件)|成功(?:完成|达成|交付|提交)|顺利(?:完成|交付|提交)|目标已达成|宣告完成)/u;
+        if (!completionCue.test(text)) return [];
+        return tasks.filter((task) => {
+            const name = normalizeFingerprintText(task.name || '');
+            const keywords = taskKeywords(task);
+            const anchored = (name.length >= 3 && normalized.includes(name)) || keywords.some((word) => word.length >= 2 && normalized.includes(word));
+            return anchored || tasks.length === 1;
+        }).map((task) => ({ id: task.id, confidence: 1, evidence: '正文出现明确完成措辞并命中任务关键词' }));
+    }
+
+    async function aiTaskMatches(text, tasks) {
+        if (!state.connected || !state.api || !state.api.url || !state.api.model) return [];
+        const relatedCue = /(?:完成|达成|成功|交付|提交|解决|修复|击败|抵达|找到|取得|救出|通过|结束)/u;
+        if (!relatedCue.test(text)) return [];
+        const payload = tasks.map((task) => ({ id: task.id, name: task.name, goal: task.goal }));
+        const response = await apiChat(state, {
+            system: '你是任务完成判定器。只根据已经发生的正文事实判断，不因计划、准备、接受任务或假设而判定完成。只返回 JSON。',
+            user: '进行中的任务：' + JSON.stringify(payload) + '\n最近正文：' + text.slice(-7000) + '\n返回 {"completed":[{"id":"任务id","confidence":0到1,"evidence":"不超过60字的正文依据"}]}。没有完成则 completed 为空数组。',
+            json: false,
+            temperature: 0.1,
+            maxTokens: 500
+        });
+        const parsed = extractJson(response);
+        return (Array.isArray(parsed.completed) ? parsed.completed : []).map((item) => ({
+            id: String(item.id || ''),
+            confidence: Math.max(0, Math.min(1, Number(item.confidence) || 0)),
+            evidence: String(item.evidence || '').slice(0, 240)
+        }));
+    }
+
+    async function settleTasksFromContext(eventText, source) {
+        if (!state.autoTaskSettlement || taskSettlementRunning) return false;
+        const doing = (state.tasks || []).filter((task) => task && task.status === 'doing' && !task.rewardClaimed);
+        if (!doing.length) { setDebugHealth('taskSettlement', true, '监听正常 · 当前无进行中任务'); return false; }
+        taskSettlementRunning = true;
+        try {
+            const context = cleanNarrativeText(eventText) || await readLatestNarrativeContext(state.contextFloors || 10);
+            if (!context) throw new Error('未读取到可判定的正文内容');
+            const fp = fingerprintText(context);
+            if (fp === state.lastTaskContextFingerprint) return false;
+            let matches = quickTaskMatches(context, doing);
+            if (!matches.length) matches = await aiTaskMatches(context, doing);
+            const minConfidence = Number(state.taskSettlementMinConfidence) || .78;
+            const settledIds = [];
+            for (const match of matches) {
+                if (Number(match.confidence) < minConfidence) continue;
+                const task = doing.find((item) => String(item.id) === String(match.id));
+                if (task && settleTask(task, { source: source || '正文事件', evidence: match.evidence })) settledIds.push(task.id);
+            }
+            state.lastTaskContextFingerprint = fp;
+            state.taskSettlementHistory.push({ time: Date.now(), fingerprint: fp, source: String(source || '正文事件'), taskIds: settledIds });
+            state.taskSettlementHistory = state.taskSettlementHistory.slice(-80);
+            setDebugHealth('taskSettlement', true, settledIds.length ? '刚刚结算 ' + settledIds.length + ' 个任务' : '正文检查完成 · 无任务达成');
+            saveState();
+            return settledIds.length > 0;
+        } catch (e) {
+            recordDebugError('任务结算器', e, source || '正文事件');
+            setDebugHealth('taskSettlement', false, e && e.message || String(e));
+            return false;
+        } finally {
+            taskSettlementRunning = false;
+        }
+    }
+
+    function runtimeValue(name) {
+        try {
+            if (name === 'eventOn' && typeof eventOn === 'function') return eventOn;
+            if (name === 'tavern_events' && typeof tavern_events === 'object') return tavern_events;
+            if (name === 'iframe_events' && typeof iframe_events === 'object') return iframe_events;
+        } catch (e) {}
+        const realms = [window];
+        try { if (window.parent && window.parent !== window) realms.push(window.parent); } catch (e) {}
+        for (const realm of realms) {
+            try { if (realm && realm[name] != null) return realm[name]; } catch (e) {}
+        }
+        return null;
+    }
+
+    function normalizeDisposer(value) {
+        if (typeof value === 'function') return value;
+        if (value && typeof value.stop === 'function') return () => value.stop();
+        return () => {};
+    }
+
+    function handleNarrativeEvent(source, text) {
+        Promise.resolve(settleTasksFromContext(text, source)).catch((e) => recordDebugError('任务结算器', e, source));
+        if (!state.autoRefresh || !state.initialized || !state.connected) return;
+        Promise.resolve(cleanNarrativeText(text) || readLatestNarrativeContext(4)).then((value) => {
+            const fp = fingerprintText(value);
+            if (!value || fp === lastRefreshFingerprint) return;
+            lastRefreshFingerprint = fp;
+            refreshCounter++;
+            if (refreshCounter >= Math.max(1, Number(state.refreshInterval) || 1)) { refreshCounter = 0; doAutoRefresh(); }
+        }).catch((e) => recordDebugError('自动刷新', e, source));
+    }
+
+    function clearRuntimeEvents() {
+        for (const dispose of runtimeEventDisposers.splice(0).reverse()) { try { dispose(); } catch (e) {} }
+        if (runtimePollTimer) { clearInterval(runtimePollTimer); runtimePollTimer = null; }
+    }
+
+    function setupAutoRefresh() {
+        clearRuntimeEvents();
+        const eventOnFn = runtimeValue('eventOn');
+        const tavern = runtimeValue('tavern_events') || {};
+        const iframe = runtimeValue('iframe_events') || {};
+        let bound = 0;
+        const bindEvent = (name, listener) => {
+            if (!eventOnFn || !name) return;
+            try { runtimeEventDisposers.push(normalizeDisposer(eventOnFn(name, listener))); bound++; }
+            catch (e) { recordDebugError('事件监听', e, String(name)); }
+        };
+        bindEvent(iframe.GENERATION_ENDED || tavern.GENERATION_ENDED, (text) => handleNarrativeEvent('GENERATION_ENDED', text));
+        bindEvent(tavern.MESSAGE_RECEIVED, () => handleNarrativeEvent('MESSAGE_RECEIVED', ''));
+        bindEvent(tavern.CHAT_CHANGED, () => {
+            const liveUser = getUserBinding();
+            if (!state.userBinding || state.userBinding.id !== liveUser.id) {
+                state = loadState(); applyTheme(state.theme || 'hl-dark');
+                if (overlay()) render();
+            }
+        });
+        if (!bound) {
+            let lastPollFingerprint = '';
+            runtimePollTimer = setInterval(async () => {
+                try {
+                    const context = await readLatestNarrativeContext(4);
+                    const fp = fingerprintText(context);
+                    if (!context || fp === lastPollFingerprint) return;
+                    lastPollFingerprint = fp;
+                    handleNarrativeEvent('轻量轮询兜底', context);
+                } catch (e) { recordDebugError('正文轮询', e, 'fallback'); }
+            }, 3000);
+        }
+        setDebugHealth('events', bound > 0 || !!runtimePollTimer, bound > 0 ? '已绑定 ' + bound + ' 个酒馆事件' : '事件不可用，已启用 3 秒轮询兜底');
     }
     var autoRefreshRunning = false;
     async function doAutoRefresh() {
@@ -2159,13 +2517,14 @@ async function apiGenerateExclusive(st, pref, complexity){
         try {
             console.log('[自定义系统] 开始自动刷新任务/商城…');
             var tasks = await apiGenerateTask(state, { first: false });
-            if (tasks && tasks.length) { state.tasks = tasks; }
+            if (tasks && tasks.length) { state.tasks = mergeTaskRefresh(tasks); }
             var shop = await apiGenerateShop(state);
             if (shop && shop.length) { state.shop = shop; }
             saveState();
             console.log('[自定义系统] 自动刷新完成: ' + (state.tasks?state.tasks.length:0) + '个任务, ' + (state.shop?state.shop.length:0) + '件商品');
         } catch (e) {
             console.warn('[自定义系统] 自动刷新失败:', e);
+            recordDebugError('自动刷新', e, '任务与商城');
         } finally {
             autoRefreshRunning = false;
         }
@@ -2189,18 +2548,19 @@ async function apiGenerateExclusive(st, pref, complexity){
                         openPanel();
                         console.log('[自定义系统] openPanel 完成');
                     }
-                } catch(e) { console.error('[自定义系统] 按钮点击出错:', e); }
+                } catch(e) { console.error('[自定义系统] 按钮点击出错:', e); recordDebugError('脚本按钮', e, '点击'); }
             });
             console.log('[自定义系统] 按钮事件注册成功');
         } else {
             console.warn('[自定义系统] 按钮事件为空，注册失败');
         }
-    } catch (e) { console.warn('[自定义系统] 脚本按钮注册失败：', e); }
+    } catch (e) { console.warn('[自定义系统] 脚本按钮注册失败：', e); recordDebugError('脚本按钮', e, '注册'); }
 
     /* ---------- 启动 ---------- */
     try {
         ensureStyle();
         injectFont();
+        installInternalErrorCapture();
         setupAutoRefresh();
-    } catch (e) { console.error('[自定义系统] 启动失败：', e); }
+    } catch (e) { console.error('[自定义系统] 启动失败：', e); recordDebugError('脚本启动', e, '启动'); }
 })();
