@@ -1,0 +1,160 @@
+{
+  "project": "玄鉴仙族",
+  "repository": "Jzilan/OOO",
+  "assets": [
+    {
+      "id": "chapter-01",
+      "file": "images/chapter-01.webp",
+      "source": "素材/开局篇图/高清/01-玄鉴初临.webp",
+      "group": "chapter",
+      "mime": "image/webp",
+      "bytes": 936646,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "d66a386d60f1261584c186a71f8ea894d8926672d7ca10942d5cf6e00fb56824"
+    },
+    {
+      "id": "chapter-02",
+      "file": "images/chapter-02.webp",
+      "source": "素材/开局篇图/高清/02-长鲸月落.webp",
+      "group": "chapter",
+      "mime": "image/webp",
+      "bytes": 856742,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "1a9c42c466e7e39a439228d6ae0d6e631b1ec9c9fbc90c0db153bad30f2bf7ad"
+    },
+    {
+      "id": "chapter-03",
+      "file": "images/chapter-03.webp",
+      "source": "素材/开局篇图/高清/03-行蛟见虹.webp",
+      "group": "chapter",
+      "mime": "image/webp",
+      "bytes": 853234,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "7b8dffe110256563ca8d2970334de0930eb61df37937962af2436c2496963e81"
+    },
+    {
+      "id": "chapter-04",
+      "file": "images/chapter-04.webp",
+      "source": "素材/开局篇图/高清/04-明煌世子.webp",
+      "group": "chapter",
+      "mime": "image/webp",
+      "bytes": 720442,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "06294b484fbff50d9a36c84bf7e233490604b5296d42cf6c64ba6e01f0910507"
+    },
+    {
+      "id": "chapter-05",
+      "file": "images/chapter-05.webp",
+      "source": "素材/开局篇图/高清/05-天色既明.webp",
+      "group": "chapter",
+      "mime": "image/webp",
+      "bytes": 783108,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "b9055bd0defe1b8f17bbe56981e5af7c640ccd2ac8f5e84120fb6a9b77b9fd9d"
+    },
+    {
+      "id": "chapter-06",
+      "file": "images/chapter-06.webp",
+      "source": "素材/开局篇图/高清/06-今不复也.webp",
+      "group": "chapter",
+      "mime": "image/webp",
+      "bytes": 690116,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "ed3483dd39a97fa4a0572f78c94c50b5d5c074290b180a8cd2fc59fa77af70df"
+    },
+    {
+      "id": "chapter-07",
+      "file": "images/chapter-07.webp",
+      "source": "素材/开局篇图/高清/07-号为宋.webp",
+      "group": "chapter",
+      "mime": "image/webp",
+      "bytes": 794750,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "df1d0286f24266f890e90b2faf1491c75a3fa363161bf08d5a2fbf0a997caa41"
+    },
+    {
+      "id": "chapter-08",
+      "file": "images/chapter-08.webp",
+      "source": "素材/开局篇图/高清/08-照临汝土.webp",
+      "group": "chapter",
+      "mime": "image/webp",
+      "bytes": 933606,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "8e5b8f14aa7edfe58d8801fdb214716de90e913bd8013494a87a364067bf037b"
+    },
+    {
+      "id": "status-bronze",
+      "file": "images/status-bronze.webp",
+      "source": "素材/状态栏/01-玄铜鉴枢.webp",
+      "group": "status",
+      "mime": "image/webp",
+      "bytes": 356284,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "cd66b7ad4bcb73c1b5e5f30048530d216711406bab7994d184d0bf5747089cd1"
+    },
+    {
+      "id": "status-paper",
+      "file": "images/status-paper.webp",
+      "source": "素材/状态栏/02-朱印古牒.webp",
+      "group": "status",
+      "mime": "image/webp",
+      "bytes": 414998,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "bd42f2e7c2dd875a27314c9e31e10d26662c97569dd3a455fb7704500e25575e"
+    },
+    {
+      "id": "status-moon",
+      "file": "images/status-moon.webp",
+      "source": "素材/状态栏/03-太虚月鉴.webp",
+      "group": "status",
+      "mime": "image/webp",
+      "bytes": 161812,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "cdfa13bde86f8034823f095e97e7fde4031ebd4ccab5146490959b9ad460fc1f"
+    },
+    {
+      "id": "source-chapters-01-04",
+      "file": "images/source-chapters-01-04.png",
+      "source": "素材/开局篇图/01-04篇场景.png",
+      "group": "source",
+      "mime": "image/png",
+      "bytes": 3431779,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "294201fc3055595dab7039d6e053686f4e49a5cb416c589e2815ff34f939176a"
+    },
+    {
+      "id": "source-chapters-05-08",
+      "file": "images/source-chapters-05-08.png",
+      "source": "素材/开局篇图/05-08篇场景.png",
+      "group": "source",
+      "mime": "image/png",
+      "bytes": 3213968,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "c921411cfe6fc3969721334aee1f2673d9901da5beee9730737e590ea68e951c"
+    },
+    {
+      "id": "card-cover",
+      "file": "images/card-cover.png",
+      "source": "角色卡封面",
+      "group": "cover",
+      "mime": "image/png",
+      "bytes": 76618,
+      "width": 512,
+      "height": 768,
+      "sha256": "ea900a91c502024f30e87c085ebd55cf4b00106058c4bf6e07d9a6ae1a419bf4"
+    }
+  ]
+}
