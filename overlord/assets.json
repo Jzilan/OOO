@@ -1,9 +1,9 @@
 {
   "files": [
     {
-      "file": "assets/57400a7064b5143775f2cc91.svg",
-      "sha256": "57400a7064b5143775f2cc91fb91330c545ce3d945311def4dafa6710ae9ff08",
-      "bytes": 497,
+      "file": "assets/1bc52a513bcc56a0efa12fb4.svg",
+      "sha256": "1bc52a513bcc56a0efa12fb4ed0f48424988dfc7fbefc4399f73009aedefb81d",
+      "bytes": 496,
       "uses": [
         "开局界面/OVERLORD-开局预览.html"
       ]
