@@ -1,0 +1,1181 @@
+{
+  "files": [
+    {
+      "file": "assets/57400a7064b5143775f2cc91.svg",
+      "sha256": "57400a7064b5143775f2cc91fb91330c545ce3d945311def4dafa6710ae9ff08",
+      "bytes": 497,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ]
+    },
+    {
+      "file": "assets/56f779e2d1d1b9248010ce7f.webp",
+      "sha256": "56f779e2d1d1b9248010ce7fb95651c784bb0297a4d000d289561f585016a0fc",
+      "bytes": 213350,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 595,
+      "height": 1090
+    },
+    {
+      "file": "assets/1aa94c3a3cd74f6d4a66c832.webp",
+      "sha256": "1aa94c3a3cd74f6d4a66c832af5366471c9ca6dbd6fe85b3e28491f44252f222",
+      "bytes": 10472,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html",
+        "正文美化/OVERLORD-正文美化预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/d73fd788cbc9da7e9abf5d78.webp",
+      "sha256": "d73fd788cbc9da7e9abf5d78aaf6bb55e38246b56c94c452883d4d44436b58c7",
+      "bytes": 209118,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 598,
+      "height": 1090
+    },
+    {
+      "file": "assets/d9ac4e9324559c124e60c634.webp",
+      "sha256": "d9ac4e9324559c124e60c6348941227b7063cbaf789012b9ba7debbd3423fff1",
+      "bytes": 11178,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/83ab8d5eb945b03465634a70.webp",
+      "sha256": "83ab8d5eb945b03465634a705f9486d5704c001b988c44238ad0dd6c48d97930",
+      "bytes": 289220,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 678,
+      "height": 1090
+    },
+    {
+      "file": "assets/26545ea61bf3c9fdc7a8e83a.webp",
+      "sha256": "26545ea61bf3c9fdc7a8e83a928fb1cef6a5039e496fab8c6b3d132811da53ad",
+      "bytes": 12528,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/967fd29f043f2c46653c1417.webp",
+      "sha256": "967fd29f043f2c46653c1417bcb548797204fa351729e66eccb7a78e8cac91bb",
+      "bytes": 260752,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 629,
+      "height": 1090
+    },
+    {
+      "file": "assets/ec514b7ebe485762831bdacc.webp",
+      "sha256": "ec514b7ebe485762831bdacc70f7775350ece6b43df440ec5a72936e723ee1f5",
+      "bytes": 12436,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/268f26aced52a78102ffc8ca.webp",
+      "sha256": "268f26aced52a78102ffc8ca08dc5845feb1991298f2a7693f9dee11336f4f24",
+      "bytes": 242456,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 618,
+      "height": 1090
+    },
+    {
+      "file": "assets/1ef2d37ae672c5cf825c86cc.webp",
+      "sha256": "1ef2d37ae672c5cf825c86cc3afca744802f4366b3769955eaf922d7b17c0ada",
+      "bytes": 10916,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/fabe40be4ce9abd450c20e04.webp",
+      "sha256": "fabe40be4ce9abd450c20e043ba06bca6ab29b4cd456bff3f1c497b3b7cad808",
+      "bytes": 246872,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 727,
+      "height": 1090
+    },
+    {
+      "file": "assets/c15d2dd8955db87ae8221d5b.webp",
+      "sha256": "c15d2dd8955db87ae8221d5bc3f5e70935da96448072eb39365ab5fe0bd7b9e2",
+      "bytes": 11908,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/28be479f2dd09dfaee4257c7.webp",
+      "sha256": "28be479f2dd09dfaee4257c70b1be0fa699cef0ee61faa92ab2c356a0066f068",
+      "bytes": 263886,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 659,
+      "height": 1090
+    },
+    {
+      "file": "assets/b75e1def2a6ae94b37a14426.webp",
+      "sha256": "b75e1def2a6ae94b37a144268eb2172e5d4c8f2c6c4b4760bf143d712e4335a7",
+      "bytes": 13170,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/1f86435fba01788d7a8b6cc6.webp",
+      "sha256": "1f86435fba01788d7a8b6cc68e590f3be0369293f12a5be3a6a9006177985322",
+      "bytes": 201550,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 522,
+      "height": 1090
+    },
+    {
+      "file": "assets/c0f45973db3afe45dc3adad1.webp",
+      "sha256": "c0f45973db3afe45dc3adad110f5e50c1e0f056b1a2a67a42e3eb579bab17fcf",
+      "bytes": 11318,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/376215da520189df093af761.webp",
+      "sha256": "376215da520189df093af76183c00f88991536780804dc635d7c742254733538",
+      "bytes": 208870,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 508,
+      "height": 1090
+    },
+    {
+      "file": "assets/c97c577d8287506cde14c657.webp",
+      "sha256": "c97c577d8287506cde14c65784db5a1a000637f4878aafbbc2f7b498310b4ed9",
+      "bytes": 13702,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/8abbb40499e2765dba4b431e.webp",
+      "sha256": "8abbb40499e2765dba4b431e98371c80fdc94473b8b1e16876fe53e0d80199a4",
+      "bytes": 274522,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 713,
+      "height": 1090
+    },
+    {
+      "file": "assets/73c48fbcaabc0df1f1022092.webp",
+      "sha256": "73c48fbcaabc0df1f1022092f08e2818a0dbc37848e4fe24e51c3ad377d1e7d2",
+      "bytes": 10436,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/93cc0463cc5f42967327aaff.webp",
+      "sha256": "93cc0463cc5f42967327aaff59c2da3a8ca4dd0c44577f0f6f1c3b057834e1be",
+      "bytes": 277538,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 651,
+      "height": 1090
+    },
+    {
+      "file": "assets/8b256b588299970cd3f113a6.webp",
+      "sha256": "8b256b588299970cd3f113a6d584451c35571d2afd59f892f6619461ff40ee24",
+      "bytes": 11002,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/17ec069c1aec4f4f5fdaeb78.webp",
+      "sha256": "17ec069c1aec4f4f5fdaeb78b0446a89d477e913cd87b470c79700a458f701bb",
+      "bytes": 308090,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 702,
+      "height": 1090
+    },
+    {
+      "file": "assets/bd1f3c8d6c5055740a0dd119.webp",
+      "sha256": "bd1f3c8d6c5055740a0dd11998c48c5e8388746a95232bd4928f62f8c4cb4a6c",
+      "bytes": 11568,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/e5e5f5df42b42cc82c450ef1.webp",
+      "sha256": "e5e5f5df42b42cc82c450ef101797d4de71f543fd67158d8168163f669eceb72",
+      "bytes": 147404,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 880,
+      "height": 493
+    },
+    {
+      "file": "assets/38be37c9c4cc5f2c0926705d.webp",
+      "sha256": "38be37c9c4cc5f2c0926705d1d3f21237241951037df9f94772499dc5dd597f3",
+      "bytes": 13476,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/e482108b518d42000fff4654.webp",
+      "sha256": "e482108b518d42000fff465455b5789dd2bec8693419b17d5024767f85588e47",
+      "bytes": 235412,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 522,
+      "height": 1090
+    },
+    {
+      "file": "assets/515458c12bebea403f5569e5.webp",
+      "sha256": "515458c12bebea403f5569e547d78e831f8cd315f9aeb1fbd55771199cc0a596",
+      "bytes": 12292,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/c94c85085c376ad841cd6c55.webp",
+      "sha256": "c94c85085c376ad841cd6c552c370ee3d06bc3d92a250adb7afb232bf9135289",
+      "bytes": 303200,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 683,
+      "height": 1090
+    },
+    {
+      "file": "assets/13c057d5d2725f67568b96b2.webp",
+      "sha256": "13c057d5d2725f67568b96b2069f415ba29c85afa6195d240957f5e0e83330b3",
+      "bytes": 12438,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/d30b850317b675a3a7f0c123.webp",
+      "sha256": "d30b850317b675a3a7f0c123d1cd6a3803cbe5b60c986a9b710d34b325be3734",
+      "bytes": 259928,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 727,
+      "height": 1090
+    },
+    {
+      "file": "assets/9839b74bf5b07fc271f58a25.webp",
+      "sha256": "9839b74bf5b07fc271f58a2597b2b3d3daab8a0e8ae5cfb83dcb71183582239a",
+      "bytes": 11770,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/89d0519c54566de7320e8e69.webp",
+      "sha256": "89d0519c54566de7320e8e69359b3d4ec2548a5d7a825ed984461427f35c8511",
+      "bytes": 258162,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 700,
+      "height": 1090
+    },
+    {
+      "file": "assets/5a150612d42a22ac23786a6b.webp",
+      "sha256": "5a150612d42a22ac23786a6bf23f3d7eb89a375dccf79eb10c5dba49ec039c19",
+      "bytes": 11540,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/1703cdc32ab84fd6ca31f711.webp",
+      "sha256": "1703cdc32ab84fd6ca31f71150d6adf198222a0d7efd4e6b91eabc00d642f0a5",
+      "bytes": 269022,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 672,
+      "height": 1090
+    },
+    {
+      "file": "assets/29304af91dfec811bf3ea227.webp",
+      "sha256": "29304af91dfec811bf3ea227c6c4cfb8bdfbcb195883488d20b489cc11bcd90b",
+      "bytes": 13148,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/9b9ff6c7f5d0bd81b670b6f6.webp",
+      "sha256": "9b9ff6c7f5d0bd81b670b6f6eb89e4ae960c51580d2fb8970edf4cddc082eb67",
+      "bytes": 276324,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 720,
+      "height": 1090
+    },
+    {
+      "file": "assets/8c5372e9d8196963ff3a57b6.webp",
+      "sha256": "8c5372e9d8196963ff3a57b66908e869f550e0f5921deeb830933d14602d08f4",
+      "bytes": 12462,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/58c55e3beeb49e80eeef25b6.webp",
+      "sha256": "58c55e3beeb49e80eeef25b62942548f6ff34a6361023debbb24fc32ae6098c8",
+      "bytes": 145078,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 547,
+      "height": 1090
+    },
+    {
+      "file": "assets/838aed48a9b93f115d74a3dd.webp",
+      "sha256": "838aed48a9b93f115d74a3ddd58857655ef80d362ea1b85a85a3c034cd66443b",
+      "bytes": 8226,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/e4ccabd325e56f848c888056.webp",
+      "sha256": "e4ccabd325e56f848c888056e7204f89814d7d315a86433e5867d565196b8092",
+      "bytes": 229392,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 633,
+      "height": 1090
+    },
+    {
+      "file": "assets/ed5aac96fc254837e461e903.webp",
+      "sha256": "ed5aac96fc254837e461e9030ea1197684a77eff4edc8b72d317dbdea07089bc",
+      "bytes": 10802,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/f8bb39251549b4abc7e58f19.webp",
+      "sha256": "f8bb39251549b4abc7e58f19e7c6608a4e700687dc40335d6d00491a0894aa53",
+      "bytes": 249174,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 700,
+      "height": 1090
+    },
+    {
+      "file": "assets/2d209dc1a862f43bcb43d807.webp",
+      "sha256": "2d209dc1a862f43bcb43d80760b0ca0f15f89d74004b6cc820eb9fc2e32e9dda",
+      "bytes": 10904,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/258ee8eb5ae293d209ab8d08.webp",
+      "sha256": "258ee8eb5ae293d209ab8d083f6c62074fb243017db1c6dbd7e4ecabe191e379",
+      "bytes": 207020,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 635,
+      "height": 1090
+    },
+    {
+      "file": "assets/6fb5665bc801bb2206972ca2.webp",
+      "sha256": "6fb5665bc801bb2206972ca25438e573d7ae5a9612dd5ec9ce10d8e3d09138fd",
+      "bytes": 10564,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/a96ffde2cd9d8372e7769e5f.webp",
+      "sha256": "a96ffde2cd9d8372e7769e5fe8434587a9865170c33246747d3e6b76a7bdc81e",
+      "bytes": 253588,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 727,
+      "height": 1090
+    },
+    {
+      "file": "assets/26ac62a78a49ee7d7ea66035.webp",
+      "sha256": "26ac62a78a49ee7d7ea660354306cfab26786a8f8f2be29589ad66e11daaab7d",
+      "bytes": 9444,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/a3cc66d6705a65529153878d.webp",
+      "sha256": "a3cc66d6705a65529153878d71f4bbf3cddd447f3309b0a5e5dc8880373b18b9",
+      "bytes": 221334,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 651,
+      "height": 1090
+    },
+    {
+      "file": "assets/90074b9c5478eece05574772.webp",
+      "sha256": "90074b9c5478eece05574772c81c698fc3b8ed872b341b43d99340f1f1c42966",
+      "bytes": 12928,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/66f270606b06c5035513943a.webp",
+      "sha256": "66f270606b06c5035513943a268d7fa40ecc788f0d33e8dcf3c07a113e028053",
+      "bytes": 335792,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 667,
+      "height": 1090
+    },
+    {
+      "file": "assets/97b9a8a156151fe974a01a08.webp",
+      "sha256": "97b9a8a156151fe974a01a08c674482c53877b796dae666091d9a6467650b478",
+      "bytes": 13814,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 132,
+      "height": 132
+    },
+    {
+      "file": "assets/1196aafff7417a9ea65a20cc.webp",
+      "sha256": "1196aafff7417a9ea65a20cca24e1d16855c0dd4b10cd46c330c9038db3140bf",
+      "bytes": 55816,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 198,
+      "height": 613
+    },
+    {
+      "file": "assets/b474f7e0ae9aff19867a4a03.webp",
+      "sha256": "b474f7e0ae9aff19867a4a033734654bb038196bdcce3feba7a607038317d53e",
+      "bytes": 64008,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 197,
+      "height": 613
+    },
+    {
+      "file": "assets/17ddb4e4fe535b659ae7c735.webp",
+      "sha256": "17ddb4e4fe535b659ae7c735d08a3a261a378de23a8006a5740969651bd09ced",
+      "bytes": 45378,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 200,
+      "height": 592
+    },
+    {
+      "file": "assets/d048fa21d780d7ef91caf1dd.webp",
+      "sha256": "d048fa21d780d7ef91caf1dda77808c16873129b6e15970fb407facadb1183d7",
+      "bytes": 59544,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 197,
+      "height": 590
+    },
+    {
+      "file": "assets/6c0929d1c2dbaef94ce1866d.webp",
+      "sha256": "6c0929d1c2dbaef94ce1866d416b4ff952c25175b43b45194561c25b2a5ac0fa",
+      "bytes": 54002,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 204,
+      "height": 585
+    },
+    {
+      "file": "assets/f34ede7c3dee7da825fcde51.webp",
+      "sha256": "f34ede7c3dee7da825fcde51c31b6190daacc4842646251fd6e08a25d6e7555f",
+      "bytes": 54532,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 203,
+      "height": 563
+    },
+    {
+      "file": "assets/33ffabf5ee8cc381faceb9f6.webp",
+      "sha256": "33ffabf5ee8cc381faceb9f667d4a7553e7aa888e9e681930995126df484a6d5",
+      "bytes": 53896,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 200,
+      "height": 577
+    },
+    {
+      "file": "assets/ad0c4b6c990b387ebc1b49b1.webp",
+      "sha256": "ad0c4b6c990b387ebc1b49b18a6652af4685d8b7945188525a647780286c28a9",
+      "bytes": 51514,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 194,
+      "height": 601
+    },
+    {
+      "file": "assets/61b14755c7dbeae52a7f1ec9.webp",
+      "sha256": "61b14755c7dbeae52a7f1ec91939cb03e885d41ab804a1f5f849ec9473c489d4",
+      "bytes": 35126,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 197,
+      "height": 464
+    },
+    {
+      "file": "assets/09f77def15a5b1955b47ccf2.webp",
+      "sha256": "09f77def15a5b1955b47ccf252e9b79eb6c3e8782e30be4ba156718c91cf680d",
+      "bytes": 59088,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 198,
+      "height": 601
+    },
+    {
+      "file": "assets/a51c0d9b580eba30842d9d41.webp",
+      "sha256": "a51c0d9b580eba30842d9d41a765c1d21221111de22b909bdb8437fbf86f6f3f",
+      "bytes": 701714,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1394,
+      "height": 1800
+    },
+    {
+      "file": "assets/24863c69cb41a57f791611a2.webp",
+      "sha256": "24863c69cb41a57f791611a28ced82954997b0f5422372fdffb3d637b4aa5da4",
+      "bytes": 57516,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 387,
+      "height": 500
+    },
+    {
+      "file": "assets/6951c0f224aa13913046d270.webp",
+      "sha256": "6951c0f224aa13913046d27027422ce2b7035c0308a5b6ec191d0afcc1401ef9",
+      "bytes": 592376,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1298,
+      "height": 1800
+    },
+    {
+      "file": "assets/4a7271c992db0d02c24d4405.webp",
+      "sha256": "4a7271c992db0d02c24d4405caf39a262130107a61677725741e82a8868f0991",
+      "bytes": 60902,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 361,
+      "height": 500
+    },
+    {
+      "file": "assets/54f55ebb538208f115a64608.webp",
+      "sha256": "54f55ebb538208f115a6460866f5317036fdf9165736344648e95ab10f5d69be",
+      "bytes": 573140,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1920,
+      "height": 1025
+    },
+    {
+      "file": "assets/135b6efcdc81638a00fa2b3b.webp",
+      "sha256": "135b6efcdc81638a00fa2b3bb4b70b98e518ca1cd1b2a9bc14d0f914ac071f8a",
+      "bytes": 41686,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 256
+    },
+    {
+      "file": "assets/f928a6912755b6a7e4ad67aa.webp",
+      "sha256": "f928a6912755b6a7e4ad67aaed2517651a5246dea112b5ebd298484ef1977e27",
+      "bytes": 334574,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1920,
+      "height": 1041
+    },
+    {
+      "file": "assets/57f6fa114bda983ee233d912.webp",
+      "sha256": "57f6fa114bda983ee233d912e44dd184c6807a31385301a5e07f19e8d1d6d06e",
+      "bytes": 22492,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 260
+    },
+    {
+      "file": "assets/75688222a8324017fc9b1544.webp",
+      "sha256": "75688222a8324017fc9b1544bc3a4a7af8df1cdee2e6f955e0b0c3ab20e0e178",
+      "bytes": 585774,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1920,
+      "height": 1022
+    },
+    {
+      "file": "assets/4785ce7747c544e260427f52.webp",
+      "sha256": "4785ce7747c544e260427f52fc80b6862b986a05010bfc7026c48e13877858d5",
+      "bytes": 40944,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 256
+    },
+    {
+      "file": "assets/d9397b5535f864d6779c0fc3.webp",
+      "sha256": "d9397b5535f864d6779c0fc3a02a6108a45a075fd71f6e3486e3ae050dc1a6db",
+      "bytes": 695526,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1338,
+      "height": 1800
+    },
+    {
+      "file": "assets/f03ca4dd0a79f77b7b5f73de.webp",
+      "sha256": "f03ca4dd0a79f77b7b5f73de4aa180819f02ffb1302fed244dbebfb10a0e384e",
+      "bytes": 46504,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 372,
+      "height": 500
+    },
+    {
+      "file": "assets/78cafc42e399713897b93943.webp",
+      "sha256": "78cafc42e399713897b93943d206d8b6c2c0ea3fe2c012459fcd62466a25453c",
+      "bytes": 559436,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1920,
+      "height": 1057
+    },
+    {
+      "file": "assets/a23be665215df66877bcd312.webp",
+      "sha256": "a23be665215df66877bcd3121db184aa448b6598862ebedfc51733763490c891",
+      "bytes": 39026,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 264
+    },
+    {
+      "file": "assets/f3b2a962833da45f396ec3d4.webp",
+      "sha256": "f3b2a962833da45f396ec3d4b6251d47d6c58107134e9c136edb5b6bf1e5ea9c",
+      "bytes": 512744,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1427,
+      "height": 1800
+    },
+    {
+      "file": "assets/9bd24a4a00719fc23ac19213.webp",
+      "sha256": "9bd24a4a00719fc23ac192130302b47b65752c0623134d1ea8265ee9041ce935",
+      "bytes": 45886,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 396,
+      "height": 500
+    },
+    {
+      "file": "assets/b97ff4068cca1006c5f3b52d.webp",
+      "sha256": "b97ff4068cca1006c5f3b52d62af834d3f26670adb09b5ac95b0c03ca8eae5c6",
+      "bytes": 754804,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1920,
+      "height": 1025
+    },
+    {
+      "file": "assets/97a6867760fdd0024d180073.webp",
+      "sha256": "97a6867760fdd0024d180073a4dd3a646cf1b264a8485ba19783b96a0a54384d",
+      "bytes": 39884,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 256
+    },
+    {
+      "file": "assets/2d1d153b83890a30ee5167b7.webp",
+      "sha256": "2d1d153b83890a30ee5167b72140fc7fce4495acafb02869b2fa763ed9b3730e",
+      "bytes": 627442,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1293,
+      "height": 1800
+    },
+    {
+      "file": "assets/d78bd923947eeafcb87eab6e.webp",
+      "sha256": "d78bd923947eeafcb87eab6ee47882aaad1f3744ba994db74df84552e9f32be6",
+      "bytes": 64080,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 359,
+      "height": 500
+    },
+    {
+      "file": "assets/49de60d37a8915779934dacb.webp",
+      "sha256": "49de60d37a8915779934dacb70c981a97a2a22082e430cb37c2f81f84ade1477",
+      "bytes": 972042,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 2247,
+      "height": 1200
+    },
+    {
+      "file": "assets/65a59881a6fc3175029ba206.webp",
+      "sha256": "65a59881a6fc3175029ba20624ec80d3dcf8043a36a5966c23d1af77512c95ba",
+      "bytes": 40068,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 256
+    },
+    {
+      "file": "assets/4de5f04402c6f53dca444c8b.webp",
+      "sha256": "4de5f04402c6f53dca444c8b7c0cd59ad75c77c565e361fb2d94a1dbf697945a",
+      "bytes": 626890,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1920,
+      "height": 1025
+    },
+    {
+      "file": "assets/8c53e2c5f7bf62414522117e.webp",
+      "sha256": "8c53e2c5f7bf62414522117eee995cda10a3adbae1a194436b5203ff2928420e",
+      "bytes": 42348,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 256
+    },
+    {
+      "file": "assets/04d34d7df7e1b38f2ce2c38f.webp",
+      "sha256": "04d34d7df7e1b38f2ce2c38f8902d554061818fbb78d18f0320843b63adcc9c9",
+      "bytes": 634098,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 2047,
+      "height": 1093
+    },
+    {
+      "file": "assets/ea46d673da8842575ebcc665.webp",
+      "sha256": "ea46d673da8842575ebcc6653c3a4de4dba46380bdc5973ee3d005e0b454a7e3",
+      "bytes": 34564,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 256
+    },
+    {
+      "file": "assets/03503bc556e62f141fed283e.webp",
+      "sha256": "03503bc556e62f141fed283ec44abf80299e825b65f6b649f1d68a3ae2b088f6",
+      "bytes": 465502,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 1920,
+      "height": 1356
+    },
+    {
+      "file": "assets/821f316df62ee9f160588e6f.webp",
+      "sha256": "821f316df62ee9f160588e6f1f6c91070da38122219e4246a786b4f2c234c101",
+      "bytes": 38638,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 339
+    },
+    {
+      "file": "assets/0e99af14425a9aa5f898cf22.webp",
+      "sha256": "0e99af14425a9aa5f898cf22c05395a89e963c2c248ca915e57db97baf13ee1a",
+      "bytes": 508288,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 2247,
+      "height": 1200
+    },
+    {
+      "file": "assets/e03c0e2a895b78c29b06939f.webp",
+      "sha256": "e03c0e2a895b78c29b06939f39da29276f086adea03708c1534cab4e0485b86a",
+      "bytes": 29760,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 256
+    },
+    {
+      "file": "assets/edc2cb8ed2c45c21ce03e010.webp",
+      "sha256": "edc2cb8ed2c45c21ce03e010ab7fa74b0b3ba3ecd0d9236508fe86d2f00f1d93",
+      "bytes": 545064,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 2208,
+      "height": 1156
+    },
+    {
+      "file": "assets/5d26347d2aa16dbe0f7df025.webp",
+      "sha256": "5d26347d2aa16dbe0f7df025e546e8063bdc9d44d2287f97553c2954b999487d",
+      "bytes": 30990,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 251
+    },
+    {
+      "file": "assets/b0b87dd3547b9ae9462eadbf.webp",
+      "sha256": "b0b87dd3547b9ae9462eadbfbe57e483c61a8c1083d179089aa923ff87f0b8b8",
+      "bytes": 934420,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 2536,
+      "height": 1448
+    },
+    {
+      "file": "assets/8a7b10c1da4cffa18d3c3e32.webp",
+      "sha256": "8a7b10c1da4cffa18d3c3e325928717baaea3ffd51621f1427b08b79ee6af2b2",
+      "bytes": 48992,
+      "uses": [
+        "开局界面/OVERLORD-开局预览.html"
+      ],
+      "width": 480,
+      "height": 274
+    },
+    {
+      "file": "assets/728c4719dcad61cf29836537.webp",
+      "sha256": "728c4719dcad61cf298365371b8c447685ea95d9c67fac90a65686eb729d2a73",
+      "bytes": 4324,
+      "uses": [
+        "状态栏/OVERLORD-状态栏预览.html",
+        "正文美化/OVERLORD-正文美化预览.html",
+        "正文头像/安兹·乌尔·恭",
+        "正文头像/飞鼠",
+        "正文头像/铃木悟",
+        "正文头像/安兹",
+        "正文头像/飞飞"
+      ],
+      "width": 105,
+      "height": 106
+    },
+    {
+      "file": "assets/9683d7b7c9dbbc54a3935b47.webp",
+      "sha256": "9683d7b7c9dbbc54a3935b47d7caac589ce36b883569412a66c6df29390ae5e8",
+      "bytes": 3664,
+      "uses": [
+        "状态栏/OVERLORD-状态栏预览.html",
+        "正文美化/OVERLORD-正文美化预览.html",
+        "正文头像/雅儿贝德"
+      ],
+      "width": 108,
+      "height": 108
+    },
+    {
+      "file": "assets/a441a5b11e5e8d4b7af5681a.webp",
+      "sha256": "a441a5b11e5e8d4b7af5681a320e1d9998e7e73aed275ffb93bec0021e270e57",
+      "bytes": 3532,
+      "uses": [
+        "状态栏/OVERLORD-状态栏预览.html",
+        "正文头像/亚乌拉·贝拉·菲欧拉",
+        "正文头像/亚乌菈"
+      ],
+      "width": 108,
+      "height": 108
+    },
+    {
+      "file": "assets/5d6581e035d7356c1130c15a.webp",
+      "sha256": "5d6581e035d7356c1130c15ae8e4cdc67d8c4c0c143aa9797e29aa7d8330041e",
+      "bytes": 2898,
+      "uses": [
+        "状态栏/OVERLORD-状态栏预览.html",
+        "正文头像/迪米乌哥斯",
+        "正文头像/亚达巴沃"
+      ],
+      "width": 108,
+      "height": 108
+    },
+    {
+      "file": "assets/6e9e7b9213da608f1a6a2df1.webp",
+      "sha256": "6e9e7b9213da608f1a6a2df19e3bb352eb78af5ce07b9fb6b0358b34a624c8d9",
+      "bytes": 2716,
+      "uses": [
+        "状态栏/OVERLORD-状态栏预览.html",
+        "正文头像/夏提雅·布拉德弗伦",
+        "正文头像/夏提雅"
+      ],
+      "width": 108,
+      "height": 108
+    },
+    {
+      "file": "assets/422c31d65dfaf0430fce4b1c.webp",
+      "sha256": "422c31d65dfaf0430fce4b1cf24aed2889f489ede7526a21ebb279a490fb01dc",
+      "bytes": 369320,
+      "uses": [
+        "状态栏/OVERLORD-状态栏预览.html"
+      ],
+      "width": 1000,
+      "height": 1873
+    },
+    {
+      "file": "assets/6684112f7cc69de24f7f90c8.webp",
+      "sha256": "6684112f7cc69de24f7f90c81deedba7b5006fc546a5f3e9947b1028212695cd",
+      "bytes": 93034,
+      "uses": [
+        "状态栏/OVERLORD-状态栏预览.html"
+      ],
+      "width": 730,
+      "height": 941
+    },
+    {
+      "file": "assets/00edd60b1a60a2f90ba20448.webp",
+      "sha256": "00edd60b1a60a2f90ba20448f283afee588f67f7f969b7f33e724ba50219faa1",
+      "bytes": 37194,
+      "uses": [
+        "状态栏/OVERLORD-状态栏预览.html"
+      ],
+      "width": 760,
+      "height": 412
+    },
+    {
+      "file": "assets/7ea174141f70a75dca763859.webp",
+      "sha256": "7ea174141f70a75dca7638592832d8284879a9102136f4d0dd459e5423ea428e",
+      "bytes": 5944,
+      "uses": [
+        "正文头像/马雷",
+        "正文头像/马雷·贝罗·菲欧雷"
+      ],
+      "width": 88,
+      "height": 88
+    },
+    {
+      "file": "assets/7900e53da52ce22f3808a534.webp",
+      "sha256": "7900e53da52ce22f3808a534c06468398d28f6ee229ad5cd61712eaccb945d03",
+      "bytes": 4388,
+      "uses": [
+        "正文头像/萨留斯",
+        "正文头像/萨留斯·夏夏"
+      ],
+      "width": 88,
+      "height": 88
+    },
+    {
+      "file": "assets/c4c744cb611ae3b77528fedf.webp",
+      "sha256": "c4c744cb611ae3b77528fedf3bbb8b79de0ba28a53fc88c21857c5b3ddb9e175",
+      "bytes": 3488,
+      "uses": [
+        "正文头像/蔻儿修",
+        "正文头像/蔻儿修·露露"
+      ],
+      "width": 88,
+      "height": 88
+    },
+    {
+      "file": "assets/ad928c6107e37518183a92d9.webp",
+      "sha256": "ad928c6107e37518183a92d933a78df17871dfe5bbbedf1f0552f14c8959993f",
+      "bytes": 4552,
+      "uses": [
+        "正文头像/克莱姆"
+      ],
+      "width": 88,
+      "height": 88
+    },
+    {
+      "file": "assets/6de6079b0efd64f400404a9d.webp",
+      "sha256": "6de6079b0efd64f400404a9d894c7fa22e89103a88c4a6b80c393d76a712afc2",
+      "bytes": 3830,
+      "uses": [
+        "正文头像/布莱恩",
+        "正文头像/布莱恩·安格劳斯"
+      ],
+      "width": 88,
+      "height": 88
+    },
+    {
+      "file": "assets/69872019df9149663c590eb8.webp",
+      "sha256": "69872019df9149663c590eb81096e9e213e4e553affb38cab9593f30132d0b29",
+      "bytes": 2356,
+      "uses": [
+        "正文头像/贡多",
+        "正文头像/贡多·费尔比德"
+      ],
+      "width": 88,
+      "height": 88
+    },
+    {
+      "file": "assets/7a00b3c6ca10fca3be69e909.webp",
+      "sha256": "7a00b3c6ca10fca3be69e909d83c4570568b1ede6d6ca832940c0c5f7561c1cd",
+      "bytes": 4278,
+      "uses": [
+        "正文头像/葛杰夫",
+        "正文头像/葛杰夫·史托罗诺夫"
+      ],
+      "width": 88,
+      "height": 88
+    },
+    {
+      "file": "assets/cover.jpg",
+      "sha256": "b3c69f9db4213965314a219bdbc9b736500b7308ad4fd3551bca0eb97574e191",
+      "bytes": 278692,
+      "width": 1000,
+      "height": 1421,
+      "uses": [
+        "角色卡封面"
+      ]
+    }
+  ],
+  "faces": {
+    "安兹·乌尔·恭": "assets/728c4719dcad61cf29836537.webp",
+    "雅儿贝德": "assets/9683d7b7c9dbbc54a3935b47.webp",
+    "亚乌拉·贝拉·菲欧拉": "assets/a441a5b11e5e8d4b7af5681a.webp",
+    "迪米乌哥斯": "assets/5d6581e035d7356c1130c15a.webp",
+    "夏提雅·布拉德弗伦": "assets/6e9e7b9213da608f1a6a2df1.webp",
+    "飞鼠": "assets/728c4719dcad61cf29836537.webp",
+    "亚乌菈": "assets/a441a5b11e5e8d4b7af5681a.webp",
+    "马雷": "assets/7ea174141f70a75dca763859.webp",
+    "萨留斯": "assets/7900e53da52ce22f3808a534.webp",
+    "蔻儿修": "assets/c4c744cb611ae3b77528fedf.webp",
+    "克莱姆": "assets/ad928c6107e37518183a92d9.webp",
+    "布莱恩": "assets/6de6079b0efd64f400404a9d.webp",
+    "贡多": "assets/69872019df9149663c590eb8.webp",
+    "葛杰夫": "assets/7a00b3c6ca10fca3be69e909.webp",
+    "铃木悟": "assets/728c4719dcad61cf29836537.webp",
+    "马雷·贝罗·菲欧雷": "assets/7ea174141f70a75dca763859.webp",
+    "夏提雅": "assets/6e9e7b9213da608f1a6a2df1.webp",
+    "葛杰夫·史托罗诺夫": "assets/7a00b3c6ca10fca3be69e909.webp",
+    "安兹": "assets/728c4719dcad61cf29836537.webp",
+    "飞飞": "assets/728c4719dcad61cf29836537.webp",
+    "布莱恩·安格劳斯": "assets/6de6079b0efd64f400404a9d.webp",
+    "萨留斯·夏夏": "assets/7900e53da52ce22f3808a534.webp",
+    "蔻儿修·露露": "assets/c4c744cb611ae3b77528fedf.webp",
+    "亚达巴沃": "assets/5d6581e035d7356c1130c15a.webp",
+    "贡多·费尔比德": "assets/69872019df9149663c590eb8.webp"
+  },
+  "cover": "assets/cover.jpg"
+}
