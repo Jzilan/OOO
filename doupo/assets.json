@@ -315,10 +315,10 @@
   },
   "cover": "card-cover.png",
   "integrity": {
-    "skins/stone.html": "sha256-p14u8VdQFzf71eXHVjg1f4ctVFrwM7sPL0lMkt6yGOE=",
-    "skins/fire.html": "sha256-ARcuu5D2jKhJrMRSpAogxJ8PAowRtmvlZrRDU5I+b7E=",
-    "skins/sky.html": "sha256-K6aIPNrJlsMfwg9YDEIo7vOKix4iApcDfZU6CgR6enk=",
-    "skins/opening.html": "sha256-jpsA0PxsIp2JQf99S0MpeN/CBHp/nxUQxbaLe3lUf48=",
-    "skins/prose.json": "sha256-Gksr3x71hHeuX45ySjYXvZghlGKTL6SFi3EPQ7rBYx0="
+    "skins/stone.html": "sha256-+BHtdnGFFlkTLe9Z7vUTG4kye1o0GovDOVOSFtHQ/bI=",
+    "skins/fire.html": "sha256-LFLWZ40+tBC+V2MbRtlklpU13d6nkJioHxFw07ts+BQ=",
+    "skins/sky.html": "sha256-FgVDdTQEwkSpYmQtJawbYfQ4b1clhDDMtEdVaHLtEmU=",
+    "skins/opening.html": "sha256-37L7T4Rlwdkk+BhkbZwQ9H08POFXtfyxLsYyA6pkXv0=",
+    "skins/prose.json": "sha256-cQHp8zdtz8Owije6DdxO6QBuvWRe1eXO75IQ04DAfw4="
   }
 }

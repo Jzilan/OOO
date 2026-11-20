@@ -328,19 +328,19 @@
   const frame = document.querySelector('#preview');
   const draftKey = host.draftKey || 'doupo-opening-draft-v2';
   const digits = [...'一二三四五六七八九'];
-  const majorRealms = ['斗之气','斗者','斗师','大斗师','斗灵','斗王','斗皇','斗宗','斗尊','斗尊巅峰','半圣','斗圣','斗帝'];
+  const majorRealms = ['斗之力','斗者','斗师','大斗师','斗灵','斗王','斗皇','斗宗','斗尊','斗尊巅峰','半圣','斗圣','斗帝'];
   const cultivations = ['未初始化',...majorRealms.flatMap(realm=>{
     if(realm==='斗帝')return [realm];
     if(realm==='半圣')return [realm,...['初级','中级','高级'].map(level=>realm+'·'+level)];
     if(realm==='斗尊巅峰')return [realm,...digits.map(n=>realm+'·'+n+'转')];
-    return digits.map(n=>realm+'·'+n+(realm==='斗之气'?'段':'星'));
+    return digits.map(n=>realm+'·'+n+(realm==='斗之力'?'段':'星'));
   })];
   const attributes = ['火','木','水','风','雷','土','冰','金','光','暗','火中带木','无'];
   const ranks = ['非炼药师','学徒','一品','二品','三品','四品','五品','六品','七品','八品','九品宝丹宗师','九品玄丹宗师','九品金丹宗师','帝品'];
   const stepTitles={route:'选篇',point:'定开局',identity:'立身份',cultivation:'定修为',extras:'补细节',review:'确认入局'};
   const emptyCharacter=()=>({
     kind:'original',traveler:null,canon:'',name:'',sex:'未定',age:'',faction:'',identity:'',species:'',form:'兽身',tier:'一阶',
-    realm:'斗之气·一段',attribute:'无',canonAttribute:null,alchemy:'非炼药师',power:'',skill:'',
+    realm:'斗之力·一段',attribute:'无',canonAttribute:null,alchemy:'非炼药师',power:'',skill:'',
     appearance:'',background:'',item:'',intent:'',view:'second'
   });
   for(const sample of openingSamples){
@@ -367,6 +367,7 @@
     if(saved && routes[saved.route]?.acts[saved.act]?.events[saved.event]){
       state={...state,...saved,step:'route',character:{...emptyCharacter(),...saved.character}};
       const c=state.character;
+      if(typeof c.realm==='string')c.realm=c.realm.replace(/^斗之气(?=·)/u,'斗之力');
       if(c.traveler==null && c.kind!=='canon' && c.origin==='穿越者')c.traveler='是';
       delete c.origin;
     }
@@ -475,7 +476,7 @@
   }
   function canonOptions(event) {
     const extra = {
-      '萧薰儿':{sex:'女',faction:'萧家',identity:'萧家子弟',realm:event.date.startsWith('炎历15年')?'斗之气·九段':'未初始化'},
+      '萧薰儿':{sex:'女',faction:'萧家',identity:'萧家子弟',realm:event.date.startsWith('炎历15年')?'斗之力·九段':'未初始化'},
       '萧战':{sex:'男',faction:'萧家',identity:'萧家族长',realm:'大斗师·五星'},
       '苏千':{sex:'男',faction:'迦南学院',identity:'内院大长老',realm:'未初始化'},
       '叶重':{sex:'男',faction:'叶家',identity:'叶家长老',realm:'未初始化'}
@@ -630,7 +631,7 @@
     const {route,act,event}=current(), char=player(), c=state.character;
     if(!char.name){go('identity');root.querySelector('input[name=name]')?.reportValidity();return;}
     const buildSkill=(name,field)=>name?.trim()?{[name.trim()]:{等阶:'未定',属性:'无',境界:'未入门',[field]:0,效果:'待核实'}}:{};
-    const unformed=char.realm.startsWith('斗之气')||(char.realm==='未初始化'&&c.kind!=='beast');
+    const unformed=char.realm.startsWith('斗之力')||(char.realm==='未初始化'&&c.kind!=='beast');
     const realm={境界:char.realm,境界进度:0,斗气属性:unformed?'无':char.attribute};
     const baseCultivation={境界:realm,功法:buildSkill(char.power,'进度'),斗技:buildSkill(char.skill,'熟练度'),
       炼药师品级:char.alchemy,灵魂境界:{境界:'未初始化',阶段:'未定'}};

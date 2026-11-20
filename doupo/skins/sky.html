@@ -532,7 +532,7 @@ body.large .prose-reader,.large .prose-bubble{font-size:18px}
 [data-reader=sky] .prose-scene-art{grid-row:1/4;grid-column:2;height:50px;max-width:220px;justify-self:end}
 [data-reader=sky] .prose-scene-line h2{margin:0 0 7px}
 
-[data-reader=stone] .dk-realm[title^="斗之气"] .dk-realm-g{white-space:nowrap;font-size:23px}
+[data-reader=stone] .dk-realm[title^="斗之力"] .dk-realm-g{white-space:nowrap;font-size:23px}
 html:not([data-motion=full]) .prose-fire-orbit,
 html:not([data-motion=full]) .prose-crack-halo,
 html:not([data-motion=full]) .prose-skill[data-arrival] *{animation:none}
@@ -706,7 +706,7 @@ window.DP_STAT=window.frameElement.dpView.data;
 // 三份样稿共用的小工具（正式版会并进脚本里）
 window.DP = (() => {
   const D = ['一', '二', '三', '四', '五', '六', '七', '八', '九'];
-  const MAJORS = ['斗之气', '斗者', '斗师', '大斗师', '斗灵', '斗王', '斗皇', '斗宗', '斗尊', '半圣', '斗圣', '斗帝'];
+  const MAJORS = ['斗之力', '斗者', '斗师', '大斗师', '斗灵', '斗王', '斗皇', '斗宗', '斗尊', '半圣', '斗圣', '斗帝'];
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   function realm(s) {
     if (!s || s === '未初始化') return { ok: false, major: '未测', minor: '', idx: -1, stars: 0, unit: '' };
