@@ -1,0 +1,764 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{height:100%;margin:0}#opening {
+  --op-bg:#101718;--op-panel:#172021;--op-muted:#b1b8ad;--op-text:#f0e9d9;--op-gold:#e4bc7d;
+  --op-edge:#42514d;--op-rule:#313e3a;--op-dark:#121b1b;
+  --op-serif:"Songti SC","SimSun",serif;--op-display:"STKaiti","KaiTi","Songti SC",serif;--op-sans:"Microsoft YaHei",sans-serif;
+  box-sizing:border-box;height:100%;overflow:auto;overscroll-behavior:contain;color:var(--op-text);background:
+    radial-gradient(ellipse at 55% -30%,#29413d 0%,transparent 65%),var(--op-bg);
+  font:15px/1.65 var(--op-sans);
+}
+#opening *,#opening *::before,#opening *::after{box-sizing:inherit}
+#opening[hidden],#preview[hidden]{display:none}
+#opening :is(h1,h2,h3,p,dl,dd){margin:0}
+#opening button,#opening input,#opening select,#opening textarea{font:inherit}
+#opening button{cursor:pointer;color:inherit}
+#opening button:disabled{cursor:default}
+#opening :is(button,input,select,textarea,summary):focus-visible{outline:2px solid var(--op-gold);outline-offset:3px}
+#opening h1:focus{outline:none}
+.op-shell{max-width:1240px;min-height:100%;margin:auto;display:flex;flex-direction:column;padding-inline:clamp(18px,4vw,56px)}
+.op-header{display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid var(--op-rule);padding:16px 0}
+.op-brand{display:flex;align-items:center;gap:12px;flex:none}
+.op-brand>i{display:grid;place-items:center;width:36px;height:39px;font:500 26px/1 var(--op-display);color:#e8c18a;border:1px solid #9a7957;box-shadow:inset 0 0 0 3px #342e22;transform:rotate(-3deg)}
+.op-brand b{display:block;color:#efe9d7;letter-spacing:.13em;font:650 23px/1.05 var(--op-display)}
+.op-brand small{display:block;color:var(--op-muted);letter-spacing:.23em;font:10px/1.6 var(--op-sans);margin-top:4px}
+.op-progress{display:flex;gap:4px;justify-content:end;flex-wrap:wrap}
+.op-progress button{display:flex;align-items:center;gap:6px;color:var(--op-muted)!important;background:none;border:1px solid transparent;padding:5px 8px;white-space:nowrap;font-size:12px!important}
+.op-progress i{font:11px/1 Consolas,monospace;font-style:normal;opacity:.8}
+.op-progress button[aria-current]{border-color:#80704d;background:#40382a60;color:#efd2a2!important}
+.op-progress button:disabled{opacity:.61}
+.op-content{flex:1;padding:23px 0 22px;min-height:0}
+#opening[data-step=route] {isolation:isolate; position:relative; background:#131a1b}
+#opening[data-step=route]::before {
+  content:''; position:fixed; inset:0; z-index:-2;
+  background:#171c22 var(--op-cover,none) center 53% / cover no-repeat;
+}
+#opening[data-step=route]::after {
+  content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:linear-gradient(90deg,rgba(9,15,18,.94),rgba(12,18,22,.75) 25%,rgba(13,17,22,.26) 51%,transparent 72%),
+    linear-gradient(0deg,rgba(8,11,14,.99),rgba(8,11,14,.72) 16%,transparent 46%),
+    linear-gradient(180deg,rgba(8,12,16,.55),transparent 24%);
+}
+#opening[data-step=route] .op-shell {
+  max-width:none; min-height:100%; padding:0; isolation:auto;
+}
+#opening[data-step=route] .op-header {
+  align-items:center; flex-direction:row; padding:clamp(12px,2.1vw,28px) clamp(15px,4vw,62px); border-bottom:0;
+}
+#opening .op-fullscreen {
+  border:1px solid #b4b4a75e; background:#10171682; color:#e6d5b8;
+  font-size:12px; padding:7px 13px;
+}
+#opening[data-step=route] .op-content {
+  display:grid; align-items:center; padding:10px clamp(22px,6vw,110px) 28px;
+}
+.op-route-copy {max-width:555px; overflow-wrap:anywhere}
+.op-eyebrow {display:flex;align-items:center;gap:10px;color:#e5bf8b;font:12px/1.5 var(--op-sans);letter-spacing:.2em}
+.op-eyebrow i,.op-context i {display:inline-block;width:5px;height:5px;background:currentColor;transform:rotate(45deg);flex:none}
+#opening .op-route h1 {
+  font:550 clamp(43px,7.2vw,104px)/1.08 var(--op-display); margin:12px 0 8px; letter-spacing:.055em;
+  color:#fff2d7; text-shadow:0 3px 30px #020504aa;
+}
+#opening .op-arc-title {font:500 14px var(--op-serif);letter-spacing:.23em;color:#f0d8b0;margin:0 0 21px}
+#opening .op-hook {
+  font:clamp(16px,1.55vw,21px)/1.8 var(--op-serif); color:#fff5e4;
+  max-width:29ch; border-left:2px solid #dcba85; padding-left:15px;
+}
+.op-route .op-chips {margin:15px 0}
+.op-route .op-chip {border-color:#c1ad8680;color:#f4ddaf;background:#111a1b90;padding:3px 8px}
+#opening .op-enter {padding:10px 14px; width:max-content; border-radius:2px}
+.op-synopsis {margin-top:12px;color:#dfd4bd;font-size:12px;max-width:44ch}
+.op-synopsis summary{cursor:pointer;width:max-content;padding-block:4px}
+#opening .op-synopsis p {margin-top:6px;font-size:13px;color:#f6e8d2}
+.op-route-choice {margin-top:auto; padding:10px clamp(16px,3.3vw,54px) 15px}
+.op-rail-heading {display:flex;justify-content:space-between;align-items:center;padding:0 5px 5px;color:#eadfc9}
+.op-rail-heading b {font:600 15px/1.3 var(--op-display);letter-spacing:.15em}
+.op-rail-heading span {font:12px Consolas,monospace;color:#dfbe8e}
+.op-rail {display:grid;grid-template-columns:28px minmax(0,1fr) 28px;gap:6px;align-items:center}
+.op-rail-arrow {height:33px;padding:0;background:#121819ad;border:1px solid #bead8380;border-radius:50%;font-size:22px!important;line-height:1!important}
+.op-rail-arrow:disabled {opacity:.33}
+.op-route-list {
+  display:flex; gap:10px; overflow:auto hidden; padding:5px 3px 24px; scroll-padding-inline:3px;
+  scrollbar-width:thin;scrollbar-color:#b89968 #141c1c;position:relative;
+}
+.op-route-tile {
+  position:relative; flex:0 0 clamp(126px,12vw,192px); height:85px; padding:0;
+  text-align:left;background:#222c2a;border:1px solid #acaba354;
+}
+.op-route-tile img,.op-route-tile::before {
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;
+}
+.op-route-tile::before {content:'';z-index:1;background:linear-gradient(0deg,#0a0e10f7 0%,#10171982 61%,transparent)}
+.op-route-tile>span {display:grid;position:absolute;bottom:5px;left:8px;right:5px;z-index:2;min-width:0}
+.op-route-tile small {font:10px/1.4 var(--op-sans);color:#e4c798}
+.op-route-tile strong {font:600 15px/1.25 var(--op-display);color:#fff3dc;overflow-wrap:anywhere}
+.op-route-tile i {
+  position:absolute;left:50%;bottom:-15px;width:8px;height:8px;background:#a49678;border:1px solid #efd6a9;
+  transform:translateX(-50%) rotate(45deg);z-index:2;
+}
+.op-route-tile::after {content:'';position:absolute;left:-1px;width:calc(100% + 12px);bottom:-11px;border-bottom:1px solid #a79576a6;pointer-events:none}
+.op-route-tile:last-child::after {width:100%}
+.op-route-tile[aria-pressed=true] {border-color:#f6d592;outline:1px solid #f9d7a0;box-shadow:0 0 14px #eacc8668}
+.op-route-tile[aria-pressed=true] i {background:#ffde9f;box-shadow:0 0 10px #e4bd7f}
+.op-route-tile:hover,.op-event:hover,.op-mode button:hover,.op-canon button:hover{border-color:var(--op-gold)}
+.op-chips{display:flex;gap:6px;flex-wrap:wrap}
+.op-chip{padding:2px 8px;border:1px solid #71634f;color:#eddfc8;font-size:12px}
+#opening .op-next{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:10px 19px;min-width:137px;border:1px solid #f0d8a0;color:#231c14;background:linear-gradient(115deg,#f5deac,#d5ad70);box-shadow:inset 0 0 0 2px #e1c18a,inset 0 0 0 3px #9b773d;font-weight:650}
+#opening .op-next:hover{background:linear-gradient(115deg,#ffeac2,#e2be80)}
+.op-next span{font-size:19px;line-height:1}
+#opening:not([data-step=route]){
+  --ink:#151e20;--jade:#253c3b;--bronze:#b39a6c;--paper:#efe3c9;--paper-ink:#302c23;--paper-dim:#655d50;
+  position:relative;isolation:isolate;background:#111b1b
+}
+#opening:not([data-step=route])::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(90deg,#101a1cee,#102124e8 62%,#101b1de0),var(--op-cover) center / cover
+}
+#opening:not([data-step=route]) .op-shell{max-width:1350px;padding-inline:clamp(18px,4.3vw,72px)}
+#opening:not([data-step=route]) .op-header{padding:18px 0;border-image:linear-gradient(90deg,#e2c08877,#87938a35 45%,#bc986855) 1}
+.op-progress{column-gap:6px}
+.op-progress button{padding:6px 9px!important}
+.op-progress button[aria-current]{border-color:#b79c71;background:#a9824433}
+.op-heading{padding:6px 0 17px}
+#opening .op-heading p,.op-eyebrow{color:#dabb87;font:11px/1.6 var(--op-sans);letter-spacing:.16em}
+#opening .op-heading h1{font:600 clamp(30px,3.75vw,58px)/1.25 var(--op-display);letter-spacing:.07em;color:#faf0da}
+#opening:not([data-step=route]) .op-content{padding:clamp(16px,2.6vw,38px) 0 25px}
+.op-footer{position:sticky;z-index:3;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:auto;padding:13px 0 max(13px,env(safe-area-inset-bottom));border-top:1px solid #8e81605e;background:#142021f7;box-shadow:0 0 0 100vmax #142021f7;clip-path:inset(0 -100vmax)}
+.op-context{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:#c3c4b8}
+.op-context i{margin:0 7px;vertical-align:2px;color:var(--bronze)}
+.op-actions{display:flex;flex:none;align-items:stretch;gap:10px}
+.op-back{padding:9px 16px;border:1px solid #756f5b;background:#1c2a2b}
+.op-back:hover,.op-back:focus-visible{color:var(--op-gold)}
+.op-emblem{display:block;width:44px;height:44px;flex:none}
+.op-point-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:20px}
+.op-point-head .op-heading{padding:0}
+.op-act-switch{display:flex;align-items:stretch;max-width:100%;border:1px solid #9b865b99;background:#182b2bd9}
+.op-act-switch button{width:36px;padding:0;border:0;background:transparent;color:#ead1a2!important;font:24px/1 Georgia,serif!important}
+.op-act-switch button:disabled{opacity:.27}
+.op-act-switch label{display:grid;padding:6px 8px;min-width:0;border-inline:1px solid #8c80584d}
+.op-act-switch label>span{font-size:10px;letter-spacing:.15em;color:#d4b986}
+.op-act-switch select{width:100%;max-width:min(42vw,390px);min-width:0;padding-right:6px;border:0;background:#1b2c2c;color:#f2ead9;color-scheme:dark;font-size:14px!important}
+.op-point-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(15px,2vw,30px);align-items:start}
+.op-index,.op-point-detail,.op-frontispiece,.op-scene-review{border:1px solid #a9956b85;background:#182828;box-shadow:0 9px 30px #06101138;min-width:0}
+.op-section-head{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:1px solid #af97656b;background:linear-gradient(102deg,#35423c,#1c3030)}
+.op-section-head h2,.op-review-card header h2{font:600 19px var(--op-display);letter-spacing:.13em;color:#f2d9a6}
+.op-section-head>span{font-size:12px;color:#d3c1a1}
+.op-timeline{position:relative;max-height:clamp(320px,calc(100dvh - 300px),760px);overflow:auto;scrollbar-width:thin;scrollbar-color:#8f805f #1c2c2b;scroll-padding:8px;padding:0 17px 12px;background:linear-gradient(110deg,#203130,#172728)}
+.op-dateline{display:flex;align-items:center;gap:10px;padding:14px 2px 5px;font:11px/1.5 var(--op-sans);letter-spacing:.095em;color:#cebc98}
+.op-dateline:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,#a99a6f65,transparent)}
+.op-event{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;width:100%;text-align:left;border:1px solid transparent;border-bottom-color:#89948635;background:transparent;padding:14px 10px 13px;color:#efe9d6}
+.op-event:hover{background:#cbb17b0d}
+.op-event-num{display:grid;place-items:center;align-self:start;margin-top:3px;height:25px;border:1px solid #9d936d80;font:italic 14px/1 Georgia,serif;color:#dfc797}
+.op-event-copy{display:grid;gap:6px;overflow-wrap:anywhere}
+.op-event-copy strong{font:600 clamp(17px,1.55vw,23px)/1.27 var(--op-display);letter-spacing:.035em}
+.op-event-summary{font:14px/1.72 var(--op-serif);color:#c9cec2}
+.op-event[aria-pressed=true]{background:linear-gradient(105deg,#444139,#313a32 72%,#263534);border:1px solid #b5996999;box-shadow:inset 3px 0 #d0ac73}
+.op-event[aria-pressed=true] .op-event-num{color:#fff4dc;background:#854437;border-color:#ce9e7f}
+.op-event[aria-pressed=true] strong{color:#ffe6b2}
+.op-point-detail,.op-frontispiece,.op-scene-review{overflow:hidden}
+.op-location-art,.op-plate-art{position:relative;isolation:isolate;background:var(--op-cover) 62% 47% / cover no-repeat}
+.op-location-art{height:clamp(132px,18vh,224px)}
+.op-location-art:before,.op-plate-art:before{content:"";pointer-events:none;position:absolute;inset:7px;border:1px solid #f2d5a370;outline:1px solid #141c1a66;outline-offset:2px}
+.op-location-art:after,.op-plate-art:after{content:"";pointer-events:none;position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#16272482,transparent 42%)}
+.op-image-seal{position:absolute;top:17px;right:18px;padding:6px 4px;writing-mode:vertical-rl;letter-spacing:.16em;font:600 14px/1 var(--op-display);color:#f4d8af;background:#813f32eb;border:3px double #d3a382;box-shadow:0 2px 6px #211c1a3d;transform:rotate(2deg)}
+.op-point-card,.op-review-body{position:relative;padding:20px clamp(16px,2.2vw,32px) 23px;border-top:2px solid #a78a55}
+.op-point-card .op-eyebrow{letter-spacing:.08em}
+#opening .op-point-card h2,#opening .op-review-card h3{font:600 clamp(24px,2.65vw,38px)/1.28 var(--op-display);letter-spacing:.035em;margin:8px 0 10px}
+.op-lede,.op-review-card p{font:15px/1.75 var(--op-serif);color:#d4d7c9}
+.op-point-card dl{margin-top:15px!important}
+.op-point-card dl>div{display:grid;grid-template-columns:38px 1fr;gap:12px;padding:8px 0;border-top:1px solid #7585735c}
+.op-point-card dt,.op-review-card dt{font:12px/1.8 var(--op-sans);color:#d4bd91}
+.op-point-card dd,.op-review-card dd{font:14px/1.68 var(--op-serif);overflow-wrap:anywhere}
+.op-dossier{display:grid;grid-template-columns:minmax(215px,.59fr) minmax(0,1.41fr);gap:clamp(14px,2.4vw,32px);align-items:stretch}
+.op-frontispiece{display:flex;flex-direction:column;position:relative;isolation:isolate;min-height:395px;background:#192c2c}
+.op-plate-art{flex:1;min-height:215px;background-position:68% 47%}
+.op-plate-copy{position:relative;padding:20px 18px 24px;border-top:3px double #9f885e;background:linear-gradient(125deg,#2c403a,#152929)}
+.op-plate-copy:after{content:"";position:absolute;left:15px;right:15px;bottom:8px;border-bottom:1px solid #a38f6340}
+.op-plate-copy .op-eyebrow{letter-spacing:.035em;font-size:11px}
+#opening .op-plate-copy h2{font:500 clamp(21px,2.2vw,34px)/1.35 var(--op-display);color:#fff0cf;margin:9px 0 5px}
+.op-plate-copy time{font-size:12px;color:#cbbd9e}
+.op-sheet,.op-person-review{--edge:#b9a684;position:relative;isolation:isolate;min-width:0;padding:clamp(19px,2.65vw,37px);color:var(--paper-ink);
+  border:1px solid #e5c68e;background-color:var(--paper);background-image:repeating-linear-gradient(2deg,#97703c07 0 1px,transparent 1px 4px),radial-gradient(ellipse at 100% 0,#cfb88d78,transparent 65%),linear-gradient(110deg,#f4ecd9,#ede0c5);
+  box-shadow:inset 0 0 0 4px #e5d3af,inset 0 0 0 5px #9374416e,0 8px 32px #060e122e}
+.op-sheet .op-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 0 9px;border-bottom:3px double #a48d64}
+#opening .op-sheet .op-heading p{color:#894b33}
+#opening .op-sheet .op-heading h1{color:#302e25;font-size:clamp(28px,3.1vw,45px)}
+.op-sheet .op-heading>.op-emblem{width:53px;height:53px;color:#8a6e43}
+#opening .op-heading-note{margin:10px 0 17px;font:14px/1.6 var(--op-serif);color:var(--paper-dim)}
+.op-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 20px}
+.op-wide{grid-column:1/-1}
+.op-mode{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.op-mode button{display:flex;align-items:center;justify-content:center;gap:5px;min-width:0;padding:8px 4px;color:#514d3f!important;border:1px solid #af9d79;background:#fff8e75e}
+.op-mode .op-emblem{width:29px;height:29px}
+.op-mode b{font:600 16px/1.35 var(--op-display)}
+.op-mode button[aria-pressed=true],.op-canon button[aria-pressed=true]{background:#2a403d;color:#f1dbb1!important;border-color:#435451;box-shadow:inset 0 0 0 2px #263a38,inset 0 0 0 3px #c8b27a87}
+.op-mode button:disabled{opacity:.45}
+.op-canon{display:flex;flex-wrap:wrap;gap:8px}
+.op-canon button{border:1px solid #b8a583;padding:7px 14px;background:#fff8e96e;color:#393c31!important}
+.op-info{display:flex;gap:12px;align-items:center;font-size:13px;color:#625747}
+.op-field{display:grid;align-self:start;gap:5px;min-width:0}
+.op-affinity{min-width:0;margin:0;padding:9px 12px 11px;border:1px solid #ac9874;background:#fff8e741}
+.op-affinity legend{padding:0 7px;font:650 17px/1.4 var(--op-display);color:#57442e}
+.op-affinities{display:flex;flex-wrap:wrap;gap:5px}
+.op-affinities button{min-width:40px;min-height:32px;border:1px solid #af9d79;background:#f5edda;color:#42392e!important;font:600 15px/1.3 var(--op-display)!important}
+.op-affinities button[aria-pressed=true]{background:#2c4340;border-color:#354d45;color:#ffe8b8!important;box-shadow:inset 0 0 0 2px #2c4340,inset 0 0 0 3px #a58e60}
+.op-affinity-input{display:flex;gap:10px;align-items:center;margin-top:9px;color:#665641;font-size:12px}
+.op-affinity-input input{min-width:0;flex:1;padding:5px 8px;border:1px solid #b8a783;background:#fffaf0b0;color:#302f27}
+.op-field>span,.op-traveler legend{font-size:13px;font-weight:600;color:#544836}
+.op-field sup{color:#8c4638;font-size:10px;margin-left:5px;vertical-align:baseline;font-weight:400}
+.op-field :is(input,textarea,select),.op-readonly{width:100%;min-width:0;padding:8px 10px;border:1px solid #b8a783;border-bottom-color:#97825b;border-radius:1px;background:#fffaf0b0;color:#302f27;font-size:14px!important;line-height:1.5}
+.op-field select{min-height:39px;color-scheme:light}
+.op-field textarea{min-height:69px;resize:vertical}
+.op-field :is(input,textarea)::placeholder{color:#716a5e}
+.op-sheet :is(input,select,textarea,button):focus-visible{outline:2px solid #795529!important;outline-offset:2px}
+.op-traveler{margin:0;padding:0;border:0}
+.op-traveler legend{margin-bottom:5px;padding:0}
+.op-traveler>div{display:inline-flex;border:1px solid #a8936b}
+.op-traveler label{display:flex;position:relative;cursor:pointer}
+.op-traveler input{position:absolute;opacity:0;width:1px;height:1px}
+.op-traveler span{display:flex;align-items:center;gap:8px;padding:6px 18px;background:#fff8e75e;font-size:14px}
+.op-traveler span:before{content:"";width:8px;height:8px;border:1px solid #8e8067;transform:rotate(45deg)}
+.op-traveler input:checked+span{background:#2c4340;color:#fae8c5}
+.op-traveler input:checked+span:before{background:#e1c489;border-color:#e1c489}
+.op-traveler input:focus-visible+span{outline:2px solid #7a4920;outline-offset:3px}
+.op-review{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:22px;align-items:start}
+.op-review-card header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #8f927453;padding-bottom:8px}
+.op-review-card header button{background:transparent;border:1px solid currentColor;padding:3px 10px;font-size:12px!important}
+.op-review-card dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:9px 15px;margin-top:14px!important}
+.op-person-review{align-self:stretch}
+.op-person-review header{border-bottom:3px double #a48d64}
+.op-person-review header h2,.op-person-review dt{color:#795b36}
+.op-person-review .op-nameplate{display:flex;align-items:center;gap:13px;margin:18px 0;border-bottom:1px solid #b7a581;padding-bottom:10px}
+.op-nameplate .op-emblem{width:47px;height:47px;color:#8c6144}
+#op-error:not(:empty){display:block;color:#ffe1a7;margin-top:8px;font-size:13px}
+@media(max-width:900px){
+  .op-dossier{grid-template-columns:minmax(170px,.46fr) minmax(0,1fr)}
+  .op-form{gap:12px}
+  .op-mode button{flex-direction:column}
+}
+@media(max-width:730px){
+  .op-header{gap:10px}
+  #opening:not([data-step=route]) .op-header{display:grid;grid-template-columns:1fr;padding:10px 0 7px}
+  #opening:not([data-step=route]) .op-shell{padding-inline:13px}
+  .op-progress{display:flex;justify-content:space-between;flex-wrap:nowrap;overflow:auto;gap:1px}
+  .op-progress button{gap:3px;padding:3px!important;font-size:11px!important}
+  .op-progress i{font-size:9px}
+  #opening:not([data-step=route]) .op-content{padding:16px 0}
+  #opening[data-step=route] .op-content{align-items:end;padding:50px 19px 20px}
+  #opening[data-step=route]::before{background-position:62% center}
+  #opening[data-step=route]::after{background:linear-gradient(0deg,#0b1013fa,#0d1518b0 40%,#11161922 75%,#11161955),linear-gradient(90deg,#11171b80,transparent)}
+  #opening .op-route h1{font-size:clamp(37px,11vw,64px);margin:9px 0 5px}
+  #opening .op-arc-title{margin-bottom:13px;font-size:12px}
+  #opening .op-hook{font-size:14px;max-width:34ch;padding-left:9px}
+  .op-route-choice{padding:8px 9px 11px}
+  .op-rail{grid-template-columns:24px minmax(0,1fr) 24px;gap:4px}
+  .op-rail-arrow{height:28px;font-size:19px!important}
+  .op-route-tile{height:66px;flex-basis:112px}
+  .op-route-tile strong{font-size:13px}
+  .op-route-list{gap:8px}
+  .op-route-tile::after{width:calc(100% + 10px)}
+  .op-point-head{display:grid;gap:10px;margin-bottom:12px}
+  .op-act-switch label,.op-act-switch select{width:100%;max-width:none}
+  .op-act-switch button{flex:none;width:34px}
+  .op-point-layout,.op-dossier,.op-review{grid-template-columns:1fr;gap:13px}
+  .op-section-head{padding:9px 13px}
+  .op-timeline{max-height:clamp(255px,49dvh,470px);padding-inline:9px}
+  .op-event{padding:12px 7px;grid-template-columns:24px 1fr;gap:8px}
+  .op-event-summary{font-size:14px}
+  .op-event-num{height:22px;font-size:12px}
+  .op-location-art{height:90px;background-position:60% 45%}
+  .op-point-card,.op-review-body{padding:13px}
+  .op-point-card dl{margin-top:8px!important}
+  .op-frontispiece{min-height:122px;display:grid;align-items:end}
+  .op-plate-art{position:absolute;inset:0;min-height:0;background-position:65% 43%;z-index:-1}
+  .op-plate-art:after{background:linear-gradient(90deg,#0b171bef,#12242665 72%,transparent)}
+  .op-plate-copy{padding:18px;max-width:86%;background:none;border:0}
+  .op-plate-copy:after{display:none}
+  .op-plate-copy h2{margin:4px 0!important}
+  .op-sheet,.op-person-review{padding:17px 15px}
+  .op-mode button{gap:1px;padding:5px 2px}
+  .op-mode .op-emblem{width:26px;height:26px}
+  .op-mode b{font-size:15px}
+  .op-footer{padding-block:8px max(8px,env(safe-area-inset-bottom));gap:8px}
+  .op-actions{gap:5px}
+  .op-actions button{font-size:13px!important}
+  .op-back{padding:7px 10px}
+  #opening .op-footer .op-next{padding:8px 11px;min-width:99px;gap:8px}
+  .op-context{font-size:11px}
+}
+@media(max-width:380px){
+  .op-progress i{display:none}
+  .op-form{gap:11px 8px}
+  .op-mode b{font-size:14px}
+}
+@media(prefers-reduced-motion:no-preference){
+  .op-event,.op-mode button{transition:background-color .16s,border-color .16s}
+}
+
+/* 青铜云纹压角和烫金回纹腰线随卷宗使用同一套刻线。 */
+#opening:not([data-step=route]){--op-corner:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2086%2086%22%20fill%3D%22none%22%20stroke%3D%22%23a58151%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%2080V3h77M9%2062V9h53M4%2032h14v-8h-7v-8h13v10h9v-9h11v-6h16%22%2F%3E%3Cpath%20d%3D%22M15%2055V37h10c10%200%2014-8%208-12-4-3-10%201-7%205%202%203%205%201%204-1m-6%2016c1-4%206-7%2011-8%209-2%2013-7%2015-13%201-5%207-8%2013-6m-19%209c5-1%208-6%209-10m-35%2049c0-9%203-17%2010-23%22%2F%3E%3Cpath%20d%3D%22m12%2012%205-5%205%205-5%205zm24%203%203-3%203%203-3%203z%22%20fill%3D%22%23b79b69%22%2F%3E%3Ccircle%20cx%3D%2265%22%20cy%3D%229%22%20r%3D%221.4%22%2F%3E%3Ccircle%20cx%3D%229%22%20cy%3D%2266%22%20r%3D%221.4%22%2F%3E%3C%2Fsvg%3E");--op-cloud:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20280%20160%22%20fill%3D%22none%22%20stroke%3D%22%23927242%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20stroke-width%3D%22.9%22%3E%3Ccircle%20cx%3D%22197%22%20cy%3D%2292%22%20r%3D%2284%22%2F%3E%3Ccircle%20cx%3D%22197%22%20cy%3D%2292%22%20r%3D%2277%22%20stroke-dasharray%3D%221%205%22%2F%3E%3Ccircle%20cx%3D%22197%22%20cy%3D%2292%22%20r%3D%2267%22%2F%3E%3Cpath%20d%3D%22M102%2092h178M197%200v160m-70-134%20140%20137M129%20153%20260%2026%22%2F%3E%3Cpath%20d%3D%22M7%20137c24%201%2023-16%2039-17%2013%200%2024-8%2022-18-3-12-19-12-22-2-2%207%207%2012%2010%206m-30%2027c18%200%2025-3%2031-11%2013%202%2026-5%2025-17%2022%201%2028-10%2034-20%204-6%2013-5%2015%200%203%207-5%2010-8%206m-44%2030c17%202%2023-5%2029-13%2026%205%2042-1%2048-12%205-12%2023-12%2031-7%207%205%208%2015%201%2019-5%203-10%200-9-4m-38%2011c20%201%2024-1%2029-6m28-28c8-5%2017-5%2022%200%207%207%2016%207%2025%206m-31%2019c12%207%2028%204%2039-4%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");--op-band:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2092%2010%22%20fill%3D%22none%22%20stroke%3D%22%23b99a63%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0%207h27l5-4%205%204h9l5-4h14l5%204h22M0%209h92%22%20stroke-width%3D%22.65%22%2F%3E%3Cpath%20d%3D%22m40%204%202-2%202%202-2%202z%22%20fill%3D%22%23c4a575%22%2F%3E%3C%2Fsvg%3E")}
+.op-sheet:before,.op-person-review:before{content:"";position:absolute;inset:5px;pointer-events:none;z-index:-1;background:var(--op-cloud) right -22px bottom -28px / 245px 142px no-repeat;opacity:.16}
+.op-sheet:after,.op-person-review:after{content:"";position:absolute;inset:auto 6px 6px auto;pointer-events:none;width:48px;height:48px;background:var(--op-corner) center / contain;transform:rotate(180deg);opacity:.78}
+.op-location-art:before,.op-plate-art:before{background:var(--op-corner) left top / 51px 51px no-repeat,var(--op-band) left bottom / 92px 7px repeat-x}
+.op-section-head{position:relative;padding-bottom:18px}
+.op-section-head:after,.op-plate-copy:before{position:absolute;content:"";left:6px;right:6px;bottom:2px;height:7px;background:var(--op-band) left bottom / 92px 7px repeat-x;opacity:.75;pointer-events:none}
+.op-plate-copy:before{top:0;bottom:auto}
+.op-sheet>.op-heading>.op-emblem{padding:7px;border:3px double #a48b60;outline:1px solid #b69b7059;outline-offset:3px;border-radius:50%;background:radial-gradient(circle,#f6e9c966,#a6814e22)}
+.op-section-head h2{margin:0}
+.op-record{margin-top:11px;border-top:3px double #ab936572}
+.op-record summary{padding:10px 0 0;cursor:pointer;color:#ebd3a4;font:600 14px/1.6 var(--op-display)}
+.op-record ol{margin:9px 0 0;padding-left:1.65em;color:#d9d9ca;font:15px/1.85 var(--op-serif)}
+.op-record li+li{margin-top:8px}
+.op-record li::marker{color:#c9af7d;font:italic 13px Georgia,serif}
+@media(max-width:730px){
+  .op-sheet:before,.op-person-review:before{background-size:173px 105px;opacity:.11}
+  .op-plate-copy:before{display:none}
+  .op-sheet>.op-heading>.op-emblem{width:39px;height:39px;padding:4px}
+  .op-sheet:after,.op-person-review:after{width:34px;height:34px}
+}
+
+@media(max-width:640px){
+  #opening{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  #opening .op-route h1{font-size:clamp(24px,7vw,30px);line-height:1.18}
+  #opening .op-heading h1,#opening .op-sheet .op-heading h1{font-size:21px}
+  #opening .op-section-head h2,#opening .op-review-card h2,#opening .op-nameplate h3{font-size:16px}
+}
+</style><div id="opening"></div><iframe id="preview" hidden></iframe><script>const host={draftKey:"doupo-opening:"+/*CHAT_KEY*/,submitOpening:p=>window.dpCommit(p)};
+/*DOUPO_CATALOG*/
+(() => {
+  const root = document.querySelector('#opening');
+  const frame = document.querySelector('#preview');
+  const draftKey = host.draftKey || 'doupo-opening-draft-v2';
+  const digits = [...'一二三四五六七八九'];
+  const majorRealms = ['斗之气','斗者','斗师','大斗师','斗灵','斗王','斗皇','斗宗','斗尊','斗尊巅峰','半圣','斗圣','斗帝'];
+  const cultivations = ['未初始化',...majorRealms.flatMap(realm=>{
+    if(realm==='斗帝')return [realm];
+    if(realm==='半圣')return [realm,...['初级','中级','高级'].map(level=>realm+'·'+level)];
+    if(realm==='斗尊巅峰')return [realm,...digits.map(n=>realm+'·'+n+'转')];
+    return digits.map(n=>realm+'·'+n+(realm==='斗之气'?'段':'星'));
+  })];
+  const attributes = ['火','木','水','风','雷','土','冰','金','光','暗','火中带木','无'];
+  const ranks = ['非炼药师','学徒','一品','二品','三品','四品','五品','六品','七品','八品','九品宝丹宗师','九品玄丹宗师','九品金丹宗师','帝品'];
+  const stepTitles={route:'选篇',point:'定开局',identity:'立身份',cultivation:'定修为',extras:'补细节',review:'确认入局'};
+  const emptyCharacter=()=>({
+    kind:'original',traveler:null,canon:'',name:'',sex:'未定',age:'',faction:'',identity:'',species:'',form:'兽身',tier:'一阶',
+    realm:'斗之气·一段',attribute:'无',canonAttribute:null,alchemy:'非炼药师',power:'',skill:'',
+    appearance:'',background:'',item:'',intent:'',view:'second'
+  });
+  for(const sample of openingSamples){
+    const route=routes.find(e=>e.number===sample.number);
+    for(const act of sample.acts){
+      const target=route.acts.find(e=>e.number===act.number);
+      target.title=act.title;
+      for(const scene of act.events){
+        const event=target.events.find(e=>e.number===scene.number);
+        Object.assign(event,scene);
+      }
+    }
+  }
+  for(const [number,scene] of Object.entries(firstScenes))Object.assign(routes[Number(number)].acts[0].events[0],scene);
+  let state = {step:'route',route:1,act:0,event:0,character:emptyCharacter()};
+  let chapterScroll=0, pointScroll=0;
+  for(const [id,encoded] of Object.entries(openingCovers)) {
+    if(!encoded.startsWith('data:'))continue;
+    const buffer=Uint8Array.from(atob(encoded.split(',')[1]),character=>character.charCodeAt(0));
+    openingCovers[id]=URL.createObjectURL(new Blob([buffer],{type:'image/webp'}));
+  }
+  try {
+    const saved=JSON.parse(localStorage.getItem(draftKey)||'null');
+    if(saved && routes[saved.route]?.acts[saved.act]?.events[saved.event]){
+      state={...state,...saved,step:'route',character:{...emptyCharacter(),...saved.character}};
+      const c=state.character;
+      if(c.traveler==null && c.kind!=='canon' && c.origin==='穿越者')c.traveler='是';
+      delete c.origin;
+    }
+  } catch {}
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  const current = () => {
+    const route=routes[state.route], act=route.acts[state.act];
+    return {route,act,event:act.events[state.event]};
+  };
+  const steps = () => Object.keys(stepTitles).filter(step=>step!=='cultivation'||state.character.kind!=='canon');
+  const save = () => {try{localStorage.setItem(draftKey,JSON.stringify(state))}catch{}};
+  const pill = text=>'<span class="op-chip">'+esc(text)+'</span>';
+  const pad = number=>String(number).padStart(2,'0');
+
+  const emblems={
+    original:'<path d="M8 34 22 20l4 3 6-13 8 24M16 30l7-7m2 4 6-10 4 11M9 38h30"/><circle cx="16" cy="14" r="3"/>',
+    beast:'<path d="m9 35 5-9 8-5-3-10 9 7 8-8-2 11 6 7-2 6-7-1-6 6-10-2m9-16-5 8-5 4m13-6 4-2 4 2m-1 6-4-3"/>',
+    canon:'<path d="m7 13 7-3 10 5 10-5 7 3v23l-7-3-10 5-10-5-7 3zm17 3v21m-13-19 8 2m-8 4 8 2m10-6 8-3m-8 9 8-3"/>',
+    cultivation:'<path d="M25 5c4 9-4 15-1 20 3-2 7-7 7-11 8 7 11 16 4 23-5 5-15 5-20 0-8-8-4-16 2-22-1 7 1 9 3 10-2-7 6-11 5-20Z"/><path d="M25 28c-4 4-5 8-1 12 5-1 7-6 5-10"/>',
+    extras:'<path d="m10 37 5-10 20-20 6 6-20 20-11 4Zm6-11 6 6m8-20 6 6M9 41h30"/>',
+    review:'<path d="M11 8h26v32H11zM16 13h16v22H16zM20 19h8m-4-3v14m-6-5h12"/>'
+  };
+  function emblem(key){
+    return '<svg class="op-emblem" aria-hidden="true" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">'+emblems[key]+'</svg>';
+  }
+  function folioLabel(route,act){
+    return '第 '+route.number+' 篇　'+esc(route.short)+'<i></i>第 '+pad(act.number)+' 幕';
+  }
+
+  function routeView({route}) {
+    return '<section class="op-route"><div class="op-route-copy">'
+      +'<p class="op-eyebrow">第 '+route.number+' 篇 <i></i> '+esc(route.region)+'</p>'
+      +'<h1>'+esc(route.title)+'</h1><p class="op-arc-title">'+esc(route.part)+'</p>'
+      +'<p class="op-hook">'+esc(route.hook)+'</p>'
+      +'<div class="op-chips">'+pill(route.acts.length+' 幕')+pill(route.acts.reduce((n,a)=>n+a.events.length,0)+' 个事件')+'</div>'
+      +'<button type="submit" form="op-form" class="op-next op-enter">进入此篇 <span aria-hidden="true">→</span></button>'
+      +'<details class="op-synopsis"><summary>本篇背景</summary><p>'+esc(route.synopsis)+'</p></details></div></section>';
+  }
+
+  function chapterTimeline() {
+    return '<section class="op-route-choice" aria-label="篇章时间轴">'
+      +'<div class="op-rail-heading"><b>篇章时间轴</b><span>全 '+routes.length+' 篇</span></div>'
+      +'<div class="op-rail"><button type="button" class="op-rail-arrow" data-chapter-nav="-1" aria-label="上一篇" '+(state.route===0?'disabled':'')+'>‹</button>'
+      +'<div class="op-route-list">'+routes.map((r,i)=>'<button type="button" class="op-route-tile" data-route-choice="'+i+'" aria-pressed="'+(state.route===i)+'" aria-label="'+esc(r.part)+'">'
+      +(openingCovers[r.number]?'<img src="'+openingCovers[r.number]+'" alt="" loading="lazy" decoding="async">':'')
+      +'<span><small>第 '+r.number+' 篇</small><strong>'+esc(r.part)+'</strong></span><i aria-hidden="true"></i></button>').join('')+'</div>'
+      +'<button type="button" class="op-rail-arrow" data-chapter-nav="1" aria-label="下一篇" '+(state.route+1===routes.length?'disabled':'')+'>›</button></div></section>';
+  }
+
+  function pointView({route,act,event}) {
+    const choices=route.acts.map((a,i)=>'<option value="'+i+'" '+(i===state.act?'selected':'')+'>第 '+pad(a.number)+' 幕　'+esc(a.name)+'</option>').join('');
+    const events=act.events.map((e,i)=>{
+      const changed=i===0||e.date!==act.events[i-1].date;
+      const date=changed?'<h3 class="op-dateline"><time>'+esc(e.date)+'</time></h3>':'';
+      return date+'<button type="button" class="op-event" data-event="'+i+'" aria-pressed="'+(state.event===i)+'">'
+        +'<span class="op-event-num">'+pad(e.number)+'</span><span class="op-event-copy"><strong>'+esc(e.name)+'</strong><span class="op-event-summary">'+esc(e.summary)+'</span></span></button>';
+    }).join('');
+    return '<div class="op-point-head"><div class="op-heading"><p>第 '+route.number+' 篇　'+esc(route.part)+'</p><h1>选择入局时刻</h1></div>'
+      +'<div class="op-act-switch"><button type="button" data-act-nav="-1" aria-label="上一幕" '+(!state.act?'disabled':'')+'>‹</button>'
+      +'<label><span>分幕目录</span><select aria-label="选择幕" data-act-picker>'+choices+'</select></label>'
+      +'<button type="button" data-act-nav="1" aria-label="下一幕" '+(state.act===route.acts.length-1?'disabled':'')+'>›</button></div></div>'
+      +'<div class="op-point-layout"><section class="op-index"><header class="op-section-head"><h2>本幕事件</h2><span>'+act.events.length+' 则</span></header>'
+      +'<div class="op-timeline" aria-label="开局时间线">'+events+'</div></section>'
+      +'<aside class="op-point-detail" aria-label="入场情境"><div class="op-location-art"><span class="op-image-seal">入境</span></div>'
+      +'<div class="op-point-card"><p class="op-eyebrow">'+folioLabel(route,act)+'</p><h2>'+esc(event.name)+'</h2>'
+      +(event.body?'<p class="op-lede">'+esc(event.preview)+'</p>':'')
+      +'<dl><div><dt>时日</dt><dd>'+esc(event.date)+' · '+esc(event.layer)+'</dd></div><div><dt>场景</dt><dd>'+esc(event.place)+'</dd></div>'
+      +'<div><dt>在场</dt><dd class="op-chips">'+(event.cast.map(pill).join('')||'尚未记名')+'</dd></div></dl>'
+      +'<details class="op-record"><summary>阅读完整经过</summary><ol>'+event.steps.map(line=>'<li>'+esc(line)+'</li>').join('')+'</ol></details></div></aside></div>';
+  }
+
+  function input(field,label,opts={}) {
+    const value=state.character[field];
+    return '<label class="op-field'+(opts.wide?' op-wide':'')+'"><span>'+esc(label)+(opts.required?'<sup>必填</sup>':'')+'</span>'
+      +'<input name="'+field+'" '+(opts.attrs||'')+' placeholder="'+esc(opts.placeholder||'')+'" value="'+esc(value)+'" '+(opts.required?'required':'')+'></label>';
+  }
+  function select(field,label,options) {
+    return '<label class="op-field"><span>'+esc(label)+'</span><select name="'+field+'">'
+      +options.map(entry=>{const [value,text]=Array.isArray(entry)?entry:[entry,entry];return '<option value="'+esc(value)+'" '+(state.character[field]===value?'selected':'')+'>'+esc(text)+'</option>';}).join('')
+      +'</select></label>';
+  }
+  function textarea(field,label,placeholder,max) {
+    return '<label class="op-field op-wide"><span>'+esc(label)+'</span><textarea rows="3" name="'+field+'" maxlength="'+max+'" placeholder="'+esc(placeholder)+'">'+esc(state.character[field])+'</textarea></label>';
+  }
+  function formArea(title,context,content) {
+    const {route,act,event}=current();
+    const mark=state.step==='identity'?state.character.kind:state.step;
+    return '<div class="op-dossier"><aside class="op-frontispiece"><div class="op-plate-art"><span class="op-image-seal">'+esc(stepTitles[state.step])+'</span></div>'
+      +'<div class="op-plate-copy"><p class="op-eyebrow">'+folioLabel(route,act)+'</p><h2>'+esc(event.name)+'</h2><time>'+esc(event.date)+'</time></div></aside>'
+      +'<section class="op-sheet"><div class="op-heading"><div><p>'+esc(stepTitles[state.step])+'</p><h1>'+title+'</h1></div>'+emblem(mark)+'</div>'
+      +(context?'<p class="op-heading-note">'+esc(context)+'</p>':'')+'<div class="op-form">'+content+'</div></section></div>';
+  }
+  function travelerValue(){
+    const c=state.character;
+    return c.traveler??(c.kind==='canon'&&c.canon==='萧炎'?'是':'否');
+  }
+  function travelerField(){
+    const value=travelerValue();
+    return '<fieldset class="op-traveler op-wide"><legend>是否为穿越者</legend><div>'
+      +['是','否'].map(x=>'<label><input type="radio" name="traveler" value="'+x+'" '+(value===x?'checked':'')+'><span>'+x+'</span></label>').join('')+'</div></fieldset>';
+  }
+  function affinityField(field,value){
+    const buttons=attributes.map(a=>'<button type="button" data-affinity="'+a+'" aria-pressed="'+(value===a)+'">'+a+'</button>').join('');
+    return '<fieldset class="op-affinity op-wide"><legend>斗气属性</legend><div class="op-affinities">'+buttons+'</div>'
+      +'<label class="op-affinity-input"><span>属性名称</span><input name="'+field+'" maxlength="24" value="'+esc(value)+'" placeholder="可填写自定属性"></label></fieldset>';
+  }
+  function canonOptions(event) {
+    const extra = {
+      '萧薰儿':{sex:'女',faction:'萧家',identity:'萧家子弟',realm:event.date.startsWith('炎历15年')?'斗之气·九段':'未初始化'},
+      '萧战':{sex:'男',faction:'萧家',identity:'萧家族长',realm:'大斗师·五星'},
+      '苏千':{sex:'男',faction:'迦南学院',identity:'内院大长老',realm:'未初始化'},
+      '叶重':{sex:'男',faction:'叶家',identity:'叶家长老',realm:'未初始化'}
+    };
+    const available = Object.fromEntries(event.cast.filter(name=>knownCharacters.has(name)).map(name=>[
+      name, {sex:'未知',faction:'无',identity:'原作人物',realm:'未初始化',...extra[name]}
+    ]));
+    if (event.cast.includes('萧炎')) {
+      const birthYear=event.date.match(/^炎历(\d+)年/);
+      available.萧炎={sex:'男',age:birthYear?Number(birthYear[1]):null,
+        faction:event.date.startsWith('炎历15年')?'萧家':'无',
+        identity:event.date.startsWith('炎历15年')?'萧家子弟':'修炼者',realm:event.realm||'未初始化',attribute:'火中带木'};
+    }
+    return available;
+  }
+  function identityView({event}) {
+    const c=state.character, canon=c.kind==='canon', beast=c.kind==='beast', available=canonOptions(event);
+    const options=Object.keys(available);
+    const choices = '<div class="op-mode op-wide" role="group" aria-label="角色类型">'
+      +[['original','自创修炼者'],['beast','魔兽'],['canon','原作人物']].map(([kind,label])=>{
+        const disabled=kind==='canon'&&!options.length;
+        return '<button type="button" data-kind="'+kind+'" '+(disabled?'disabled title="此事件暂无可选原作人物"':'')+' aria-pressed="'+(c.kind===kind)+'">'+emblem(kind)+'<b>'+label+'</b></button>';
+      }).join('')+'</div>';
+    if(canon){
+      const selected=available[c.canon]?c.canon:options[0], preset=available[selected];
+      return formArea('择一人入局','选择此刻在场的人物，沿用他在这一幕的身份与修为。',choices
+        +'<div class="op-canon op-wide">'+options.map(name=>'<button type="button" data-canon="'+esc(name)+'" aria-pressed="'+(selected===name)+'"><b>'+esc(name)+'</b></button>').join('')+'</div>'
+        +'<div class="op-info op-wide"><b>'+esc(preset.identity)+'</b><span>'+esc(preset.realm==='未初始化'?'当前修为待定':preset.realm)+'</span></div>'
+        +affinityField('canonAttribute',c.canonAttribute??preset.attribute??'无')+travelerField());
+    }
+    return formArea(beast?'立下兽籍':'写下你的名姓',beast?'选定血脉与形态，下一页可填写兽阶及本命能力。':'写下旁人如何称呼你，以及你为何出现在这一幕。',choices
+      +input('name','姓名',{required:true,attrs:'maxlength="18"',placeholder:'角色姓名'})
+      +select('sex','性别',['未定','男','女','自定'])
+      +input('age','年龄',{attrs:'type="number" min="0" max="99999" step="1"',placeholder:'可留空'})
+      +input('faction','出身势力',{attrs:'maxlength="36"',placeholder:'如萧家、迦南学院、散修'})
+      +input('identity','在这一幕的身份',{attrs:'maxlength="40"',placeholder:'如来参加测验的族人'})
+      +(beast?input('species','种族或血脉',{required:true,attrs:'maxlength="36"',placeholder:'如赤火狐'})+select('form','入场形态',['兽身','已化人形']):'')+travelerField());
+  }
+  function cultivationView() {
+    const c=state.character;
+    const beast=c.kind==='beast';
+    if(beast&&c.form==='兽身'){
+      return formArea('本命与兽阶','以兽身入局时，档案记录兽阶和本命能力。',
+        select('tier','当前兽阶',digits.map(n=>n+'阶'))+affinityField('attribute',c.attribute)
+        +input('skill','本命能力',{wide:true,attrs:'maxlength="30"',placeholder:'可留空，按血脉与兽阶补全'}));
+    }
+    return formArea('定下起始修为','尚未凝聚气旋时，所选属性记作先天资质；凝旋成为斗者后，便能修炼相应的属性斗气。',
+      select('realm','当前境界',cultivations.map(r=>r==='未初始化'?[r,'待定']:r))
+      +(beast?select('tier','当前兽阶',digits.map(n=>n+'阶')):'')
+      +select('alchemy','炼药师品级',ranks)
+      +affinityField('attribute',c.attribute)
+      +input('power','起始功法',{attrs:'maxlength="30"',placeholder:'可留空，酒馆开局时按出身与境界补全'})
+      +input('skill','起始斗技',{wide:true,attrs:'maxlength="30"',placeholder:'可留空，酒馆开局时按身法或战斗所长补全'}));
+  }
+  function extrasView() {
+    const own=state.character.kind!=='canon';
+    return formArea('入世前的几笔','选好叙事视角，其余留白处，可以等故事开始再填。',
+      select('view','正文视角',[['second','第二人称 · 你'],['third','第三人称 · 角色名']])
+      +(own?input('item','随身物件',{attrs:'maxlength="32"',placeholder:'一件物件，如旧木牌'})
+        +textarea('appearance','外貌','衣着、2 个容易认出的特征即可。',160)
+        +textarea('background','简短来历','你和这处地方、这群人有什么关系？',240):'')
+      +textarea('intent','开场想法','此时想弄清什么，或想先和谁说话？',300));
+  }
+  function player() {
+    const c=state.character;
+    if(c.kind==='canon'){
+      const canon=canonOptions(current().event);
+      const name=Object.hasOwn(canon,c.canon)?c.canon:'';
+      return {name,kind:'canon',origin:'原作人物',是否为穿越者:travelerValue(),...canon[name],
+        attribute:(c.canonAttribute??canon[name]?.attribute??'无').trim()||'无',power:'',skill:'',alchemy:'未初始化'};
+    }
+    const details={...c,origin:travelerValue()==='是'?'穿越者':'原住民',是否为穿越者:travelerValue(),name:c.name.trim(),age:c.age===''?null:Number(c.age)};
+    delete details.traveler;
+    delete details.canonAttribute;
+    details.attribute=c.attribute.trim()||'无';
+    if(c.kind==='beast'){
+      details.identity=[c.species.trim(),c.tier,c.form,c.identity.trim()].filter(Boolean).join(' · ');
+      if(c.form==='兽身')Object.assign(details,{realm:'未初始化',alchemy:'非炼药师',power:''});
+    }
+    return details;
+  }
+  function reviewView({route,act,event}) {
+    const c=player();
+    const grade=c.kind==='beast'&&c.form==='兽身'?c.tier:c.realm==='未初始化'?'待定':c.realm;
+    const rows=(facts)=>facts.filter(([,value])=>value!=null&&value!=='').map(([label,value])=>'<dt>'+esc(label)+'</dt><dd>'+esc(value)+'</dd>').join('');
+    return '<div class="op-heading"><p>'+esc(route.part)+'</p><h1>准备入局</h1></div>'
+      +'<div class="op-review"><section class="op-review-card op-scene-review"><div class="op-location-art"><span class="op-image-seal">此刻</span></div><div class="op-review-body"><header><h2>剧情起点</h2><button type="button" data-goto="point">修改</button></header>'
+      +'<h3>'+esc(event.name)+'</h3><p>'+esc(event.summary)+'</p><dl>'+rows([['篇幕',route.short+' · '+act.name],['时日',event.date],['地点',event.place],['在场',event.cast.join('、')]])+'</dl></div></section>'
+      +'<section class="op-review-card op-person-review"><header><h2>主角档案</h2><button type="button" data-goto="identity">修改</button></header>'
+      +'<div class="op-nameplate">'+emblem(c.kind)+'<h3>'+esc(c.name)+'</h3></div><dl>'+rows([['身份',c.identity||'待定'],['是否为穿越者',c.是否为穿越者],['势力',c.faction],['境界',grade],['斗气属性',c.attribute],['功法',c.power],[c.kind==='beast'&&c.form==='兽身'?'本命能力':'斗技',c.skill],['随身物件',c.item],['视角',state.character.view==='third'?'第三人称':'第二人称'],['开场想法',state.character.intent.trim()]])+'</dl></section></div>';
+  }
+
+  const views={route:routeView,point:pointView,identity:identityView,cultivation:cultivationView,extras:extrasView,review:reviewView};
+  const labels={route:'进入此篇',point:'以此开局',identity:'继续',cultivation:'继续',extras:'查看档案',review:'进入第一幕'};
+  function render(focusSelector) {
+    const order=steps(), index=order.indexOf(state.step);
+    const {route,event}=current();
+    const choosing=state.step==='route';
+    root.dataset.step=state.step;
+    root.style.setProperty('--op-cover','url('+openingCovers[route.number]+')');
+    const progress='<nav class="op-progress" aria-label="开局步骤">'+order.map((key,i)=>'<button type="button" data-goto="'+key+'" '+(i>index?'disabled':'')+(i===index?' aria-current="step"':'')+'><i>'+pad(i+1)+'</i>'+stepTitles[key]+'</button>').join('')+'</nav>';
+    const header='<header class="op-header"><div class="op-brand"><i aria-hidden="true">斗</i><div><b>斗破苍穹</b><small>开局卷宗</small></div></div>'
+      +(choosing?'<button type="button" class="op-fullscreen" data-fullscreen>'+ (document.fullscreenElement?'退出全屏':'进入全屏')+'</button>':progress)+'</header>';
+    const content='<main class="op-content" data-step="'+state.step+'"><form id="op-form">'+views[state.step](current())+'<output id="op-error" role="alert"></output></form></main>';
+    const footer = choosing?chapterTimeline():'<footer class="op-footer"><div class="op-context">'+esc(event.date)+' <i></i> '+esc(event.place)+'</div>'
+      +'<div class="op-actions"><button type="button" data-back class="op-back">上一步</button>'
+      +'<button type="submit" form="op-form" class="op-next">'+labels[state.step]+'<span aria-hidden="true">→</span></button></div></footer>';
+    root.innerHTML='<div class="op-shell">'+header+content+footer+'</div>';
+    if(choosing){
+      const rail=root.querySelector('.op-route-list');
+      rail.scrollLeft=chapterScroll;
+      root.querySelector('[aria-pressed=true]')?.scrollIntoView({block:'nearest',inline:'nearest'});
+    }
+    if(state.step==='point'){
+      const timeline=root.querySelector('.op-timeline');
+      timeline.scrollTop=pointScroll;
+      if(!focusSelector && pointScroll===0){
+        const selected=timeline.querySelector('[aria-pressed=true]');
+        if(state.event>0)timeline.scrollTop=selected.offsetTop;
+      }
+    }
+    if(focusSelector)root.querySelector(focusSelector)?.focus({preventScroll:true});
+    save();
+  }
+  function chooseChapter(index,focus) {
+    chapterScroll=root.querySelector('.op-route-list').scrollLeft;
+    state.route=index;
+    state.act=0;
+    state.event=0;
+    pointScroll=0;
+    render(focus);
+  }
+  function go(next) {
+    if(state.step==='route')chapterScroll=root.querySelector('.op-route-list').scrollLeft;
+    if(state.step==='point')pointScroll=root.querySelector('.op-timeline').scrollTop;
+    if(next==='identity' && state.character.kind==='canon'){
+      const available=Object.keys(canonOptions(current().event));
+      if(!available.includes(state.character.canon)){
+        state.character.canon=available[0]||'';
+        state.character.traveler=null;
+        state.character.canonAttribute=null;
+        if(!available.length)state.character.kind='original';
+      }
+    }
+    state.step=next;
+    render();
+    root.scrollTop=0;
+    root.querySelector('h1').setAttribute('tabindex','-1');
+    root.querySelector('h1').focus({preventScroll:true});
+  }
+  async function commit() {
+    const {route,act,event}=current(), char=player(), c=state.character;
+    if(!char.name){go('identity');root.querySelector('input[name=name]')?.reportValidity();return;}
+    const buildSkill=(name,field)=>name?.trim()?{[name.trim()]:{等阶:'未定',属性:'无',境界:'未入门',[field]:0,效果:'待核实'}}:{};
+    const unformed=char.realm.startsWith('斗之气')||(char.realm==='未初始化'&&c.kind!=='beast');
+    const realm={境界:char.realm,境界进度:0,斗气属性:unformed?'无':char.attribute};
+    const baseCultivation={境界:realm,功法:buildSkill(char.power,'进度'),斗技:buildSkill(char.skill,'熟练度'),
+      炼药师品级:char.alchemy,灵魂境界:{境界:'未初始化',阶段:'未定'}};
+    const registered=canonOptions(event);
+    const actors=Object.fromEntries(event.cast.filter(name=>name!==char.name).map(name=>[name,{
+      ...baseCultivation,功法:{},斗技:{},炼药师品级:'未初始化',境界:{境界:registered[name]?.realm||'未初始化',境界进度:0,斗气属性:'无'},
+      在场状态:'在场',所在地:event.place,性别:registered[name]?.sex||'未知',所属组织:registered[name]?.faction||'',年龄:registered[name]?.age??null
+    }]));
+    const nextId='E'+event.number;
+    const guiding=Object.fromEntries(act.events.map(e=>['E'+e.number,{日期:e.date,标题:e.name,状态:e.number<event.number?'已发生':'未发生',原因:'',关联蝴蝶:[]}]));
+    host.data={
+      时空:{外界日期:event.date,场景日期:null,时层:event.layer||'实际历史',地点:event.place,当前部:'斗破苍穹',当前篇:route.part,当前幕:act.name,下一幕:route.acts[state.act+1]?.name??null,跳时总结:null},
+      主角:{姓名:char.name,性别:char.sex,年龄:char.age??null,身份:char.identity||'未定',是否为穿越者:char.是否为穿越者,所属组织:char.faction||'无',所在地:event.place,
+        先天斗气属性:char.attribute,外貌:char.appearance||'',穿着:'',当前状态:event.preview,生命:100,斗气:100,...baseCultivation},
+      人物:actors,伴侣:{},兽宠:{},人物归档:{},装备:c.kind!=='canon'&&c.item.trim()?{[c.item.trim()]:{类别:'随身物件',简介:'开局随身携带'}}:{},
+      储物空间:{},炼丹:{已掌握丹方:{},自拟丹方:{},炼制记录:{}},蝴蝶效应:{},永久改写:{},
+      原作指导:{幕:act.name,来源:route.number==='00'?'前史篇':'当前幕',当前事件:nextId,事件:guiding}
+    };
+    const convert = t=>esc(c.view==='third'?t.replace(/你/g,()=>char.name):t);
+    const canonLead=char.name==='萧炎'&&c.kind==='canon'?{
+      '轮到萧炎触碑':'台下的笑声压了下去。测验员抬手示意，石碑已经在你面前。',
+      '崖边有人踏叶而来':'父亲停在月光照得到的地方，像有话要说，又等着你先开口。',
+      '画像和本人对上了':'桌角摆着一枚蔚蓝徽章，霍德还捏着那页学籍，等你说清来意。'
+    }[event.name]:null;
+    const lead=event.body || event.preview+(event.preview.endsWith('。')?'':'。');
+    const beat=event.body ? (canonLead||event.beat) : '';
+    const lines=[convert(lead),event.dialogue&&event.dialogue[0]!==char.name?'{'+esc(event.dialogue[0])+'}「'+esc(event.dialogue[1])+'」':'',beat?convert(beat):''].filter(Boolean);
+    host.story={text:'<content><story>剧情-'+esc(route.part)+'·'+esc(act.name)+'</story><time>时间 '+esc(event.date)+'</time><now_plot>'+lines.join('\n\n')+'</now_plot></content>',
+      meta:{title:event.name,chapter:'第 '+pad(act.number)+' 幕',location:event.place}};
+    host.openingArchive={身份:char,剧情:{篇:route.part,幕:act.name,事件:event.name,日期:event.date,地点:event.place},开场想法:c.intent.trim()};
+    if(host.submitOpening){
+      const button=root.querySelector('.op-next');
+      button.disabled=true;
+      const form=root.querySelector('#op-form');
+      root.querySelector('.op-shell').inert=true;
+      const message=form.querySelector('#op-error');
+      message.textContent='正在写入开局档案…';
+      try{
+        await host.submitOpening({data:host.data,archive:host.openingArchive,view:c.view,steps:event.steps,scene:lines.join('\n'),actNumber:act.number,partNumber:route.number});
+        message.textContent='开局档案已写入。';
+      }catch(error){
+        message.textContent=error.message||String(error);
+      }finally{
+        button.disabled=false;
+        root.querySelector('.op-shell').inert=false;
+      }
+      return;
+    }
+    host.readingPosition=null;
+    host.captureStoryPosition=null;
+    host.open=false;
+    host.tab='hero';
+    root.hidden=true;
+    frame.hidden=false;
+    host.switchTheme(host.theme);
+  }
+  root.addEventListener('input',event=>{
+    const el=event.target;
+    if(!el.name||!Object.hasOwn(state.character,el.name))return;
+    state.character[el.name]=el.value;
+    save();
+    if(el.closest('.op-affinity')){
+      for(const button of el.closest('.op-affinity').querySelectorAll('[data-affinity]'))button.setAttribute('aria-pressed',String(button.dataset.affinity===el.value.trim()));
+    }
+  });
+  function chooseAct(index,focus){
+    state.act=index;
+    state.event=0;
+    pointScroll=0;
+    render(focus);
+  }
+  root.addEventListener('change',event=>{
+    if(event.target.matches('[data-act-picker]'))chooseAct(Number(event.target.value),'[data-act-picker]');
+  });
+  root.addEventListener('click',event=>{
+    const button=event.target.closest('button');
+    if(!button)return;
+    const d=button.dataset;
+    if(d.routeChoice!==undefined){chooseChapter(Number(d.routeChoice),'[data-route-choice="'+d.routeChoice+'"]');}
+    else if(d.chapterNav){chooseChapter(state.route+Number(d.chapterNav),'[data-route-choice="'+(state.route+Number(d.chapterNav))+'"]');}
+    else if('fullscreen' in d){
+      const change=document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.();
+      change?.catch(()=>{});
+    }
+    else if(d.actNav){chooseAct(state.act+Number(d.actNav),'[data-act-picker]');}
+    else if(d.event!==undefined){pointScroll=root.querySelector('.op-timeline').scrollTop;state.event=Number(d.event);render('[data-event="'+d.event+'"]');}
+    else if(d.affinity){
+      const field=button.closest('fieldset').querySelector('input');
+      field.value=d.affinity;
+      field.dispatchEvent(new Event('input',{bubbles:true}));
+    }
+    else if(d.kind && state.character.kind!==d.kind){
+      state.character.kind=d.kind;
+      state.character.traveler=null;
+      state.character.canonAttribute=null;
+      state.character.canon=Object.keys(canonOptions(current().event))[0]||'';
+      render('[data-kind="'+d.kind+'"]');
+    }
+    else if(d.canon && state.character.canon!==d.canon){state.character.canon=d.canon;state.character.traveler=null;state.character.canonAttribute=null;render('[data-canon="'+CSS.escape(d.canon)+'"]');}
+    else if('back' in d){const order=steps();go(order[order.indexOf(state.step)-1]);}
+    else if(d.goto)go(d.goto);
+  });
+  root.addEventListener('submit',event=>{
+    event.preventDefault();
+    if(state.step==='identity'&&state.character.kind!=='canon'&&!state.character.name.trim()){
+      const error=root.querySelector('#op-error');error.textContent='请填写角色姓名。';
+      root.querySelector('input[name=name]').focus();return;
+    }
+    const order=steps(), next=order[order.indexOf(state.step)+1];
+    if(next)go(next);else commit();
+  });
+  frame.addEventListener('load',()=>{
+    const toolbar=frame.contentDocument?.querySelector('.prose-toolbar');
+    if(!toolbar)return;
+    const back=frame.contentDocument.createElement('button');
+    back.type='button';
+    back.textContent='返回开局';
+    back.addEventListener('click',()=>{frame.hidden=true;root.hidden=false;go('review');});
+    const settingsButton=toolbar.querySelector('#reader-settings');
+    const actions=frame.contentDocument.createElement('div');
+    actions.style.cssText='display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:3px 6px';
+    toolbar.append(actions);
+    actions.append(back,settingsButton);
+  });
+  document.addEventListener('fullscreenchange',()=>{
+    const button=root.querySelector('[data-fullscreen]');
+    if(button)button.textContent=document.fullscreenElement?'退出全屏':'进入全屏';
+  });
+  render();
+})();
+</script></html>
