@@ -577,7 +577,60 @@ html:not([data-motion=full]) .prose-skill[data-arrival] *{animation:none}
   [data-reader=sky] .prose-skill{padding:9px 12px}
 }
 </style><style>.dp-art-view{color:#f7dfad;background:#182524;border:1px solid #b9986c;padding:12px;width:min(470px,90vw);max-height:92vh;margin:auto}.dp-art-view::backdrop{background:#091011c9}.dp-art-view>img{display:block;width:100%;height:min(62vh,620px);object-fit:contain;margin:8px auto}.dp-art-view div{display:flex;align-items:center;justify-content:space-evenly;gap:7px}.dp-art-view button,.dp-face{cursor:pointer;background:#2e3e38;color:#efd59b;border:1px solid #ab946d;padding:5px}.dp-face{float:left;margin-right:6px;border-radius:50%;padding:0;width:32px;height:32px;overflow:hidden}.dp-face img{width:100%;height:100%;object-fit:cover;object-position:50% 23%}[data-gallery]{cursor:pointer}[data-original-name]{object-position:50% 23%}
-.stage{justify-content:flex-end;max-width:none}.stage>.chat{display:none}#dp #panel{height:calc(100dvh - var(--dock-height,70px));max-height:none}#dp[data-open=false] #panel{visibility:hidden}</style><style>@media(max-width:640px){
+.stage{justify-content:flex-end;max-width:none}.stage>.chat{display:none}#dp #panel{height:calc(100dvh - var(--dock-height,70px));max-height:none}#dp[data-open=false] #panel{visibility:hidden}</style><style>body[data-skin=stone]{--dock-bg:linear-gradient(110deg,#30291f,#1a1916 64%,#30271c);--dock-ink:#f4e4c9;--dock-muted:#d1b991;--dock-line:#776044;--dock-ac:#edc177;--meter-0:#e87d62;--meter-1:#ebbd70}
+body[data-skin=fire]{--dock-bg:radial-gradient(ellipse at 35% 100%,#12353e,transparent 65%),#080f1b;--dock-ink:#dcf9f1;--dock-muted:#9cbfc7;--dock-line:#39606c;--dock-ac:#73ead0;--meter-0:#e397bc;--meter-1:#64e6cf}
+body[data-skin=sky]{--dock-bg:linear-gradient(110deg,#f6f5e9,#e6eef3 60%,#f5f7f6);--dock-ink:#223c50;--dock-muted:#4c6576;--dock-line:#a6b9c4;--dock-ac:#38667b;--meter-0:#af6854;--meter-1:#54849b}
+#dock.dock{display:grid;grid-template-columns:minmax(105px,1.05fr) minmax(95px,1fr) minmax(90px,1.25fr) auto 36px;align-items:center;gap:clamp(8px,1.3vw,20px);padding:5px 10px;height:68px;box-sizing:border-box;overflow:hidden;background:var(--dock-bg);color:var(--dock-ink);border-top:1px solid var(--dock-line)}
+#dock>*{min-width:0}#dock>*+*::before{display:none}#dock button{color:inherit;cursor:pointer;touch-action:manipulation}
+#dock::after{display:none}
+#toast{pointer-events:none}
+#dock .ms-who{display:flex;flex-direction:row;gap:10px;align-items:center;justify-content:flex-start;padding:0;width:auto}
+#dock .ms-name,#dock .ms-scene{display:flex;flex-flow:column;align-items:flex-start;justify-content:center;min-width:0;padding:0;gap:3px;text-align:left;background:transparent}
+#dock .ms-name b,#dock .ms-name small,#dock .ms-scene>*{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.03em;line-height:1.3}
+#dock .ms-name b{font-size:17px;color:var(--dock-ink)}#dock .ms-name small,#dock .ms-scene span{color:var(--dock-muted);font-size:12px}
+#dock .ms-scene time{color:var(--dock-ac);font-size:13px;font-weight:600}
+#dock .ms-face,#dock .ms-mini-face{box-sizing:border-box;flex:none;display:grid;place-items:center;position:relative;width:54px;height:54px;padding:0;margin:0;overflow:hidden;border-radius:50%;border:1px solid var(--dock-ac);background:color-mix(in srgb,var(--dock-line) 25%,transparent);font:600 16px/1 serif}
+#dock .ms-face img,#dock .ms-mini-face img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 23%}
+#dock .ms-mini-face{width:32px;height:32px;font-size:11px;border-color:var(--dock-line)}
+#dock .ms-cast{display:flex;align-items:center;justify-content:flex-end;gap:5px;padding:0}
+#dock .ms-cast [data-go]{min-width:25px;min-height:28px;padding:0 3px;color:var(--dock-muted);font-size:11px}
+#dock .ms-meters{display:grid;align-content:center;gap:6px}
+.ms-meter{display:grid;grid-template-columns:auto minmax(12px,1fr) 3ch;align-items:center;gap:5px;font-size:12px}
+.ms-meter em{color:var(--dock-muted);font-size:11px;font-style:normal}.ms-meter b{text-align:right;font-variant-numeric:tabular-nums}.ms-meter i{display:block;height:5px;overflow:hidden;border-radius:2px;background:color-mix(in srgb,var(--dock-line) 45%,transparent)}.ms-meter s{display:block;width:var(--pct);height:100%;background:var(--bar)}
+#dock .dk-toggle{display:grid;place-items:center;height:40px;width:100%;padding:0;border:0;border-inline-start:1px solid var(--dock-line);color:var(--dock-ac);background:transparent}
+#dock button:focus-visible,#panel nav button:focus-visible{outline:2px solid var(--dock-ac);outline-offset:-2px}
+body.slim #dock.dock{height:44px;padding-block:2px}body.slim #dock .ms-face{width:36px;height:36px}
+@media(max-width:640px){
+  #dock.dock{grid-template-columns:minmax(0,1fr) minmax(90px,28%) 36px;grid-template-rows:44px 30px;height:84px;gap:1px 7px;padding:4px 8px}
+  #dock .ms-who{grid-area:1/1;gap:7px}#dock .ms-face{width:39px;height:39px}#dock .ms-name b{font-size:16px}
+  #dock .ms-meters{grid-area:1/2;gap:4px}#dock .dk-toggle{grid-area:1/3}
+  #dock .ms-scene{grid-area:2/1/3/4;align-self:stretch;margin-right:112px;flex-direction:row;justify-content:flex-start;align-items:center;gap:7px;border-top:1px solid var(--dock-line)}
+  #dock .ms-scene time{flex:none;font-size:11px}#dock .ms-scene span{font-size:11px}
+  #dock .ms-cast{grid-area:2/1/3/4;justify-self:end;align-self:stretch;gap:3px;border-top:1px solid var(--dock-line)}
+  #dock .ms-mini-face{width:25px;height:25px;font-size:10px}
+  body.slim #dock.dock{height:44px;grid-template-rows:38px}body.slim #dock .ms-scene,body.slim #dock .ms-cast{display:none}
+  body.slim #dock .dk-toggle{height:36px}
+  #dp #panel{display:flex;flex-direction:column;overflow:hidden}#panel>#body{flex:1 1 0;min-height:0;min-width:0;position:relative;padding:14px 12px 22px;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:auto}
+  #panel>nav:is(#rail,#tabs){position:relative;inset:auto;order:5;z-index:8;flex:none;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;width:100%;height:auto;margin:0;padding:2px 3px;background:var(--dock-bg);border:0;border-top:1px solid var(--dock-line)}
+  #panel>nav .tab{display:grid;place-items:center;position:relative;writing-mode:horizontal-tb;min-width:0;width:100%;height:40px;margin:0;padding:0;letter-spacing:0;font-size:13px;text-align:center;clip-path:none;transform:none;color:var(--dock-muted);background:transparent;border:0}
+  #panel>nav .tab[aria-selected=true]{color:var(--dock-ink);box-shadow:inset 0 -2px var(--dock-ac)}
+  #panel>nav .tab .carve{color:inherit;text-shadow:none}#panel>nav .tab::after,#panel>nav .tab::before,#panel>nav .ind{display:none}
+  #panel>#scene{height:clamp(94px,15dvh,136px);min-height:0;flex:none}#panel:not(:has([data-tab=hero][aria-selected=true]))>#scene{display:none}
+  #body :is(.fed-cols,.fed-two,.fed-rows){min-width:0}#body .fed-cols{grid-template-columns:minmax(0,1fr)}
+  #body :is(.fed-card,.fed-row,.fd-record,.setting-row,.field,.pg,.body,.col){min-width:0;max-width:100%}
+  #body :is(.fed-name,.fed-kv dd,.art-n,.who-r,.lead-id,.option,.btn,.bag-item){overflow-wrap:anywhere}
+  #body .option{min-height:48px;padding:8px 10px}#body .settings-page .options{grid-template-columns:repeat(2,minmax(0,1fr))}#body .settings-page .theme-options{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #body .setting-row,#body .linkrow{flex-wrap:wrap;gap:6px}#body .linkrow input{flex:1 1 100px;min-width:0}
+  #body .avatar-row{grid-template-columns:36px minmax(0,1fr)}#body .avatar-row>.setting-row{grid-column:2}#body .avatar-row>.linkrow{grid-column:1/-1}
+  #body .who-n,#body .lead h2{font-size:25px}#body .gauge b{font-size:28px}#body .node-v{font-size:22px}
+  #body .chart{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;min-height:0}#body #lotus{width:min(178px,58vw);height:auto;aspect-ratio:1;scale:1}
+  #body #lotus canvas{max-width:100%;height:auto;left:0;bottom:0}#body .who{gap:8px;flex-wrap:wrap}
+  #body .fd-arts,#body .lead{gap:10px}#body .fd-art-name{min-width:0}
+  #body .arts,#body .gear{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+  #body .art.big .ring{width:60px;height:60px}body[data-skin=fire] #body .art.big{grid-template-columns:60px minmax(0,1fr) auto;gap:5px 8px}
+  #body .art.big .art-s b{font-size:28px}
+}
+</style><style>@media(max-width:640px){
   html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   #body .fed-name,.fedroot .fed-name{font-size:15px}#body .fed-head h2{font-size:17px}
   #body .fed-full .fd-portrait h3{font-size:20px}#body .fd-realm-info h4,#body .fd-art-name h4{font-size:17px}
@@ -900,6 +953,7 @@ document.fonts?.ready.then(() => { moveInd(); meridians(); });
 </script>
 <script>// 与斗罗联邦一致的卡片概要 / 完整档案，以及人物名册展开方式。
 const DP_HOST=window.frameElement.dpView, defaults=DP_HOST.defaults, KEY=DP_HOST.key;
+DP_HOST.settings.avatars ??= {}; if(!Array.isArray(DP_HOST.settings.tracks))DP_HOST.settings.tracks=[];
 let settings=DP_HOST.settings,linkOpen='',clearArmed=false,selectedTrack=DP_HOST.selectedTrack||0,toastTimer;
 const audio=DP_HOST.audio;
 function save(){DP_HOST.settings=settings;DP_HOST.selectedTrack=selectedTrack;DP_HOST.save()}
@@ -1011,11 +1065,11 @@ const archive=recordEntries(S.人物归档);return wrap(`${head('人物',`已建
 // 设置页与上一稿共用，主题主体由原样稿接管。
 function optionGroup(key,options){return `<div class="options ${key==='theme'?'theme-options':''}" role="group" aria-label="${esc(key)}">${options.map(([val,label,note,colors])=>`<button class="option" data-setting="${key}" data-value="${val}" aria-pressed="${settings[key]===val}"><b>${label}</b><small>${note}</small>${colors?`<span class="swatch">${colors.map(c=>`<i style="background:${c}"></i>`).join('')}</span>`:''}</button>`).join('')}</div>`}
 const settingSection=(title,note,content)=>`<section class="setting-sec"><h3>${title}</h3><p>${note}</p>${content}</section>`;
-function settingsPage(){const people=[S.主角.姓名,...Object.keys(S.人物),...Object.keys(S.伴侣),...Object.keys(S.兽宠)];const cur=settings.tracks[selectedTrack];return `<div class="pg settings-page">${head('设置','此设备自动记忆')} 
+function settingsPage(){const people=[...new Set([S.主角.姓名,...Object.keys(S.人物||{}),...Object.keys(S.伴侣||{}),...Object.keys(S.兽宠||{})])];const cur=settings.tracks[selectedTrack];return `<div class="pg settings-page">${head('设置','此设备自动记忆')} 
 ${settingSection('主题','三种天地，同一份修行。切换后保留当前页面与数据。',optionGroup('theme',[['stone','魔石碑','玄石为骨，金纹点亮境界。',['#15120f','#6f522c','#eebb5e']],['fire','异火','火莲居中，青焰流经两翼。',['#071018','#12b6a8','#c3a6ef']],['sky','苍穹','十二峰长卷，云海与纸间留白。',['#edf3f5','#6b99b0','#c5851a']]]))}
 ${settingSection('动效','跟随系统时，尊重设备的减少动态效果偏好。',optionGroup('motion',[['auto','跟随系统','自动使用设备偏好'],['full','完整','流光、火莲与云海'],['reduced','减弱','保留简短切页提示'],['off','关闭','静态展示，无持续动画']]))}
 ${settingSection('字号与底栏','按阅读习惯调整，立即生效。',optionGroup('font',[['std','标准字号','正文 13.5px'],['large','大字号','正文 15px']])+`<div style="height:10px"></div>`+optionGroup('dock',[['bar','完整底栏','境界、资源与当前位置'],['slim','细条底栏','减少高度，保留常用信息']]))}
-${settingSection('头像管理','上传或使用图片链接；未设置时以名字生成头像。',people.map(n=>`<div class="avatar-row">${avatar(n)}<span><strong>${esc(n)}</strong><small>${settings.avatars[n]?'自定义头像':'名字头像'}</small></span><div class="setting-row"><label class="btn">上传<input hidden type="file" accept="image/*" data-upload="${esc(n)}"></label><button class="btn" data-link="${esc(n)}">链接</button>${settings.avatars[n]?`<button class="btn" data-restore="${esc(n)}">还原</button>`:''}</div>${linkOpen===n?`<form class="linkrow" data-avatar-form="${esc(n)}"><input class="field" type="url" name="url" aria-label="${esc(n)}的图片链接" placeholder="https://…" required><button class="btn">使用图片</button></form>`:''}</div>`).join(''))}
+${settingSection('头像管理','上传或使用图片链接；未设置时以名字生成头像。',people.map(n=>`<div class="avatar-row">${avatar(n)}<span><strong>${esc(n)}</strong><small>${settings.avatars[n]?'自定义头像':DP_HOST.portraitList(n).length?'角色立绘':'名字头像'}</small></span><div class="setting-row"><label class="btn">上传<input hidden type="file" accept="image/*" data-upload="${esc(n)}"></label><button class="btn" data-link="${esc(n)}">链接</button>${settings.avatars[n]?`<button class="btn" data-restore="${esc(n)}">还原</button>`:''}</div>${linkOpen===n?`<form class="linkrow" data-avatar-form="${esc(n)}"><input class="field" type="url" name="url" aria-label="${esc(n)}的图片链接" placeholder="https://…" required><button class="btn">使用图片</button></form>`:''}</div>`).join(''))}
 ${settingSection('配乐',settings.tracks.length?`${settings.tracks.length} 首，点击曲名播放。`:'还没有曲目，填入音频链接加入。',`<div class="setting-row"><button class="btn" data-music="prev" aria-label="上一首">上一首</button><button class="btn" data-music="toggle">${audio.paused?'播放':'暂停'}</button><button class="btn" data-music="next" aria-label="下一首">下一首</button><span class="smallnote">${esc(cur?.title||'未选择曲目')}</span><label class="smallnote">音量 <input id="volume" type="range" aria-label="音量" min="0" max="1" step=".05" value="${settings.volume}"></label></div>${settings.tracks.map((t,i)=>`<div class="track ${selectedTrack===i?'active':''}"><button data-play="${i}">${i+1}. ${esc(t.title)}</button><button class="btn" data-remove-track="${i}" aria-label="删除 ${esc(t.title)}">删除</button></div>`).join('')}<form id="track-form" class="setting-row"><input class="field" type="url" name="url" placeholder="音频链接（mp3 / ogg）" aria-label="音频链接" required><input class="field" name="title" placeholder="曲名（可选）" aria-label="曲名"><button class="btn">加入列表</button></form>`)}
 ${settingSection('本地数据','主题、动效、头像和曲目只保存于本浏览器，清除不会修改人物或剧情。',`<button class="btn" id="reset">${clearArmed?'再点一次确认清除':'清除本地设置'}</button>`)}<p class="smallnote">斗破苍穹 · 三主题整合预览</p></div>`}
 
@@ -1040,9 +1094,9 @@ if(b.dataset.profile){
   trigger.focus({preventScroll:true});
 }});
 document.addEventListener('input',e=>{if(e.target.id!=='fed-search')return;const pos=e.target.selectionStart;FUI.q=e.target.value;renderBody();const n=document.querySelector('#fed-search');n.focus();try{n.setSelectionRange(pos,pos)}catch{}});
-document.addEventListener('click',e=>{const b=e.target.closest('[data-setting=theme]');if(!b)return;e.stopImmediatePropagation();settings.theme=b.dataset.value;save();DP_HOST.switchTheme(settings.theme);},true);
-document.addEventListener('click',e=>{const b=e.target.closest('[data-setting=motion]');if(!b)return;e.stopImmediatePropagation();settings.motion=b.dataset.value;save();DP_HOST.switchTheme(DP_HOST.theme);},true);
-async function play(i){if(!settings.tracks.length)return toast('先加入一首配乐。');selectedTrack=(i+settings.tracks.length)%settings.tracks.length;audio.src=settings.tracks[selectedTrack].url;audio.volume=settings.volume;try{await audio.play()}catch{toast('暂时无法播放，请检查音频链接。')}if(tab==='settings')renderBody(true)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-setting=theme]');if(!b)return;e.stopImmediatePropagation();settings.theme=b.dataset.value;save();DP_HOST.settingsScroll=document.querySelector('#body').scrollTop;DP_HOST.switchTheme(settings.theme);},true);
+document.addEventListener('click',e=>{const b=e.target.closest('[data-setting=motion]');if(!b)return;e.stopImmediatePropagation();settings.motion=b.dataset.value;save();DP_HOST.settingsScroll=document.querySelector('#body').scrollTop;DP_HOST.switchTheme(DP_HOST.theme);},true);
+async function play(i){if(!settings.tracks.length)return toast('先加入一首配乐。');selectedTrack=(i+settings.tracks.length)%settings.tracks.length;audio.src=settings.tracks[selectedTrack].url;audio.volume=settings.volume;try{await audio.play()}catch{toast('暂时无法播放，请检查音频链接。')}if(tab==='settings')render(true)}
 audio.onended=()=>play(selectedTrack+1);audio.onerror=()=>toast('音频加载失败，请更换链接。');
 document.addEventListener('click',async e=>{const t=e.target.closest('button,[data-close]');if(!t)return;
  if(t.dataset.tab||t.dataset.go||['toggle','stele','lotus'].includes(t.id)||t.classList.contains('heart'))return;
@@ -1051,12 +1105,12 @@ document.addEventListener('click',async e=>{const t=e.target.closest('button,[da
  if(t.classList.contains('heart')){t.classList.toggle('open');t.setAttribute('aria-expanded',t.classList.contains('open'));return}
  if(t.id==='stele'||t.id==='lotus'){renderBody();return}
  if(t.dataset.setting){settings[t.dataset.setting]=t.dataset.value;save();render(true);return}
- if(t.dataset.link){linkOpen=linkOpen===t.dataset.link?'':t.dataset.link;renderBody(true);return}
+ if(t.dataset.link){linkOpen=linkOpen===t.dataset.link?'':t.dataset.link;render(true);document.querySelector('[data-avatar-form] input')?.focus({preventScroll:true});return}
  if(t.dataset.restore){delete settings.avatars[t.dataset.restore];save();render(true);return}
- if(t.id==='reset'){if(!clearArmed){clearArmed=true;renderBody(true);return}audio.pause();audio.removeAttribute('src');settings=defaults();selectedTrack=0;linkOpen='';clearArmed=false;save();DP_HOST.switchTheme(settings.theme);return}
- if(t.dataset.music){if(!settings.tracks.length)return toast('先加入一首配乐。');if(t.dataset.music==='toggle'){if(!audio.paused){audio.pause();renderBody(true)}else await play(selectedTrack)}else await play(selectedTrack+(t.dataset.music==='next'?1:-1));return}
+ if(t.id==='reset'){if(!clearArmed){clearArmed=true;render(true);return}audio.pause();audio.removeAttribute('src');settings=defaults();selectedTrack=0;linkOpen='';clearArmed=false;save();DP_HOST.settingsScroll=document.querySelector('#body').scrollTop;DP_HOST.switchTheme(settings.theme);return}
+ if(t.dataset.music){if(!settings.tracks.length)return toast('先加入一首配乐。');if(t.dataset.music==='toggle'){if(!audio.paused){audio.pause();render(true)}else await play(selectedTrack)}else await play(selectedTrack+(t.dataset.music==='next'?1:-1));return}
  if(t.dataset.play!==undefined)return play(Number(t.dataset.play));
- if(t.dataset.removeTrack!==undefined){const i=Number(t.dataset.removeTrack);if(i===selectedTrack){audio.pause();audio.removeAttribute('src')}settings.tracks.splice(i,1);if(i<selectedTrack)selectedTrack--;selectedTrack=Math.max(0,Math.min(selectedTrack,settings.tracks.length-1));save();renderBody(true)}
+ if(t.dataset.removeTrack!==undefined){const i=Number(t.dataset.removeTrack);if(i===selectedTrack){audio.pause();audio.removeAttribute('src')}settings.tracks.splice(i,1);if(i<selectedTrack)selectedTrack--;selectedTrack=Math.max(0,Math.min(selectedTrack,settings.tracks.length-1));save();render(true)}
 });
 document.addEventListener('submit',e=>{if(!e.target.matches('#track-form,[data-avatar-form]'))return;e.preventDefault();const f=new FormData(e.target),url=String(f.get('url')).trim();try{if(!/^https?:$/.test(new URL(url).protocol))throw 0}catch{return toast('请填写有效的 http 或 https 链接。')}
  if(e.target.id==='track-form')settings.tracks.push({url,title:String(f.get('title')).trim()||'未命名曲目'});else{settings.avatars[e.target.dataset.avatarForm]=url;linkOpen=''}save();render(true)
@@ -1072,9 +1126,57 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});
 document.body.insertAdjacentHTML('beforeend','<div id="toast" role="status" hidden></div>');
 apply();renderDock();if(typeof renderRail==='function')renderRail();else renderTabs();
 tab=PAGES[DP_HOST.tab]?DP_HOST.tab:'hero';go(tab);
-if(DP_HOST.open===false)closePanel();
+if(DP_HOST.open===false)closePanel();if(tab==='settings')document.querySelector('#body').scrollTop=DP_HOST.settingsScroll||0;
 document.addEventListener('click',()=>{DP_HOST.open=document.querySelector('#dp').dataset.open==='true'});
 window.DoupoStatus={getData:()=>S};
+</script><script>(() => {
+  const narrow = matchMedia('(max-width:640px)');
+  const panel = document.querySelector('#panel');
+  const nav = panel.querySelector('nav');
+  const home = document.createComment('导航原位');
+  nav.before(home);
+  document.body.dataset.skin = DP_HOST.theme;
+
+  function face(name) {
+    const custom = settings.avatars?.[name];
+    const src = custom || DP_HOST.portraitUrl(name);
+    return src ? '<img alt="" src="' + esc(src) + '"' + (custom ? '' : ' data-original-name="' + esc(name) + '"') + '>' : esc(Array.from(name).slice(-2).join(''));
+  }
+  renderDock = function () {
+    const h = S.主角, t = S.时空, name = String(h.姓名 || '未命名');
+    const cast = people().filter(x => here(x.p) === '在场' && x.n !== name);
+    const cap = narrow.matches ? 3 : 4;
+    const shown = new Set();
+    const unique = cast.filter(x => !shown.has(x.n) && shown.add(x.n));
+    const realm = [h.境界?.境界, h.境界?.阶段].filter(Boolean).join(' ');
+    const action = DP_HOST.portraitList(name).length ? 'data-gallery="' + esc(name) + '"' : 'data-go="hero"';
+    const who = '<div class="dk-id ms-who"><button class="ms-face" type="button" '+action+' aria-label="查看'+esc(name)+'">'+face(name)+'</button><button type="button" data-go="hero" class="ms-name"><b>'+esc(name)+'</b><small>'+esc(realm||'未定')+'</small></button></div>';
+    const meters = '<div class="ms-meters">'+['生命','斗气'].map((k,i) => {
+      const n = Number(h[k]) || 0;
+      return '<div class="ms-meter"><em>'+k+'</em><i><s style="--pct:'+Math.min(100,Math.max(0,n))+'%;--bar:var(--meter-'+i+')"></s></i><b>'+n+'</b></div>';
+    }).join('')+'</div>';
+    const date = String(t.外界日期 || '日期未定'), location = [t.地点,t.当前幕].filter(Boolean).join(' · ');
+    const scene = '<button type="button" class="ms-scene" data-go="fate" title="'+esc(location)+'"><time>'+esc(date)+'</time><span>'+esc(location)+'</span></button>';
+    const group = unique.slice(0,cap).map(({n,key}) => '<button type="button" class="ms-mini-face" data-cast="'+esc(key)+'" aria-label="查看'+esc(n)+'档案" title="'+esc(n)+'">'+face(n)+'</button>').join('');
+    const more = unique.length > cap ? '+'+(unique.length-cap) : unique.length ? '' : '在场 0';
+    const castRow = '<div class="ms-cast" aria-label="在场人物">'+group+(more?'<button type="button" data-go="present" aria-label="查看全部在场人物">'+more+'</button>':'')+'</div>';
+    document.querySelector('#dock').innerHTML = who+meters+scene+castRow+'<button type="button" id="toggle" class="dk-toggle" aria-label="展开或收起状态栏"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 11l6-6 6 6"/></svg></button>';
+    const stamp = document.querySelector('#whenTop');
+    if(stamp)stamp.textContent = date+'　'+(t.地点||'');
+  };
+  function layout(){
+    if(narrow.matches)panel.append(nav);else home.after(nav);
+    renderDock();
+  }
+  document.querySelector('#dock').addEventListener('click',event=>{
+    const key=event.target.closest('[data-cast]')?.dataset.cast;
+    if(!key)return;
+    FUI.open.add(key);go('present');
+    document.querySelector('[data-profile="'+CSS.escape(key)+'"]')?.scrollIntoView({block:'nearest'});
+  });
+  narrow.addEventListener('change',layout);
+  layout();
+})();
 </script><script>PAGES.fate=function(){
   const t=S.时空,g=S.原作指导,events=Object.entries(g.事件||{}).sort(([a],[b])=>a.localeCompare(b,'zh',{numeric:true}));
   const butterflies=Object.entries(S.蝴蝶效应||{}),changes=Object.entries(S.永久改写||{});
@@ -1137,15 +1239,8 @@ function sizeDock(){
   statusFrame.style.height=open?'min(calc(100dvh - 100px), '+(h+595)+'px)':h+'px';
   document.querySelector('#panel').inert=!open;
 }
-function dockPortrait(){
-  const id=dockRoot.querySelector('.dk-id'),name=statusHost.data.主角.姓名;
-  if(!id||id.classList.contains('ms-who')||id.querySelector('.dp-face')||!statusHost.portraitList(name).length)return;
-  const b=document.createElement('button');b.type='button';b.className='dp-face';b.dataset.gallery=name;b.setAttribute('aria-label','查看'+name+'立绘');
-  const img=new Image();img.dataset.originalName=name;img.alt=name;img.src=statusHost.portraitUrl(name);b.append(img);id.prepend(b);
-}
 new ResizeObserver(sizeDock).observe(dockRoot);
 new MutationObserver(sizeDock).observe(panelRoot,{attributes:true,attributeFilter:['data-open']});
-new MutationObserver(dockPortrait).observe(dockRoot,{childList:true});
-sizeDock();dockPortrait();
+sizeDock();
 </script></body>
 </html>

@@ -187,10 +187,10 @@
   },
   "cover": "card-cover.png",
   "integrity": {
-    "skins/stone.html": "sha256-Y/BdKgTlFRlCgWggYOsGdQ2fKkyz4zGyo2Lk8sgzRgM=",
-    "skins/fire.html": "sha256-cng3dOdaN2soGJanrq1cii/hmk+mCnmxEkTyMJ/5TGc=",
-    "skins/sky.html": "sha256-PnzaUuE4qP9nReCm5NEgW+ErbjUaIi9Njj29fSNXHiA=",
+    "skins/stone.html": "sha256-l39zRnMJkIw7c6GBCWnfgIGiRHDvXBgvBx5OvONQkvQ=",
+    "skins/fire.html": "sha256-l40t52f9DhJjacgi6OKeO+uYGhcbKqIP80TYZj2QORY=",
+    "skins/sky.html": "sha256-8RGrpheFD3F3NraYA2gHKFnmpHwDAOvuAOC+dqNvl+8=",
     "skins/opening.html": "sha256-jpsA0PxsIp2JQf99S0MpeN/CBHp/nxUQxbaLe3lUf48=",
-    "skins/prose.json": "sha256-VJS6J0eKiHm98U2usHzm5Zi1fKcUD/5atXiZhQiDqB8="
+    "skins/prose.json": "sha256-Gksr3x71hHeuX45ySjYXvZghlGKTL6SFi3EPQ7rBYx0="
   }
 }
