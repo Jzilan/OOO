@@ -583,6 +583,8 @@ body[data-skin=sky]{--dock-bg:linear-gradient(110deg,#f6f5e9,#e6eef3 60%,#f5f7f6
 #dock.dock{display:grid;grid-template-columns:minmax(105px,1.05fr) minmax(95px,1fr) minmax(90px,1.25fr) auto 36px;align-items:center;gap:clamp(8px,1.3vw,20px);padding:5px 10px;height:68px;box-sizing:border-box;overflow:hidden;background:var(--dock-bg);color:var(--dock-ink);border-top:1px solid var(--dock-line)}
 #dock>*{min-width:0}#dock>*+*::before{display:none}#dock button{color:inherit;cursor:pointer;touch-action:manipulation}
 #dock::after{display:none}
+body[data-skin=sky] #dock::before{inset:0;width:auto;height:auto;pointer-events:none;background-size:60% 100%;background-repeat:no-repeat;animation:dock-mist 26s linear infinite}
+@keyframes dock-mist{from{background-position:-150% center}to{background-position:250% center}}
 #toast{pointer-events:none}
 #dock .ms-who{display:flex;flex-direction:row;gap:10px;align-items:center;justify-content:flex-start;padding:0;width:auto}
 #dock .ms-name,#dock .ms-scene{display:flex;flex-flow:column;align-items:flex-start;justify-content:center;min-width:0;padding:0;gap:3px;text-align:left;background:transparent}
@@ -651,6 +653,30 @@ body.slim #dock.dock{height:44px;padding-block:2px}body.slim #dock .ms-face{widt
 .dp-guide ol{padding:0 0 0 14px;margin:8px 0;list-style:none}.dp-guide li{border-left:1px solid var(--line);padding:3px 8px 12px 15px;position:relative}.dp-guide li::before{content:'';position:absolute;left:-4px;top:11px;width:7px;height:7px;border-radius:50%;background:var(--line)}.dp-guide li[aria-current]::before{background:var(--accent);outline:3px solid var(--wash)}.dp-guide li[aria-current] b{color:var(--accent)}
 .dp-guide li small{flex:none}.dp-guide footer{border-block-start:1px solid var(--line);padding:6px 0}.dp-guide article+article{margin-top:6px}.dp-guide .guide-fork{display:grid;grid-template-columns:1fr 1fr;gap:10px}.dp-guide button{color:var(--accent);text-decoration:underline}
 @media(max-width:640px){.dp-guide header,.dp-guide article{padding:10px}.dp-guide h2{font-size:19px}.dp-guide h3{font-size:15px}.dp-guide{font-size:13px}}
+.dp-pack{--pack-line:var(--dock-line);--pack-title:var(--dock-ink);--pack-accent:var(--dock-ac);--pack-muted:var(--dock-muted);--pack-surface:linear-gradient(120deg,#302a20,#1b1916);color:var(--pack-title)}
+body[data-skin=fire] .dp-pack{--pack-surface:linear-gradient(120deg,#102631,#0a121c)}
+body[data-skin=sky] .dp-pack{--pack-surface:linear-gradient(120deg,#faf9ef,#eaf1f4)}
+.dp-pack section+section{margin-top:1.4rem}
+.pack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,275px),1fr));align-items:start;gap:8px 12px}
+.pack-entry{min-width:0;color:var(--pack-title);border:1px solid var(--pack-line);background:var(--pack-surface)}
+body[data-skin=stone] .pack-entry{border-inline-start:3px double var(--pack-accent)}
+body[data-skin=fire] .pack-entry{border-radius:12px 2px}
+body[data-skin=sky] .pack-entry{border-inline:0;border-block-start:2px double var(--pack-line)}
+.pack-entry>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto 10px;gap:8px;align-items:center;min-height:46px;padding:8px 12px;user-select:none}
+.pack-entry>summary::-webkit-details-marker{display:none}
+.pack-entry>summary::after{content:'';display:block;width:6px;height:6px;border:solid var(--pack-accent);border-width:0 1.5px 1.5px 0;transform:rotate(45deg);justify-self:end}
+.pack-entry[open]>summary::after{transform:rotate(225deg)}
+.pack-entry>summary:focus-visible{outline:2px solid var(--pack-accent);outline-offset:-2px}
+.pack-entry>summary>b{font-size:1.05em;line-height:1.45;overflow-wrap:anywhere}
+.pack-entry>summary>small{max-width:16em;color:var(--pack-muted);text-align:right;font-size:.84em;line-height:1.5;overflow-wrap:anywhere}
+.pack-detail{padding:3px 12px 10px;border-top:1px solid color-mix(in srgb,var(--pack-line) 60%,transparent);line-height:1.7;overflow-wrap:anywhere;white-space:normal}
+.pack-fields,.pack-fields dd{margin:0}.pack-fields>div{display:grid;grid-template-columns:minmax(4.5em,24%) minmax(0,1fr);gap:8px;padding:5px 0}
+.pack-fields>div+div{border-top:1px solid color-mix(in srgb,var(--pack-line) 28%,transparent)}
+.pack-fields dt,.pack-key,.pack-empty,.pack-muted{color:var(--pack-muted)}.pack-fields dd{min-width:0;white-space:pre-wrap}
+.pack-detail ul{margin:0;padding-inline-start:1.2em}.pack-detail h5,.pack-key{margin:5px 0;font-size:.9em}
+.pack-detail .pack-entry+.pack-entry{margin-top:5px}.pack-detail .pack-entry>summary{min-height:38px}
+.pack-detail .pack-fields .pack-fields>div{grid-template-columns:minmax(3em,auto) minmax(0,1fr)}
+@media(max-width:640px){.pack-grid{grid-template-columns:minmax(0,1fr)}.pack-entry>summary>small{max-width:11em}.pack-detail .pack-entry .pack-fields>div{display:block}.pack-detail .pack-entry .pack-fields dt{font-size:.87em}}
 </style></head>
 <body>
 
@@ -811,16 +837,66 @@ function pgFolk() {
 }
 
 function pgBag() {
-  const rec = Object.values(S.炼丹.炼制记录);
-  return `<div class="pg"><div class="cap">装备<small>${Object.keys(S.装备).length}</small></div>
-    <div class="gear">${Object.entries(S.装备).map(([n, e]) => `<article><h4>${esc(n)}</h4><small>${esc(e.类别)} ／ ${esc(e.来源)}</small><p>${esc(e.能力)}</p><p>${esc(e.简介)}</p></article>`).join('')}</div>
-    <div class="cap">纳戒<small>${Object.keys(S.储物空间).length}</small></div>
-    <div class="bag">${Object.entries(S.储物空间).map(([n, it]) => `<div class="item"><b>${esc(n)}</b><span>${it.数量 == null ? '—' : `<span data-count="${it.数量}">0</span>`}<small>${esc(it.单位)}</small></span><em>${esc(it.类别)}${it.等阶 !== '未定' ? ' · ' + esc(it.等阶) : ''}${it.简介 ? ' ／ ' + esc(it.简介) : ''}</em></div>`).join('')}</div>
-    <div class="cap">丹录<small>已掌握 ${Object.keys(S.炼丹.已掌握丹方).length} 方</small></div>
-    ${rec.map(r => `<div class="rec"><i class="drop" style="--s:14px;--c:${r.结果 === '成功' ? 'var(--amb)' : 'var(--rose)'}"></i>
-      <div><b>${esc(r.丹方ID)} · ${esc(r.结果)}</b><small>${esc(r.结算时间)} ／ 耗 ${r.消耗.map(m => esc(m.物品名) + '×' + (m.数量 ?? '?')).join('、')}${r.产出.length ? ' ／ 得 ' + r.产出.map(m => esc(m.物品名) + '×' + (m.数量 ?? '?')).join('、') : ''}</small></div>
-      <div><div class="roll" style="--rate:${r.成功率};--rnd:${r.随机值}"><i></i><u></u></div><small>成丹率 ${r.成功率} ／ 掷得 ${r.随机值}</small></div></div>`).join('')}</div>`;
+  const host = window.frameElement.dpView;
+  const open = host.bagOpen || (host.bagOpen = new Set());
+  const stock = S.储物空间 || {}, alchemy = S.炼丹 || {};
+  function value(v) {
+    if (v == null || v === '') return '<span class="pack-muted">未记录</span>';
+    if (Array.isArray(v)) return v.length ? '<ul>'+v.map(x=>'<li>'+value(x)+'</li>').join('')+'</ul>' : '无';
+    if (typeof v === 'object') return Object.keys(v).length ? fields(v) : '未记录';
+    if (typeof v === 'boolean') return v ? '是' : '否';
+    return esc(v);
+  }
+  function fields(record, materials) {
+    if (!record || typeof record !== 'object' || Array.isArray(record)) return value(record);
+    const entries = Object.entries(record);
+    if (!entries.length) return '未记录';
+    return '<dl class="pack-fields">'+entries.map(([label,v])=>{
+      const html = materials && ['消耗','产出'].includes(label) && Array.isArray(v)
+        ? materialList(materials,label,v) : value(v);
+      return '<div><dt>'+esc(label)+'</dt><dd>'+html+'</dd></div>';
+    }).join('')+'</dl>';
+  }
+  function row(path, name, note, body) {
+    const id = JSON.stringify(path);
+    return '<details class="pack-entry" data-pack="'+esc(id)+'"'+(open.has(id)?' open':'')+'><summary><b>'+esc(name)+'</b><small>'+esc(note||'')+'</small></summary><div class="pack-detail">'+body+'</div></details>';
+  }
+  function amount(item) {
+    return item?.数量 == null ? '数量未记' : String(item.数量)+(item.单位||'');
+  }
+  function materialList(recordId, label, list) {
+    if (!list.length) return '无';
+    return list.map((m,i)=>{
+      if (!m || typeof m!=='object') return value(m);
+      const name=m.物品名||'未记名材料';
+      let body=fields(m);
+      if (Object.hasOwn(stock,name)) body+='<h5>本层纳戒记录</h5>'+fields(stock[name]);
+      return row(['丹录',recordId,label,i],name,amount(m),body);
+    }).join('');
+  }
+  function section(title, group, records) {
+    const entries=Object.entries(records||{});
+    const cards=entries.map(([key,data])=>{
+      const d=data||{};
+      let name=key,note=d.类别||'';
+      if(group==='纳戒') note=[d.类别,amount(d)].filter(Boolean).join(' · ');
+      if(group==='丹方') note=d.版本?'版本 '+d.版本:'';
+      if(group==='自拟丹方'){name=d.名称||key;note=d.版本?'版本 '+d.版本:'';}
+      if(group==='丹录'){name=d.丹方ID||key;note=[d.结果,d.结算时间].filter(Boolean).join(' · ');}
+      let body=fields(data,group==='丹录'?key:undefined);
+      if(name!==key)body='<p class="pack-key">'+(group==='丹录'?'记录编号':'丹方编号')+'　'+esc(key)+'</p>'+body;
+      return row([group,key],name,note,body);
+    }).join('');
+    return '<section><div class="cap">'+title+'<small>'+entries.length+'</small></div>'+(cards?'<div class="pack-grid">'+cards+'</div>':'<p class="pack-empty">暂无记录</p>')+'</section>';
+  }
+  return '<div class="pg dp-pack">'+section('装备','装备',S.装备)+section('纳戒','纳戒',stock)+section('已掌握丹方','丹方',alchemy.已掌握丹方)+(Object.keys(alchemy.自拟丹方||{}).length?section('自拟丹方','自拟丹方',alchemy.自拟丹方):'')+section('丹录','丹录',alchemy.炼制记录)+'</div>';
 }
+document.addEventListener('toggle', event => {
+  const el=event.target;
+  if (!el.matches?.('.pack-entry[data-pack]') || !el.isConnected) return;
+  const state=window.frameElement.dpView.bagOpen;
+  if(el.open)state.add(el.dataset.pack);else state.delete(el.dataset.pack);
+}, true);
 
 function pgFate() {
   const t = S.时空, g = S.原作指导, SC = { 已发生: 'var(--fl)', 已改写: 'var(--amb)', 未发生: 'var(--tx2)', 无法发生: 'var(--rose)' };
@@ -963,7 +1039,7 @@ function apply(){document.documentElement.dataset.motion=motion();document.body.
 function head(title,note=''){return `<header class="fed-head"><h2>${esc(title)}</h2><small>${esc(note)}</small></header>`}
 function avatar(n,cls='av'){
   const custom=settings.avatars[n],src=custom||DP_HOST.portraitUrl(n),gallery=DP_HOST.portraitList(n).length;
-  return `<span class="${cls}" ${gallery?'data-gallery="'+esc(n)+'" tabindex="0" role="button" aria-label="查看'+esc(n)+'立绘"':''}>${src?`<img ${custom?'':'data-original-name="'+esc(n)+'"'} alt="${esc(n)}的头像" src="${esc(src)}">`:esc(Array.from(n)[0]||'人')}</span>`;
+  return `<span class="${cls}" ${gallery?'data-gallery="'+esc(n)+'" tabindex="0" role="button" aria-label="查看'+esc(n)+'头像"':''}>${src?`<img ${custom?'':'data-original-name="'+esc(n)+'"'} alt="${esc(n)}的头像" src="${esc(src)}">`:esc(Array.from(n)[0]||'人')}</span>`;
 }
 const FUI=DP_HOST.peopleUI||(DP_HOST.peopleUI={q:'',type:'全部',faction:'全部',open:new Set(),hearts:new Set()});
 const recordEntries=v=>v&&typeof v==='object'?Object.entries(v):[];
@@ -1069,7 +1145,7 @@ function settingsPage(){const people=[...new Set([S.主角.姓名,...Object.keys
 ${settingSection('主题','三种天地，同一份修行。切换后保留当前页面与数据。',optionGroup('theme',[['stone','魔石碑','玄石为骨，金纹点亮境界。',['#15120f','#6f522c','#eebb5e']],['fire','异火','火莲居中，青焰流经两翼。',['#071018','#12b6a8','#c3a6ef']],['sky','苍穹','十二峰长卷，云海与纸间留白。',['#edf3f5','#6b99b0','#c5851a']]]))}
 ${settingSection('动效','跟随系统时，尊重设备的减少动态效果偏好。',optionGroup('motion',[['auto','跟随系统','自动使用设备偏好'],['full','完整','流光、火莲与云海'],['reduced','减弱','保留简短切页提示'],['off','关闭','静态展示，无持续动画']]))}
 ${settingSection('字号与底栏','按阅读习惯调整，立即生效。',optionGroup('font',[['std','标准字号','正文 13.5px'],['large','大字号','正文 15px']])+`<div style="height:10px"></div>`+optionGroup('dock',[['bar','完整底栏','境界、资源与当前位置'],['slim','细条底栏','减少高度，保留常用信息']]))}
-${settingSection('头像管理','上传或使用图片链接；未设置时以名字生成头像。',people.map(n=>`<div class="avatar-row">${avatar(n)}<span><strong>${esc(n)}</strong><small>${settings.avatars[n]?'自定义头像':DP_HOST.portraitList(n).length?'角色立绘':'名字头像'}</small></span><div class="setting-row"><label class="btn">上传<input hidden type="file" accept="image/*" data-upload="${esc(n)}"></label><button class="btn" data-link="${esc(n)}">链接</button>${settings.avatars[n]?`<button class="btn" data-restore="${esc(n)}">还原</button>`:''}</div>${linkOpen===n?`<form class="linkrow" data-avatar-form="${esc(n)}"><input class="field" type="url" name="url" aria-label="${esc(n)}的图片链接" placeholder="https://…" required><button class="btn">使用图片</button></form>`:''}</div>`).join(''))}
+${settingSection('头像管理','上传或使用图片链接；未设置时以名字生成头像。',people.map(n=>`<div class="avatar-row">${avatar(n)}<span><strong>${esc(n)}</strong><small>${settings.avatars[n]?'自定义头像':DP_HOST.portraitList(n).length?'角色头像':'名字头像'}</small></span><div class="setting-row"><label class="btn">上传<input hidden type="file" accept="image/*" data-upload="${esc(n)}"></label><button class="btn" data-link="${esc(n)}">链接</button>${settings.avatars[n]?`<button class="btn" data-restore="${esc(n)}">还原</button>`:''}</div>${linkOpen===n?`<form class="linkrow" data-avatar-form="${esc(n)}"><input class="field" type="url" name="url" aria-label="${esc(n)}的图片链接" placeholder="https://…" required><button class="btn">使用图片</button></form>`:''}</div>`).join(''))}
 ${settingSection('配乐',settings.tracks.length?`${settings.tracks.length} 首，点击曲名播放。`:'还没有曲目，填入音频链接加入。',`<div class="setting-row"><button class="btn" data-music="prev" aria-label="上一首">上一首</button><button class="btn" data-music="toggle">${audio.paused?'播放':'暂停'}</button><button class="btn" data-music="next" aria-label="下一首">下一首</button><span class="smallnote">${esc(cur?.title||'未选择曲目')}</span><label class="smallnote">音量 <input id="volume" type="range" aria-label="音量" min="0" max="1" step=".05" value="${settings.volume}"></label></div>${settings.tracks.map((t,i)=>`<div class="track ${selectedTrack===i?'active':''}"><button data-play="${i}">${i+1}. ${esc(t.title)}</button><button class="btn" data-remove-track="${i}" aria-label="删除 ${esc(t.title)}">删除</button></div>`).join('')}<form id="track-form" class="setting-row"><input class="field" type="url" name="url" placeholder="音频链接（mp3 / ogg）" aria-label="音频链接" required><input class="field" name="title" placeholder="曲名（可选）" aria-label="曲名"><button class="btn">加入列表</button></form>`)}
 ${settingSection('本地数据','主题、动效、头像和曲目只保存于本浏览器，清除不会修改人物或剧情。',`<button class="btn" id="reset">${clearArmed?'再点一次确认清除':'清除本地设置'}</button>`)}<p class="smallnote">斗破苍穹 · 三主题整合预览</p></div>`}
 
@@ -1199,21 +1275,12 @@ document.addEventListener('click',event=>{
 });
 if(DP_HOST.tab==='fate')renderBody();
 </script><script>function installGallery(doc,host,openInParent){
-  const drawer=doc.createElement('dialog');drawer.className='dp-art-view';drawer.setAttribute('aria-label','人物立绘');
-  const picture=doc.createElement('img'),caption=doc.createElement('strong'),number=doc.createElement('span');
-  function button(label,action){const b=doc.createElement('button');b.type='button';b.textContent=label;b.onclick=action;return b;}
-  let current='';
-  const choose=delta=>{const total=host.portraitList(current).length;
-    host.choosePortrait(current,(host.portraitIndex(current)+delta+total)%total);update();};
-  const prev=button('上一张',()=>choose(-1)),next=button('下一张',()=>choose(1)),close=button('关闭',()=>drawer.close());
-  const bar=doc.createElement('div');bar.append(prev,number,next,close);drawer.append(caption,picture,bar);
-  function update(){
-    const n=host.portraitList(current).length;
-    caption.textContent=current;number.textContent=(host.portraitIndex(current)+1)+' / '+n;
-    picture.src=host.portraitUrl(current);picture.alt=current+'立绘';prev.disabled=next.disabled=n<2;
-  }
+  const drawer=doc.createElement('dialog');drawer.className='dp-art-view';drawer.setAttribute('aria-label','角色头像');
+  const picture=doc.createElement('img'),caption=doc.createElement('strong'),close=doc.createElement('button');
+  close.type='button';close.textContent='关闭';close.onclick=()=>drawer.close();
+  const bar=doc.createElement('div');bar.append(close);drawer.append(caption,picture,bar);
   function showName(name){
-    current=name;update();
+    caption.textContent=name;picture.alt=name+'头像';picture.src=host.portraitUrl(name);
     if(!drawer.isConnected)doc.body.append(drawer);
     if(!drawer.open)drawer.showModal();
   }

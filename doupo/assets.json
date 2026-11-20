@@ -169,6 +169,134 @@
       "portraits/51756d9cd1ac5c66.webp"
     ]
   },
+  "avatars": {
+    "云韵": [
+      "avatars/云韵.webp"
+    ],
+    "小医仙": [
+      "avatars/小医仙.webp"
+    ],
+    "美杜莎": [
+      "avatars/美杜莎.webp"
+    ],
+    "慕青鸾": [
+      "avatars/慕青鸾.webp"
+    ],
+    "曹颖": [
+      "avatars/曹颖.webp"
+    ],
+    "月儿": [
+      "avatars/月儿.webp"
+    ],
+    "月媚": [
+      "avatars/月媚.webp"
+    ],
+    "柳菲儿": [
+      "avatars/柳菲儿.webp"
+    ],
+    "琥嘉": [
+      "avatars/琥嘉.webp"
+    ],
+    "紫妍": [
+      "avatars/紫妍.webp"
+    ],
+    "纳兰嫣然": [
+      "avatars/纳兰嫣然.webp"
+    ],
+    "若琳": [
+      "avatars/若琳.webp"
+    ],
+    "萧玉": [
+      "avatars/萧玉.webp"
+    ],
+    "萧薰儿": [
+      "avatars/萧薰儿.webp"
+    ],
+    "雅妃": [
+      "avatars/雅妃.webp"
+    ],
+    "青鳞": [
+      "avatars/青鳞.webp"
+    ],
+    "丹晨": [
+      "avatars/丹晨.webp"
+    ],
+    "凌导师": [
+      "avatars/凌导师.webp"
+    ],
+    "凤清儿": [
+      "avatars/凤清儿.webp"
+    ],
+    "凰轩": [
+      "avatars/凰轩.webp"
+    ],
+    "唐火儿": [
+      "avatars/唐火儿.webp"
+    ],
+    "柳菲": [
+      "avatars/柳菲.webp"
+    ],
+    "欣蓝": [
+      "avatars/欣蓝.webp"
+    ],
+    "罗小夭": [
+      "avatars/罗小夭.webp"
+    ],
+    "菲儿": [
+      "avatars/菲儿.webp"
+    ],
+    "萧潇": [
+      "avatars/萧潇.webp"
+    ],
+    "云山": [
+      "avatars/云山.webp"
+    ],
+    "修罗": [
+      "avatars/修罗.webp"
+    ],
+    "古河": [
+      "avatars/古河.webp"
+    ],
+    "地魔老祖": [
+      "avatars/地魔老祖.webp"
+    ],
+    "天火尊者": [
+      "avatars/天火尊者.webp"
+    ],
+    "慕骨老人": [
+      "avatars/慕骨老人.webp"
+    ],
+    "摘星尊者": [
+      "avatars/摘星尊者.webp"
+    ],
+    "海波东": [
+      "avatars/海波东.webp"
+    ],
+    "药老": [
+      "avatars/药老.webp"
+    ],
+    "萧炎": [
+      "avatars/萧炎.webp"
+    ],
+    "萧玄": [
+      "avatars/萧玄.webp"
+    ],
+    "血刀圣者": [
+      "avatars/血刀圣者.webp"
+    ],
+    "魂天帝": [
+      "avatars/魂天帝.webp"
+    ],
+    "花玉": [
+      "avatars/花玉.webp"
+    ],
+    "米特尔·腾山": [
+      "avatars/米特尔·腾山.webp"
+    ],
+    "黑湮军统领": [
+      "avatars/黑湮军统领.webp"
+    ]
+  },
   "covers": {
     "00": "covers/00.webp",
     "01": "covers/01.webp",
@@ -187,9 +315,9 @@
   },
   "cover": "card-cover.png",
   "integrity": {
-    "skins/stone.html": "sha256-l39zRnMJkIw7c6GBCWnfgIGiRHDvXBgvBx5OvONQkvQ=",
-    "skins/fire.html": "sha256-l40t52f9DhJjacgi6OKeO+uYGhcbKqIP80TYZj2QORY=",
-    "skins/sky.html": "sha256-8RGrpheFD3F3NraYA2gHKFnmpHwDAOvuAOC+dqNvl+8=",
+    "skins/stone.html": "sha256-p14u8VdQFzf71eXHVjg1f4ctVFrwM7sPL0lMkt6yGOE=",
+    "skins/fire.html": "sha256-ARcuu5D2jKhJrMRSpAogxJ8PAowRtmvlZrRDU5I+b7E=",
+    "skins/sky.html": "sha256-K6aIPNrJlsMfwg9YDEIo7vOKix4iApcDfZU6CgR6enk=",
     "skins/opening.html": "sha256-jpsA0PxsIp2JQf99S0MpeN/CBHp/nxUQxbaLe3lUf48=",
     "skins/prose.json": "sha256-Gksr3x71hHeuX45ySjYXvZghlGKTL6SFi3EPQ7rBYx0="
   }
