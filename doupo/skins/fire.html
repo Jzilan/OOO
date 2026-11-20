@@ -1044,7 +1044,7 @@ function avatar(n,cls='av'){
 const FUI=DP_HOST.peopleUI||(DP_HOST.peopleUI={q:'',type:'全部',faction:'全部',open:new Set(),hearts:new Set()});
 const recordEntries=v=>v&&typeof v==='object'?Object.entries(v):[];
 const display=v=>v===null||v===undefined||v===''?'未记录':typeof v==='boolean'?(v?'是':'否'):String(v);
-function here(p){if(p.在场状态==='在场'||p.在场状态==='不在场')return p.在场状态;const known=s=>!!s&&!['未知','未确认'].includes(s);return known(p.所在地)&&known(S.时空.地点)?(p.所在地===S.时空.地点?'在场':'不在场'):'未确认'}
+function here(p){if(['在场','不在场','未确认'].includes(p.在场状态))return p.在场状态;const known=s=>!!s&&!['未知','未确认'].includes(s);return known(p.所在地)&&known(S.时空.地点)?(p.所在地===S.时空.地点?'在场':'不在场'):'未确认'}
 function people(){return ['人物','伴侣','兽宠'].flatMap(group=>recordEntries(S[group]).map(([n,p])=>({n,p,group,key:group+'::'+n}))).sort((a,b)=>Number(here(b.p)==='在场')-Number(here(a.p)==='在场'))}
 function kv(rows){return `<dl class="fed-kv">${rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v&&typeof v==='object'?kv(recordEntries(v)):esc(display(v))}</dd>`).join('')}</dl>`}
 function section(title,body){return `<section class="fed-block"><h3>${esc(title)}</h3>${body}</section>`}
@@ -1094,7 +1094,7 @@ function detailSoul(p){const soul=p.灵魂境界||{},stageNo=SOUL_STAGE.indexOf(
 function profile({n:name, p, group}) {
   const isPet = group === '兽宠';
   const covered = new Set(['性别','年龄','关系','所属组织','所在地','在场状态','外貌','穿着',
-    '当前状态','心声','好感度','境界','灵魂境界','炼药师品级','功法','斗技','能力建档','NSFW数据']);
+    '当前状态','心声','好感度','境界','灵魂境界','炼药师品级','功法','斗技','能力建档','在场确认','NSFW数据']);
   if (isPet) ['等级','血脉','潜力'].forEach(key => covered.add(key));
   if (p.心声 == null) covered.add('内心话');
   const extraFields = recordEntries(p).filter(([key]) => !covered.has(key));

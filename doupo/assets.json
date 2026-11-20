@@ -315,9 +315,9 @@
   },
   "cover": "card-cover.png",
   "integrity": {
-    "skins/stone.html": "sha256-+eGlPZMdfszUXsTUGoEXdoQZkZMtkBBHQNqkdCBkmyc=",
-    "skins/fire.html": "sha256-LFLWZ40+tBC+V2MbRtlklpU13d6nkJioHxFw07ts+BQ=",
-    "skins/sky.html": "sha256-FgVDdTQEwkSpYmQtJawbYfQ4b1clhDDMtEdVaHLtEmU=",
+    "skins/stone.html": "sha256-Awhk6jTLZLyDu734rpzGTIgz4RjdMsAS4VM2AKtjpM4=",
+    "skins/fire.html": "sha256-Ak5qlWA7KjqG3ZfMKwETkXYUtp9g2qOiS+m/9IAzELg=",
+    "skins/sky.html": "sha256-sxmcJ6x3t2pJBgAHgP7qQV5ijQo8rsyiX1q2MaSjh78=",
     "skins/opening.html": "sha256-37L7T4Rlwdkk+BhkbZwQ9H08POFXtfyxLsYyA6pkXv0=",
     "skins/prose.json": "sha256-cQHp8zdtz8Owije6DdxO6QBuvWRe1eXO75IQ04DAfw4="
   }
