@@ -632,8 +632,13 @@ html:not([data-motion=full]) .prose-skill[data-arrival] *{animation:none}
   #dock .ms-scene,#dock .ms-cast{border-top:1px solid #574831}
   #dock .ms-scene{grid-column:1/3;display:flex;align-items:center;gap:8px;overflow:hidden;text-align:left;padding:0}
   .ms-scene time{flex:none;color:#dabb85;font-size:10px}.ms-scene span{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;color:#c3b7a4;font-size:11px}
-  #dock:has(.ms-cast) .ms-scene{padding-right:64px}
-  #dock .ms-cast{grid-column:2/4;grid-row:2;justify-self:end;justify-content:flex-end;display:flex;padding:0 3px;gap:2px;background:#221f1a}
+  #dock .ms-scene{grid-column:1/-1;grid-row:2;margin-right:84px}
+  #dock .ms-cast{grid-column:1/-1;grid-row:2;justify-self:end;justify-content:flex-end;display:flex;padding:0 3px;gap:2px}
+  #dock .ms-scene time,#dock .ms-scene span{font-size:12px}
+  #rail .tab .carve{color:#cdbda4;text-shadow:0 1px 1px #080705}
+  #dock.dock{background:linear-gradient(110deg,#29251f,#191815 64%,#2b241c)}
+  .panel-bg.stone{background:radial-gradient(ellipse at 16% 20%,#3c3021 0,transparent 52%),linear-gradient(150deg,#25231e,#161513)}
+  .pg-hero .slab.stone{background:linear-gradient(130deg,#302b24,#1e1b18);border-top:1px solid #524537}
   .ms-mini-face{width:21px;height:21px;font-size:11px}.ms-cast small{font:11px var(--f-num);color:#c7ab80}
   .pg-hero{grid-template-columns:clamp(96px,28vw,140px) minmax(0,1fr);gap:12px 14px;align-items:start}
   .pg-hero>.stele-wrap{grid-column:1;grid-row:1/3;align-self:center;width:100%;text-align:center}
